@@ -1,11 +1,31 @@
-function register(userMail, userPassword, userName, phoneNumber) {
+function sendMail(customerMail) {
+    $.ajax({
+        type: "POST",
+        url: "/registerLogin/sendMail",
+        data: {
+            customerMail : customerMail
+        },
+        success: function (result) {
+            if(result){
+                alert("send success");
+            }
+            else
+                alert("发送失败！");
+        },
+        error: function () {
+            alert("sendMail : error!");
+        }
+    });
+}
+
+function register(customerMail, customerPassword, customerName, phoneNumber) {
     $.ajax({
         type: "POST",
         url: "/registerLogin/register",
         data: {
-            userMail : userMail,
-            userPassword : userPassword,
-            userName : userName,
+            customerMail : customerMail,
+            customerPassword : customerPassword,
+            customerName : customerName,
             phoneNumber : phoneNumber
         },
         success: function (result) {
@@ -21,13 +41,13 @@ function register(userMail, userPassword, userName, phoneNumber) {
     });
 }
 
-function login(userMail, userPassword) {
+function login(customerMail, customerPassword) {
     $.ajax({
         type: "POST",
         url: "/registerLogin/login",
         data: {
-            userMail : userMail,
-            userPassword : userPassword
+            customerMail : customerMail,
+            customerPassword : customerPassword
         },
         success: function (result) {
             if(result){

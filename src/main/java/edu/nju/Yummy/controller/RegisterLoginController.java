@@ -11,16 +11,22 @@ public class RegisterLoginController {
     @Autowired
     private RegisterLoginService registerLoginService;
 
+    @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
+    @ResponseBody
+    public String sendMail(@RequestParam String customerMail){
+        return registerLoginService.sendMail(customerMail);
+    }
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public boolean register(@RequestParam String userMail, @RequestParam String userPassword,
-                            @RequestParam String userName, @RequestParam String phoneNumber){
-        return registerLoginService.register(userMail, userPassword, userName, phoneNumber);
+    public boolean register(@RequestParam String customerMail, @RequestParam String customerPassword,
+                            @RequestParam String customerName, @RequestParam String phoneNumber){
+        return registerLoginService.register(customerMail, customerPassword, customerName, phoneNumber);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public boolean login(@RequestParam String userMail, @RequestParam String userPassword){
-        return registerLoginService.login(userMail, userPassword);
+    public boolean login(@RequestParam String customerMail, @RequestParam String customerPassword){
+        return registerLoginService.login(customerMail, customerPassword);
     }
 }
