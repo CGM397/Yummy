@@ -1,0 +1,51 @@
+.index{
+    width: 330px;
+    height: 350px;
+    background-color:rgba(255,255,255,0.75);
+    margin: 80px auto;
+}
+
+.headline{
+    font-size: 22px;
+    text-align: center;
+    padding: 20px;
+}
+
+.label{
+    margin: 5px 0 5px 42px;
+    font-size:17px;
+    color: #6a6f77;
+}
+
+.tips{
+    display: block;
+    float: right;
+    margin-right: 50px;
+    font-size: 15px;
+}
+
+input[type="text"],
+input[type="button"]{
+    -moz-appearance: none;
+    display: block;
+    margin: 0 auto;
+    font-size:15px;
+    width: 240px;
+}
+input[type="text"]{
+    height:35px;
+    border-radius:3px;
+    border:1px solid #c8cccf;
+    color:#6a6f77;
+    outline:0;
+}
+
+
+input[type="button"] {
+    margin-top: 25px;
+    height: 35px;
+    background: #357eb8;
+    color: #bcedff;
+    font-weight: bold;
+    font-size: 16px;
+}

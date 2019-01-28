@@ -6,6 +6,7 @@
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
     <link href="../static/css/backgroundImg.css" rel="stylesheet">
+    <link href="../static/css/registerLogin.css" rel="stylesheet">
 </head>
 <body>
 
@@ -13,8 +14,21 @@
     <img src="../static/img/bg.jpg" alt="backgroundImg"/>
 </div>
 
+<div class="index">
+    <form>
+        <p class="headline">用户登录</p>
+        <p class="label">用户名:</p>
+        <input type="text" placeholder="请输入邮箱">
+        <p class="label">密码:</p>
+        <input type="text" placeholder="请输入密码">
+        <input type="button" value="登录">
+        </br>
+        <p class="tips">没有账号?<a href="#">立即注册</a></p>
+    </form>
+</div>
+
 <script>
-    sendMail("980231201@qq.com");
+    //sendMail("980231201@qq.com");
     //register("mail","password","name","number");
     //login("mail","password");
 </script>
