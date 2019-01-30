@@ -104,7 +104,13 @@ function restaurantRegister() {
 }
 
 function login() {
-    var identity = document.getElementById("selectIdentity").value;
+    var identityList = document.getElementById("selectList");
+    var index = identityList.selectedIndex;
+    var identity = identityList[index].text;
+    if(identity === "请选择登录身份"){
+        alert("请选择登录身份!");
+        return;
+    }
     var account = document.getElementById("customerMail").value;
     var password = document.getElementById("customerPassword").value;
     $.ajax({
