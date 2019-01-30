@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+    <script type="text/javascript" src="../static/js/registerLogin.js"></script>
+    <link href="../static/css/registerLogin.css" rel="stylesheet">
+</head>
+<body>
+<div class="registerBlock">
+    <form>
+        <p class="headline">用户注册</p>
+
+        <!--identity select-->
+        <div id="identitySelect">
+            <p class="label">身份:</p>
+            <label>
+                <select id="selectIdentity" class="identitySelect" onchange="changeRegisterList(this.value)">
+                    <option value="0">请选择登录身份</option>
+                    <option value="1">顾客</option>
+                    <option value="2">店家</option>
+                </select>
+            </label>
+        </div>
+
+        <!--customer register-->
+        <div id="customerMailConfirm" style="display: none">
+            <p class="label">邮箱:</p>
+            <input id="customerMail" type="text" placeholder="请输入邮箱">
+            <p>
+                <input id="confirmCode" type="text" placeholder="验证码">
+                <input type="button" class="btnBlock" value="获取验证码" onclick="sendMail()">
+                <input type="button" class="btnBlock" value="下一步" onclick="showCustomerRegisterDetail()">
+            </p>
+        </div>
+
+        <!--customer register detail-->
+        <div id="customerRegister" style="display: none">
+            <p class="label">昵称:</p>
+            <input id="customerName" type="text" placeholder="请输入昵称">
+            <p class="label">联系电话:</p>
+            <input id="phoneNumber" type="text" placeholder="请输入联系电话">
+            <p class="label">密码:</p>
+            <input id="customerPassword" type="password" placeholder="请输入密码">
+            <p class="label">密码确认:</p>
+            <input id="customerPasswordConfirm" type="password" placeholder="请确认密码">
+            <div style="display: inline">
+                <input type="button" class="btnInline" value="上一步" onclick="backToCustomerMailConfirm()">
+                <input type="button" class="btnInline" value="注册" onclick="customerRegister()">
+            </div>
+        </div>
+
+        <!--restaurant register-->
+        <div id="restaurantRegister" style="display: none">
+            <p class="label">餐厅名称:</p>
+            <input id="restaurantName" type="text" placeholder="请输入餐厅名称">
+            <p class="label">密码:</p>
+            <input id="restaurantPassword" type="password" placeholder="请输入密码">
+            <p class="label">密码确认:</p>
+            <input id="restaurantPasswordConfirm" type="password" placeholder="请确认密码">
+            <input type="button" class="btnBlock" value="注册" onclick="restaurantRegister()">
+        </div>
+    </form>
+</div>
+
+<script>
+    function changeRegisterList(value) {
+        if(value === 0) {
+            document.getElementById("customerMailConfirm").style.display = "none";
+            document.getElementById("restaurantRegister").style.display = "none";
+        }
+        else if(value === 1){
+            document.getElementById("customerMailConfirm").style.display = "block";
+            document.getElementById("restaurantRegister").style.display = "none";
+        }
+        else if(value === 2){
+            document.getElementById("customerMailConfirm").style.display = "none";
+            document.getElementById("restaurantRegister").style.display = "block";
+        }
+    }
+
+    function showCustomerRegisterDetail() {
+        var inputCode = document.getElementById("confirmCode").value;
+        if(inputCode === "")
+            alert("请输入验证码!");
+        else if(inputCode !== confirmCode)
+            alert("验证码错误!");
+        else {
+            document.getElementById("identitySelect").style.display = "none";
+            document.getElementById("customerMailConfirm").style.display = "none";
+            document.getElementById("customerRegister").style.display = "block";
+        }
+    }
+
+    function backToCustomerMailConfirm() {
+        confirmCode = "";
+        document.getElementById("confirmCode").value = "";
+        document.getElementById("identitySelect").style.display = "block";
+        document.getElementById("customerMailConfirm").style.display = "block";
+        document.getElementById("customerRegister").style.display = "none";
+    }
+</script>
+</body>
+</html>

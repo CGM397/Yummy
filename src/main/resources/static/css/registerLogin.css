@@ -1,8 +1,21 @@
-.index{
+body{
+    background: url("../img/bg.jpg");
+    background-size: 100%;
+}
+
+.loginBlock{
     width: 330px;
-    height: 350px;
+    height: 450px;
     background-color:rgba(255,255,255,0.75);
     margin: 80px auto;
+}
+
+.registerBlock{
+    width: 330px;
+    height: auto;
+    background-color:rgba(255,255,255,0.75);
+    margin: 80px auto;
+    padding-bottom: 20px;
 }
 
 .headline{
@@ -25,14 +38,14 @@
 }
 
 input[type="text"],
-input[type="button"]{
-    -moz-appearance: none;
+input[type="password"]{
     display: block;
     margin: 0 auto;
     font-size:15px;
     width: 240px;
 }
-input[type="text"]{
+
+input[type="text"], input[type="password"]{
     height:35px;
     border-radius:3px;
     border:1px solid #c8cccf;
@@ -40,12 +53,44 @@ input[type="text"]{
     outline:0;
 }
 
-
-input[type="button"] {
-    margin-top: 25px;
+.identitySelect{
     height: 35px;
-    background: #357eb8;
+    width: 240px;
+    border-radius: 3px;
+    margin: 0 auto;
+    display: block;
+    font-size:15px;
+    border:1px solid #c8cccf;
+    color:#6a6f77;
+}
+
+.registerLink{
+    text-decoration: none;
+    color: #3e86a0;
+}
+
+.btnBlock{
+    display: block;
+    margin: 25px auto 10px;
+    width: 240px;
+    height: 35px;
+    background: #30c553;
     color: #bcedff;
     font-weight: bold;
     font-size: 16px;
+    border-radius:8px;
+    outline: none;
+}
+
+.btnInline{
+    width: 120px;
+    height: 35px;
+    margin-top: 25px;
+    margin-left: 26px;
+    background: #30c553;
+    color: #bcedff;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius:8px;
+    outline: none;
 }

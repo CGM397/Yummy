@@ -16,7 +16,7 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
     private CommonService commonService;
 
     @Override
-    public boolean login(String customerMail, String customerPassword) {
+    public boolean login(String identity, String account, String password) {
         return true;
     }
 
@@ -35,7 +35,13 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
     }
 
     @Override
-    public boolean register(String customerMail, String customerPassword, String customerName, String phoneNumber) {
+    public boolean customerRegister(String customerMail, String customerPassword,
+                                    String customerName, String phoneNumber) {
         return true;
+    }
+
+    @Override
+    public String restaurantRegister(String restaurantName, String restaurantPassword) {
+        return null;
     }
 }

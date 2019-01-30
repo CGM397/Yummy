@@ -2,7 +2,7 @@ package edu.nju.Yummy.service;
 
 public interface RegisterLoginService {
 
-    boolean login(String customerMail, String customerPassword);
+    boolean login(String identity, String account, String password);
 
     /**
      * check the uniqueness of this userMail,
@@ -20,5 +20,8 @@ public interface RegisterLoginService {
      * @param phoneNumber user phone number
      * @return success or not
      */
-    boolean register(String customerMail, String customerPassword, String customerName, String phoneNumber);
+    boolean customerRegister(String customerMail, String customerPassword,
+                             String customerName, String phoneNumber);
+
+    String restaurantRegister(String restaurantName, String restaurantPassword);
 }

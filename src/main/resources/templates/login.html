@@ -5,32 +5,28 @@
     <title>Login</title>
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
-    <link href="../static/css/backgroundImg.css" rel="stylesheet">
     <link href="../static/css/registerLogin.css" rel="stylesheet">
 </head>
 <body>
-
-<div class="backgroundImg">
-    <img src="../static/img/bg.jpg" alt="backgroundImg"/>
-</div>
-
-<div class="index">
+<div class="loginBlock">
     <form>
         <p class="headline">用户登录</p>
-        <p class="label">用户名:</p>
-        <input type="text" placeholder="请输入邮箱">
+        <p class="label">身份:</p>
+        <label>
+            <select class="identitySelect">
+                <option>请选择登录身份</option>
+                <option>顾客</option>
+                <option>店家</option>
+            </select>
+        </label>
+        <p class="label">账号:</p>
+        <input id="customerMail" type="text" placeholder="顾客 : 邮箱; 店家 : 登录码">
         <p class="label">密码:</p>
-        <input type="text" placeholder="请输入密码">
-        <input type="button" value="登录">
-        </br>
-        <p class="tips">没有账号?<a href="#">立即注册</a></p>
+        <input id="customerPassword" type="password" placeholder="请输入密码">
+        <input type="button" class="btnBlock" value="登录" onclick="login()">
+        <br>
+        <p class="tips">没有账号?&emsp;<a class="registerLink" href="register">立即注册</a></p>
     </form>
 </div>
-
-<script>
-    //sendMail("980231201@qq.com");
-    //register("mail","password","name","number");
-    //login("mail","password");
-</script>
 </body>
 </html>

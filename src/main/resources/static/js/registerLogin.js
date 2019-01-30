@@ -1,4 +1,16 @@
-function sendMail(customerMail) {
+var confirmCode = "";
+//test the correction of the format of the mail address
+var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+
+function sendMail() {
+    var customerMail = document.getElementById("customerMail").value;
+    if(customerMail === ""){
+        alert("请输入您的邮箱!");
+        return;
+    }else if(!reg.test(customerMail)){
+        alert("邮箱格式不正确，请重新输入!");
+        return;
+    }
     $.ajax({
         type: "POST",
         url: "/registerLogin/sendMail",
@@ -6,11 +18,11 @@ function sendMail(customerMail) {
             customerMail : customerMail
         },
         success: function (result) {
-            if(result){
-                alert("send success");
+            if(result.length === 6){
+                confirmCode = result;
             }
             else
-                alert("发送失败！");
+                alert("该邮箱已被注册，请输入另一个邮箱!");
         },
         error: function () {
             alert("sendMail : error!");
@@ -18,10 +30,25 @@ function sendMail(customerMail) {
     });
 }
 
-function register(customerMail, customerPassword, customerName, phoneNumber) {
+function customerRegister() {
+    var customerMail = document.getElementById("customerMail").value;
+    var customerPassword = document.getElementById("customerPassword").value;
+    var repeatPassword = document.getElementById("customerPasswordConfirm").value;
+    var customerName = document.getElementById("customerName").value;
+    var phoneNumber = document.getElementById("phoneNumber").value;
+
+    if(customerMail === "" || customerPassword === "" || repeatPassword === "" ||
+        customerName === "" || phoneNumber === ""){
+        alert("请将注册信息填写完整!");
+        return;
+    }else if(customerPassword !== repeatPassword){
+        alert("两次密码输入不一致!");
+        return;
+    }
+
     $.ajax({
         type: "POST",
-        url: "/registerLogin/register",
+        url: "/registerLogin/customerRegister",
         data: {
             customerMail : customerMail,
             customerPassword : customerPassword,
@@ -30,10 +57,11 @@ function register(customerMail, customerPassword, customerName, phoneNumber) {
         },
         success: function (result) {
             if(result){
-                alert("register success");
+                alert("注册成功!");
+                window.location.href = "/login";
             }
             else
-                alert("注册失败！");
+                alert("注册失败!");
         },
         error: function () {
             alert("register : error!");
@@ -41,20 +69,58 @@ function register(customerMail, customerPassword, customerName, phoneNumber) {
     });
 }
 
-function login(customerMail, customerPassword) {
+function restaurantRegister() {
+    var restaurantName = document.getElementById("restaurantName").value;
+    var restaurantPassword = document.getElementById("restaurantPassword").value;
+    var passwordConfirm = document.getElementById("passwordConfirm").value;
+
+    if(restaurantName === "" || restaurantPassword === "" || passwordConfirm === ""){
+        alert("请将注册信息填写完整!");
+        return;
+    }else if(restaurantPassword !== passwordConfirm){
+        alert("两次密码输入不一致!");
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/registerLogin/restaurantRegister",
+        data: {
+            restaurantName : restaurantName,
+            restaurantPassword : restaurantPassword
+        },
+        success: function (result) {
+            if(result.length === 7){
+                alert("注册成功! 您的登录码是: " + result);
+                window.location.href = "/login";
+            }
+            else
+                alert("注册失败!");
+        },
+        error: function () {
+            alert("register : error!");
+        }
+    });
+}
+
+function login() {
+    var identity = document.getElementById("selectIdentity").value;
+    var account = document.getElementById("customerMail").value;
+    var password = document.getElementById("customerPassword").value;
     $.ajax({
         type: "POST",
         url: "/registerLogin/login",
         data: {
-            customerMail : customerMail,
-            customerPassword : customerPassword
+            identity : identity,
+            account : account,
+            password : password
         },
         success: function (result) {
             if(result){
-                alert("login success");
+                alert("登录成功!");
             }
             else
-                alert("登录失败，账号或者密码错误！");
+                alert("登录失败，账号或者密码错误!");
         },
         error: function () {
             alert("login : error!");

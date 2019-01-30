@@ -17,16 +17,27 @@ public class RegisterLoginController {
         return registerLoginService.sendMail(customerMail);
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/customerRegister", method = RequestMethod.POST)
     @ResponseBody
-    public boolean register(@RequestParam String customerMail, @RequestParam String customerPassword,
-                            @RequestParam String customerName, @RequestParam String phoneNumber){
-        return registerLoginService.register(customerMail, customerPassword, customerName, phoneNumber);
+    public boolean customerRegister(@RequestParam String customerMail,
+                                    @RequestParam String customerPassword,
+                                    @RequestParam String customerName,
+                                    @RequestParam String phoneNumber){
+        return registerLoginService.customerRegister(customerMail, customerPassword,
+                customerName, phoneNumber);
+    }
+
+    @RequestMapping(value = "/restaurantRegister", method = RequestMethod.POST)
+    @ResponseBody
+    public String restaurantRegister(@RequestParam String restaurantName,
+                                      @RequestParam String restaurantPassword){
+        return registerLoginService.restaurantRegister(restaurantName, restaurantPassword);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public boolean login(@RequestParam String customerMail, @RequestParam String customerPassword){
-        return registerLoginService.login(customerMail, customerPassword);
+    public boolean login(@RequestParam String identity, @RequestParam String account,
+                         @RequestParam String password){
+        return registerLoginService.login(identity, account, password);
     }
 }
