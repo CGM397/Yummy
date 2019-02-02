@@ -1,5 +1,7 @@
 package edu.nju.Yummy.serviceImpl;
 
+import edu.nju.Yummy.dao.CustomerInfoDao;
+import edu.nju.Yummy.model.Customer;
 import edu.nju.Yummy.service.CommonService;
 import edu.nju.Yummy.service.RegisterLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,18 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
     private JavaMailSender mailSender;
     @Autowired
     private CommonService commonService;
+    @Autowired
+    private CustomerInfoDao customerInfoDao;
 
     @Override
     public boolean login(String identity, String account, String password) {
-        return true;
+        boolean res = false;
+        if(identity.equals("顾客")){
+            Customer customer = customerInfoDao.findCustomerInfoByMail(account);
+            if(customer.getCustomerPassword().equals(password))
+                res = true;
+        }
+        return res;
     }
 
     @Override
@@ -37,7 +47,9 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
     @Override
     public boolean customerRegister(String customerMail, String customerPassword,
                                     String customerName, String phoneNumber) {
-        return true;
+        Customer customer = new Customer("id1",customerMail,customerPassword,customerName,
+                phoneNumber,1);
+        return customerInfoDao.saveCustomerInfo(customer);
     }
 
     @Override

@@ -1,7 +1,18 @@
 package edu.nju.Yummy.model;
 
-public class Restaurant {
+import org.springframework.stereotype.Repository;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+
+@Entity
+@Table
+@Repository
+public class Restaurant implements Serializable {
+
+    @Id
     private String restaurantId;
 
     private String restaurantPassword;

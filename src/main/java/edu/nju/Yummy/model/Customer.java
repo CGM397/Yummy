@@ -1,9 +1,18 @@
 package edu.nju.Yummy.model;
 
-import java.util.ArrayList;
+import org.springframework.stereotype.Repository;
 
-public class Customer {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 
+@Entity
+@Table
+@Repository
+public class Customer implements Serializable {
+
+    @Id
     private String customerId;
 
     private String customerMail;
@@ -14,22 +23,18 @@ public class Customer {
 
     private String phoneNumber;
 
-    private ArrayList<String> deliveryAddress;
-
     private int vipLevel;
 
     public Customer() {
     }
 
     public Customer(String customerId, String customerMail, String customerPassword,
-                    String customerName, String phoneNumber,
-                    ArrayList<String> deliveryAddress, int vipLevel) {
+                    String customerName, String phoneNumber, int vipLevel) {
         this.customerId = customerId;
         this.customerMail = customerMail;
         this.customerPassword = customerPassword;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
-        this.deliveryAddress = deliveryAddress;
         this.vipLevel = vipLevel;
     }
 
@@ -71,14 +76,6 @@ public class Customer {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public ArrayList<String> getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(ArrayList<String> deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
     }
 
     public int getVipLevel() {

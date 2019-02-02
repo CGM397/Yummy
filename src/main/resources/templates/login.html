@@ -28,5 +28,30 @@
         <p class="tips">没有账号?&emsp;<a class="registerLink" href="register">立即注册</a></p>
     </form>
 </div>
+<script>
+    f();
+    function f() {
+        $.ajax({
+            type: "POST",
+            url: "/registerLogin/customerRegister",
+            data: {
+                customerMail : "mail",
+                customerPassword : "password",
+                customerName : "name",
+                phoneNumber : "phone"
+            },
+            success: function (result) {
+                if(result){
+                    alert("注册成功!");
+                }
+                else
+                    alert("注册失败!");
+            },
+            error: function () {
+                alert("register : error!");
+            }
+        });
+    }
+</script>
 </body>
 </html>
