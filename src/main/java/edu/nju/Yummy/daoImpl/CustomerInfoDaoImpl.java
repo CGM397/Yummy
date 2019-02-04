@@ -4,6 +4,8 @@ import edu.nju.Yummy.dao.BaseDao;
 import edu.nju.Yummy.dao.CustomerInfoDao;
 import edu.nju.Yummy.model.Customer;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,12 +17,13 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
 
     @Override
     public boolean saveCustomerInfo(Customer customer) {
-        Session session = baseDao.getSession();
         boolean res = false;
-        try{
+        try (Session session = baseDao.getSession()) {
+            Transaction transaction = session.beginTransaction();
             session.save(customer);
+            transaction.commit();
             res = true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return res;
@@ -28,6 +31,17 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
 
     @Override
     public Customer findCustomerInfoByMail(String customerMail) {
-        return null;
+        Customer res = new Customer();
+        try (Session session = baseDao.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            String hql = "select c from Customer c where c.customerMail = ?1";
+            Query query = session.createQuery(hql);
+            query.setParameter(1,customerMail);
+            res = (Customer) query.getSingleResult();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }

@@ -16,6 +16,6 @@ public class BaseDaoImpl implements BaseDao {
 
     @Override
     public Session getSession() {
-        return entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
+        return entityManagerFactory.unwrap(SessionFactory.class).openSession();
     }
 }

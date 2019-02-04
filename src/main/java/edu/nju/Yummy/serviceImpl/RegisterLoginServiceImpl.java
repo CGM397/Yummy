@@ -47,7 +47,7 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
     @Override
     public boolean customerRegister(String customerMail, String customerPassword,
                                     String customerName, String phoneNumber) {
-        Customer customer = new Customer("id1",customerMail,customerPassword,customerName,
+        Customer customer = new Customer("id2",customerMail,customerPassword,customerName,
                 phoneNumber,1);
         return customerInfoDao.saveCustomerInfo(customer);
     }
