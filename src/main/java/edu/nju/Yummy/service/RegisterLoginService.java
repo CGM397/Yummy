@@ -2,7 +2,7 @@ package edu.nju.Yummy.service;
 
 public interface RegisterLoginService {
 
-    boolean login(String identity, String account, String password);
+    String login(String identity, String account, String password);
 
     /**
      * check the uniqueness of this userMail,

@@ -72,7 +72,7 @@ function customerRegister() {
 function restaurantRegister() {
     var restaurantName = document.getElementById("restaurantName").value;
     var restaurantPassword = document.getElementById("restaurantPassword").value;
-    var passwordConfirm = document.getElementById("passwordConfirm").value;
+    var passwordConfirm = document.getElementById("restaurantPasswordConfirm").value;
 
     if(restaurantName === "" || restaurantPassword === "" || passwordConfirm === ""){
         alert("请将注册信息填写完整!");
@@ -122,11 +122,13 @@ function login() {
             password : password
         },
         success: function (result) {
-            if(result){
+            if(result === "success"){
                 alert("登录成功!");
             }
-            else
+            else if(result === "wrong_password")
                 alert("登录失败，账号或者密码错误!");
+            else if(result === "not_active")
+                alert("登录失败，账号已注销!");
         },
         error: function () {
             alert("login : error!");

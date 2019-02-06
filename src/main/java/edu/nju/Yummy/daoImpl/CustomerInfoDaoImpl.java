@@ -9,6 +9,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+
 @Repository
 public class CustomerInfoDaoImpl implements CustomerInfoDao {
 
@@ -17,16 +19,7 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
 
     @Override
     public boolean saveCustomerInfo(Customer customer) {
-        boolean res = false;
-        try (Session session = baseDao.getSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.save(customer);
-            transaction.commit();
-            res = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return res;
+        return baseDao.save(customer);
     }
 
     @Override
@@ -37,9 +30,26 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
             String hql = "select c from Customer c where c.customerMail = ?1";
             Query query = session.createQuery(hql);
             query.setParameter(1,customerMail);
-            res = (Customer) query.getSingleResult();
+            if(query.list().size() > 0)
+                res = (Customer) query.list().get(0);
             transaction.commit();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @Override
+    public ArrayList<Customer> showAllCustomers() {
+        ArrayList<Customer> res = new ArrayList<>();
+        try(Session session = baseDao.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            String hql = "from Customer";
+            Query query = session.createQuery(hql);
+            if(query.list().size() > 0)
+                res = (ArrayList<Customer>) query.list();
+            transaction.commit();
+        }catch (Exception e) {
             e.printStackTrace();
         }
         return res;

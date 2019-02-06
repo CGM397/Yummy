@@ -36,7 +36,7 @@ public class RegisterLoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public boolean login(@RequestParam String identity, @RequestParam String account,
+    public String login(@RequestParam String identity, @RequestParam String account,
                          @RequestParam String password){
         return registerLoginService.login(identity, account, password);
     }

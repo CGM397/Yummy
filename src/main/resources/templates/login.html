@@ -16,11 +16,11 @@
             <select id="selectList" class="identitySelect">
                 <option>请选择登录身份</option>
                 <option>顾客</option>
-                <option>店家</option>
+                <option>餐厅</option>
             </select>
         </label>
         <p class="label">账号:</p>
-        <input id="customerMail" type="text" placeholder="顾客 : 邮箱; 店家 : 登录码">
+        <input id="customerMail" type="text" placeholder="顾客 : 邮箱; 餐厅 : 登录码">
         <p class="label">密码:</p>
         <input id="customerPassword" type="password" placeholder="请输入密码">
         <input type="button" class="btnBlock" value="登录" onclick="login()">
@@ -28,29 +28,5 @@
         <p class="tips">没有账号?&emsp;<a class="registerLink" href="register">立即注册</a></p>
     </form>
 </div>
-<script>
-    function f() {
-        $.ajax({
-            type: "POST",
-            url: "/registerLogin/customerRegister",
-            data: {
-                customerMail : "mail",
-                customerPassword : "password",
-                customerName : "name",
-                phoneNumber : "phone"
-            },
-            success: function (result) {
-                if(result){
-                    alert("注册成功!");
-                }
-                else
-                    alert("注册失败!");
-            },
-            error: function () {
-                alert("register : error!");
-            }
-        });
-    }
-</script>
 </body>
 </html>

@@ -10,6 +10,7 @@ CREATE TABLE `customer` (
   `customerName` VARCHAR(64),
   `phoneNumber` VARCHAR(64),
   `vipLevel` INT,
+  `active` BOOLEAN,
   PRIMARY KEY (`customerId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
 
