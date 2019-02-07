@@ -39,6 +39,11 @@ public class RestaurantInfoDaoImpl implements RestaurantInfoDao {
     }
 
     @Override
+    public boolean updateRestaurantInfo(Restaurant restaurant) {
+        return false;
+    }
+
+    @Override
     public Restaurant findRestaurantById(String restaurantId) {
         Restaurant res = new Restaurant();
         try(Session session = baseDao.getSession()) {

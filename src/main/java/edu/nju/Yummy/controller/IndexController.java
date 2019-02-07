@@ -15,4 +15,24 @@ public class IndexController {
     public String register(){
         return "register";
     }
+
+    @RequestMapping("/customer-home")
+    public String customerHome(){
+        return "customer-home";
+    }
+
+    @RequestMapping("/customer-info")
+    public String customerInfo(){
+        return "customer-info";
+    }
+
+    @RequestMapping("/restaurant-home")
+    public String restaurantHome(){
+        return "restaurant-home";
+    }
+
+    @RequestMapping("/restaurant-info")
+    public String restaurantInfo(){
+        return "restaurant-info";
+    }
 }

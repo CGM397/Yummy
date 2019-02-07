@@ -2,6 +2,7 @@ package edu.nju.Yummy.daoImpl;
 
 import edu.nju.Yummy.dao.BaseDao;
 import edu.nju.Yummy.dao.CustomerInfoDao;
+import edu.nju.Yummy.model.Address;
 import edu.nju.Yummy.model.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -20,6 +21,16 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
     @Override
     public boolean saveCustomerInfo(Customer customer) {
         return baseDao.save(customer);
+    }
+
+    @Override
+    public boolean updateCustomerInfo(Customer customer) {
+        return false;
+    }
+
+    @Override
+    public boolean saveDeliveryAddress(ArrayList<Address> addresses) {
+        return false;
     }
 
     @Override

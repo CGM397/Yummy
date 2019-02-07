@@ -10,6 +10,8 @@ public interface RestaurantInfoDao {
 
     boolean saveRestaurantInfo(Restaurant restaurant);
 
+    boolean updateRestaurantInfo(Restaurant restaurant);
+
     Restaurant findRestaurantById(String restaurantId);
 
 }
