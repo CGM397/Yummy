@@ -15,6 +15,12 @@ public class CustomerInfoController {
     @Autowired
     private CustomerInfoService customerInfoService;
 
+    @RequestMapping(value = "/findCustomerInfoByMail", method = RequestMethod.POST)
+    @ResponseBody
+    public Customer findCustomerInfoByMail(@RequestParam String customerMail){
+        return customerInfoService.findCustomerInfoByMail(customerMail);
+    }
+
     @RequestMapping(value = "/updateCustomerInfo", method = RequestMethod.POST)
     @ResponseBody
     public boolean updateCustomerInfo(@RequestBody Customer customer){

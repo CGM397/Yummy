@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public interface CustomerInfoService {
 
+    Customer findCustomerInfoByMail(String customerMail);
+
     boolean updateCustomerInfo(Customer customer);
 
     boolean saveDeliveryAddress(ArrayList<Address> addresses);

@@ -33,15 +33,16 @@
     margin: 0 10px 0 60px;
     font-size: 20px;
     padding: 18px;
+    text-align: center;
 }
 .menu > li > label > input{
     border: none;
     outline: medium;
     background-color: inherit;
     margin-right: 60px;
-    padding: 16px;
+    padding: 18px;
     font-size: 20px;
-    text-align: center;
+    text-align: left;
 }
 .menu li:hover > a{
     background: #0c77d1;

@@ -26,6 +26,11 @@ public class IndexController {
         return "customer-info";
     }
 
+    @RequestMapping("/customer-order")
+    public String customerOrder(){
+        return "customer-order";
+    }
+
     @RequestMapping("/restaurant-home")
     public String restaurantHome(){
         return "restaurant-home";

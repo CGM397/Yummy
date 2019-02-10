@@ -1,0 +1,74 @@
+.panel {
+    margin: auto;
+    text-align: center;
+    background-color: #ffffff;
+    width: 600px;
+    border-radius: 10px;
+    padding: 50px;
+}
+.btn {
+    cursor:pointer;
+    color: white;
+    background: #00AA00;
+    font-size: 16px;
+    line-height: 38px;
+    height: 38px;
+    padding: 0 20px;
+    border-radius: 3px;
+    display: inline-block;
+    text-decoration: none;
+    transition: background .15s;
+}
+.btn:hover {
+    background-color: #00BB00;
+}
+
+.specialBtn {
+    cursor:pointer;
+    color: white;
+    background:#CC0000;
+    font-size: 16px;
+    line-height: 38px;
+    height: 38px;
+    padding: 0 20px;
+    border-radius: 3px;
+    display: inline-block;
+    text-decoration: none;
+    transition: background .15s;
+}
+.specialBtn:hover {
+    background-color: #FF0000;
+}
+.infoList{
+    width:600px;
+    height:auto;
+    margin: 0 auto;
+    padding: 10px;
+}
+.infoList ul{
+    list-style-type: none;
+    width: 600px;
+}
+.infoList ul li{
+    border-bottom: 1px solid #DFDFDF;
+    padding: 12px;
+}
+.infoList ul li label{
+    height:30px;
+    width:90px;
+    display:inline-block;
+    float: left;
+}
+.infoList ul li input[type=text],input[type=password]{
+    margin-left:0;
+    width:220px;
+    height:20px;
+    border:1px solid #AAAAAA;
+    border-radius:10px;
+    padding:3px 8px;
+    transition: .30s;
+}
+.infoList ul li input:focus{
+    border-color: green;
+    padding-right:40px;
+}

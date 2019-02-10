@@ -124,6 +124,14 @@ function login() {
         success: function (result) {
             if(result === "success"){
                 alert("登录成功!");
+                if(identity === "顾客"){
+                    localStorage.setItem("customerMail",account);
+                    window.location.href = "/customer-home";
+                }
+                else if(identity === "餐厅"){
+                    localStorage.setItem("restaurantId", account);
+                    window.location.href = "/restaurant-home";
+                }
             }
             else if(result === "wrong_password")
                 alert("登录失败，账号或者密码错误!");
