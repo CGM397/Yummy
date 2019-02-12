@@ -14,3 +14,10 @@ function Customer(customerId, customerMail, customerPassword, customerName, phon
     this.vipLevel = vipLevel;
     this.active = active;
 }
+
+var userId = "";
+var address = "";
+function Address(userId, address) {
+    this.userId = userId;
+    this.address = address;
+}

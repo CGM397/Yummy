@@ -150,9 +150,26 @@ function updateCustomerInfo(info) {
     $.ajax({
         type: 'POST',
         url:"/customerInfo/updateCustomerInfo",
+        async: false,                         //将ajax改为同步模式
         contentType: "application/json",
         data: JSON.stringify(info),
         success:function(){
+        },
+        error:function(){
+            alert("error");
+        }
+    });
+}
+
+function saveDeliveryAddress(addresses) {
+    $.ajax({
+        type: 'POST',
+        url:"/customerInfo/saveDeliveryAddress",
+        contentType: "application/json",
+        data: JSON.stringify(addresses),
+        success:function(result){
+            if(result)
+                alert("success");
         },
         error:function(){
             alert("error");
