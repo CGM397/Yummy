@@ -22,11 +22,11 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 
     @Override
     public boolean updateCustomerInfo(Customer customer) {
-        return false;
+        return customerInfoDao.updateCustomerInfo(customer);
     }
 
     @Override
     public boolean saveDeliveryAddress(ArrayList<Address> addresses) {
-        return false;
+        return customerInfoDao.saveDeliveryAddress(addresses);
     }
 }

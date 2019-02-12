@@ -33,38 +33,41 @@
             <ul>
                 <li>
                     <label>会员等级</label>
-                    <input id="vip-level" type="text" placeholder="vip-level" readonly />
+                    <input id="vip-level" type="text" placeholder="vip-level" disabled />
                 </li>
                 <li>
                     <label>用户编号</label>
-                    <input id="customer-id" type="text" placeholder="customer-id" readonly />
+                    <input id="customer-id" type="text" placeholder="customer-id" disabled />
                 </li>
                 <li>
                     <label>用户名</label>
-                    <input id="customer-name" type="text" placeholder="customer-name" readonly />
+                    <input id="customer-name" type="text" placeholder="customer-name" disabled />
                 </li>
                 <li>
                     <label>密码</label>
-                    <input id="customer-password" type="password" placeholder="customer-password" readonly />
+                    <input id="customer-password" type="password" placeholder="customer-password" disabled />
                 </li>
                 <li>
                     <label>用户邮箱</label>
-                    <input id="customer-mail" type="text" placeholder="customer-mail" readonly />
+                    <input id="customer-mail" type="text" placeholder="customer-mail" disabled />
                 </li>
                 <li>
                     <label>联系电话</label>
-                    <input id="phone-number" type="text" placeholder="phone-number" readonly />
+                    <input id="phone-number" type="text" placeholder="phone-number" disabled />
                 </li>
             </ul>
         </form>
     </div>
 
     <p>
+        <a id="modify" onclick="modify()" class="btn">
+            编辑个人信息
+        </a>
         <a id="modifyPwd" onclick="modifyPassword()" class="btn">
             修改密码
         </a>
         <a id="modifyInfo" onclick="modifyInfo()" class="btn">
-            修改个人信息
+            保存个人信息
         </a>
         <a id="logout" onclick="delAccount()" class="specialBtn">
             注销
@@ -87,6 +90,11 @@
     }
     function refresh() {
         window.location.reload();
+    }
+    function modify() {
+        document.getElementById("customer-name").disabled = false;
+        document.getElementById("phone-number").disabled = false;
+        swal("编辑权限已开启", "可在文本框中修改部分个人信息", "success");
     }
 </script>
 </body>

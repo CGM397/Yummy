@@ -25,12 +25,16 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
 
     @Override
     public boolean updateCustomerInfo(Customer customer) {
-        return false;
+        return baseDao.update(customer);
     }
 
     @Override
     public boolean saveDeliveryAddress(ArrayList<Address> addresses) {
-        return false;
+        for(Address address : addresses){
+            if(!baseDao.merge(address))
+                return false;
+        }
+        return true;
     }
 
     @Override

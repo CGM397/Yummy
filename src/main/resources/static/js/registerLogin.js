@@ -57,8 +57,11 @@ function customerRegister() {
         },
         success: function (result) {
             if(result){
-                alert("注册成功!");
-                window.location.href = "/login";
+                swal("注册成功", "欢迎使用本系统!", "success");
+                setTimeout(function(){
+                    window.location.href = "/login";
+                    window.event.returnValue=false;
+                }, 1500);
             }
             else
                 alert("注册失败!");
@@ -91,8 +94,11 @@ function restaurantRegister() {
         },
         success: function (result) {
             if(result.length === 7){
-                alert("注册成功! 您的登录码是: " + result);
-                window.location.href = "/login";
+                swal("注册成功", "您的登录码是: " + result, "success");
+                setTimeout(function(){
+                    window.location.href = "/login";
+                    window.event.returnValue=false;
+                }, 1500);
             }
             else
                 alert("注册失败!");
@@ -123,14 +129,20 @@ function login() {
         },
         success: function (result) {
             if(result === "success"){
-                alert("登录成功!");
+                swal("登录成功", "亲爱的用户，欢迎您！", "success");
                 if(identity === "顾客"){
                     localStorage.setItem("customerMail",account);
-                    window.location.href = "/customer-home";
+                    setTimeout(function(){
+                        window.location.href = "/customer-home";
+                        window.event.returnValue=false;
+                    }, 1500);
                 }
                 else if(identity === "餐厅"){
                     localStorage.setItem("restaurantId", account);
-                    window.location.href = "/restaurant-home";
+                    setTimeout(function(){
+                        window.location.href = "/restaurant-home";
+                        window.event.returnValue=false;
+                    }, 1500);
                 }
             }
             else if(result === "wrong_password")
