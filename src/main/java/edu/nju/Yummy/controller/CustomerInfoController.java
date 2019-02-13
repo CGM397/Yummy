@@ -29,7 +29,13 @@ public class CustomerInfoController {
 
     @RequestMapping(value = "/saveDeliveryAddress", method = RequestMethod.POST)
     @ResponseBody
-    public boolean saveDeliveryAddress(@RequestBody ArrayList<Address> addresses){
-        return customerInfoService.saveDeliveryAddress(addresses);
+    public boolean saveDeliveryAddress(@RequestBody Address address){
+        return customerInfoService.saveDeliveryAddress(address);
+    }
+
+    @RequestMapping(value = "/showDeliveryAddress", method = RequestMethod.POST)
+    @ResponseBody
+    public ArrayList<Address> showDeliveryAddress(@RequestParam String customerId){
+        return customerInfoService.showDeliveryAddress(customerId);
     }
 }

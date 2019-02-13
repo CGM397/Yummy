@@ -26,7 +26,12 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
     }
 
     @Override
-    public boolean saveDeliveryAddress(ArrayList<Address> addresses) {
-        return customerInfoDao.saveDeliveryAddress(addresses);
+    public boolean saveDeliveryAddress(Address address) {
+        return customerInfoDao.saveDeliveryAddress(address);
+    }
+
+    @Override
+    public ArrayList<Address> showDeliveryAddress(String customerId) {
+        return customerInfoDao.showDeliveryAddress(customerId);
     }
 }

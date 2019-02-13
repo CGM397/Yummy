@@ -11,6 +11,8 @@ public interface CustomerInfoService {
 
     boolean updateCustomerInfo(Customer customer);
 
-    boolean saveDeliveryAddress(ArrayList<Address> addresses);
+    boolean saveDeliveryAddress(Address address);
+
+    ArrayList<Address> showDeliveryAddress(String customerId);
 
 }

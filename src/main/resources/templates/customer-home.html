@@ -29,6 +29,7 @@
         var customerMail = localStorage.getItem("customerMail");
         var currentCustomer = findCustomerInfoByMail(customerMail);
         localStorage.setItem("customerName",currentCustomer.customerName);
+        localStorage.setItem("customerId",currentCustomer.customerId);
         document.getElementById("customerName").value = currentCustomer.customerName;
     }
     function turnToCustomerInfo() {

@@ -29,12 +29,25 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
     }
 
     @Override
-    public boolean saveDeliveryAddress(ArrayList<Address> addresses) {
-        for(Address address : addresses){
-            if(!baseDao.merge(address))
-                return false;
+    public boolean saveDeliveryAddress(Address address) {
+        return baseDao.save(address);
+    }
+
+    @Override
+    public ArrayList<Address> showDeliveryAddress(String customerId) {
+        ArrayList<Address> res = new ArrayList<>();
+        try (Session session = baseDao.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            String hql = "select a from Address a where a.userId = ?1";
+            Query query = session.createQuery(hql);
+            query.setParameter(1,customerId);
+            if(query.list().size() > 0)
+                res = (ArrayList<Address>) query.list();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return true;
+        return res;
     }
 
     @Override

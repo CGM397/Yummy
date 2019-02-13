@@ -160,19 +160,3 @@ function updateCustomerInfo(info) {
         }
     });
 }
-
-function saveDeliveryAddress(addresses) {
-    $.ajax({
-        type: 'POST',
-        url:"/customerInfo/saveDeliveryAddress",
-        contentType: "application/json",
-        data: JSON.stringify(addresses),
-        success:function(result){
-            if(result)
-                alert("success");
-        },
-        error:function(){
-            alert("error");
-        }
-    });
-}
