@@ -3,6 +3,7 @@ package edu.nju.Yummy.controller;
 import edu.nju.Yummy.model.Address;
 import edu.nju.Yummy.model.Customer;
 import edu.nju.Yummy.service.CustomerInfoService;
+import edu.nju.Yummy.service.UserAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,9 @@ public class CustomerInfoController {
 
     @Autowired
     private CustomerInfoService customerInfoService;
+
+    @Autowired
+    private UserAddressService userAddressService;
 
     @RequestMapping(value = "/findCustomerInfoByMail", method = RequestMethod.POST)
     @ResponseBody
@@ -30,12 +34,12 @@ public class CustomerInfoController {
     @RequestMapping(value = "/saveDeliveryAddress", method = RequestMethod.POST)
     @ResponseBody
     public boolean saveDeliveryAddress(@RequestBody Address address){
-        return customerInfoService.saveDeliveryAddress(address);
+        return userAddressService.saveAddress(address);
     }
 
     @RequestMapping(value = "/showDeliveryAddress", method = RequestMethod.POST)
     @ResponseBody
     public ArrayList<Address> showDeliveryAddress(@RequestParam String customerId){
-        return customerInfoService.showDeliveryAddress(customerId);
+        return userAddressService.showAddress(customerId);
     }
 }

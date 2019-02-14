@@ -82,8 +82,7 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
     @Override
     public String restaurantRegister(String restaurantName, String restaurantPassword) {
         String restaurantId = commonService.generateId(7,"restaurant");
-        Restaurant restaurant = new Restaurant(restaurantId, restaurantPassword, restaurantName,
-                "address","type");
+        Restaurant restaurant = new Restaurant(restaurantId, restaurantPassword, restaurantName,"type");
         if(restaurantInfoDao.saveRestaurantInfo(restaurant))
             return restaurantId;
         else

@@ -146,9 +146,9 @@ function login() {
                 }
             }
             else if(result === "wrong_password")
-                alert("登录失败，账号或者密码错误!");
+                swal("登录失败", "账号或者密码错误！", "error");
             else if(result === "not_active")
-                alert("登录失败，账号已注销!");
+                swal("登录失败", "账号已注销！", "error");
         },
         error: function () {
             alert("login : error!");

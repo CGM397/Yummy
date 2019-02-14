@@ -63,4 +63,13 @@ public class CommonServiceImpl implements CommonService {
         }
         return res;
     }
+
+    @Override
+    public ArrayList<Integer> generateCoordinate() {
+        ArrayList<Integer> res = new ArrayList<>();
+        Random random = new Random();
+        res.add(random.nextInt(300));
+        res.add(random.nextInt(300));
+        return res;
+    }
 }

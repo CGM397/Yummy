@@ -30,7 +30,7 @@ function addAddress() {
             showLoaderOnConfirm: true
         },
         function(newAddress){
-            var oneAddress = new Address(localStorage.getItem("customerId"), newAddress);
+            var oneAddress = new Address(localStorage.getItem("customerId"), newAddress, 0, 0);
             var res = saveDeliveryAddress(oneAddress);
             if(res){
                 addRow(newAddress);
@@ -56,11 +56,11 @@ function addRow(address) {
 
     var checkCell = document.createElement('td');
     var check = document.createElement('a');
-    check.innerHTML = '查看';
+    check.innerHTML = '编辑';
     check.className = 'checkBtn';
     check.href = '#';
     check.onclick = function() {
-        addressDetail(this);
+        addressEdit(this);
     };
     checkCell.appendChild(check);
     row.appendChild(checkCell);
@@ -68,7 +68,7 @@ function addRow(address) {
     table.appendChild(row);
 }
 
-function addressDetail(a) {
+function addressEdit(a) {
     var tr = a.parentNode.parentNode;
     var address = tr.cells[1].innerText;
     localStorage.setItem("selectAddress", address);

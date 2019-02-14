@@ -17,7 +17,11 @@ function Customer(customerId, customerMail, customerPassword, customerName, phon
 
 var userId = "";
 var address = "";
-function Address(userId, address) {
+var coordinateX = 0;
+var coordinateY = 0;
+function Address(userId, address, coordinateX, coordinateY) {
     this.userId = userId;
     this.address = address;
+    this.coordinateX = coordinateX;
+    this.coordinateY = coordinateY;
 }

@@ -18,12 +18,18 @@ public class Address implements Serializable {
     @Id
     private String address;
 
+    private int coordinateX;
+
+    private int coordinateY;
+
     public Address() {
     }
 
-    public Address(String userId, String address) {
+    public Address(String userId, String address, int coordinateX, int coordinateY) {
         this.userId = userId;
         this.address = address;
+        this.coordinateX = coordinateX;
+        this.coordinateY = coordinateY;
     }
 
     public String getUserId() {
@@ -40,5 +46,21 @@ public class Address implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getCoordinateX() {
+        return coordinateX;
+    }
+
+    public void setCoordinateX(int coordinateX) {
+        this.coordinateX = coordinateX;
+    }
+
+    public int getCoordinateY() {
+        return coordinateY;
+    }
+
+    public void setCoordinateY(int coordinateY) {
+        this.coordinateY = coordinateY;
     }
 }

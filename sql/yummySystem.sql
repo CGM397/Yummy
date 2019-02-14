@@ -19,7 +19,6 @@ CREATE TABLE `restaurant` (
   `restaurantId` VARCHAR(64) NOT NULL,
   `restaurantPassword` VARCHAR(64) NOT NULL,
   `restaurantName` VARCHAR(64),
-  `restaurantAddress` VARCHAR(64),
   `restaurantType` VARCHAR(64),
   PRIMARY KEY (`restaurantId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
@@ -28,5 +27,7 @@ DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address` (
   `userId` VARCHAR(64) NOT NULL,
   `address` VARCHAR(64) NOT NULL,
+  `coordinateX` INT,
+  `coordinateY` INT,
   PRIMARY KEY (`userId`,`address`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;

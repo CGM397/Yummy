@@ -1,5 +1,7 @@
 package edu.nju.Yummy.service;
 
+import java.util.ArrayList;
+
 public interface CommonService {
 
     /**
@@ -16,4 +18,10 @@ public interface CommonService {
      * @return legal_id
      */
     String generateId(int length, String identity);
+
+    /**
+     * generate random coordinate x,y in range of[0,300]
+     * @return x and y
+     */
+    ArrayList<Integer> generateCoordinate();
 }

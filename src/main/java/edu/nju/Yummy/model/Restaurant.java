@@ -19,19 +19,16 @@ public class Restaurant implements Serializable {
 
     private String restaurantName;
 
-    private String restaurantAddress;
-
     private String restaurantType;
 
     public Restaurant() {
     }
 
     public Restaurant(String restaurantId, String restaurantPassword, String restaurantName,
-                      String restaurantAddress, String restaurantType) {
+                      String restaurantType) {
         this.restaurantId = restaurantId;
         this.restaurantPassword = restaurantPassword;
         this.restaurantName = restaurantName;
-        this.restaurantAddress = restaurantAddress;
         this.restaurantType = restaurantType;
     }
 
@@ -57,14 +54,6 @@ public class Restaurant implements Serializable {
 
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
-    }
-
-    public String getRestaurantAddress() {
-        return restaurantAddress;
-    }
-
-    public void setRestaurantAddress(String restaurantAddress) {
-        this.restaurantAddress = restaurantAddress;
     }
 
     public String getRestaurantType() {
