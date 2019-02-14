@@ -51,15 +51,16 @@ function modifyPassword() {
                         inputPlaceholder: "password"
                     },
                     function (newPwd) {
+                        if(newPwd === ""){
+                            swal.showInputError("密码长度至少为1");
+                            return;
+                        }
                         swal({
                                 title: "修改密码",
                                 text: "请确认新密码",
                                 type: "input",
                                 inputType: "password",
-                                cancelButtonText: "取消",
-                                confirmButtonText: "确认",
                                 showCancelButton: true,
-                                showLoaderOnConfirm: true,
                                 closeOnConfirm: false,
                                 animation: "slide-from-top",
                                 inputPlaceholder: "password"
@@ -79,9 +80,7 @@ function modifyPassword() {
                                     var info = new Customer(customerId, customerMail, customerPassword, customerName, phoneNumber, vipLevel, active);
                                     updateCustomerInfo(info);
                                     infoListInit();
-                                    setTimeout(function () {
-                                        swal("修改成功", "密码已更新", "success");
-                                    }, 1200);
+                                    swal("修改成功", "密码已更新", "success");
                                 }
                             });
                     });
@@ -105,15 +104,16 @@ function modifyInfo() {
             cancelButtonText:"取消",
             confirmButtonText:"确认",
             showCancelButton: true,
-            closeOnConfirm: false,
-            showLoaderOnConfirm: true
+            closeOnConfirm: false
         },
         function(){
+            if(customerName === "" || phoneNumber === ""){
+                swal("修改失败","用户名和联系电话不可为空","error");
+                return;
+            }
             updateCustomerInfo(info);
             infoListInit();
-            setTimeout(function(){
-                swal("修改成功","个人信息已更新","success");
-            }, 1200);
+            swal("修改成功","个人信息已更新","success");
         });
 }
 

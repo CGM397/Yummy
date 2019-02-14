@@ -1,3 +1,5 @@
+var customerAddresses = [];
+
 function saveDeliveryAddress(address) {
     var res = false;
     $.ajax({
@@ -24,23 +26,30 @@ function addAddress() {
             showCancelButton: true,
             closeOnConfirm: false,
             animation: "slide-from-top",
-            inputPlaceholder: "address",
-            cancelButtonText:"取消",
-            confirmButtonText:"确认",
-            showLoaderOnConfirm: true
+            inputPlaceholder: "address"
         },
         function(newAddress){
-            var oneAddress = new Address(localStorage.getItem("customerId"), newAddress, 0, 0);
-            var res = saveDeliveryAddress(oneAddress);
-            if(res){
-                addRow(newAddress);
-                setTimeout(function(){
+            if(newAddress === false)
+                return;
+            if(newAddress === "")
+                swal.showInputError("请输入地址");
+            else {
+                for(var i = 0; i < customerAddresses.length; i++){
+                    if(newAddress === customerAddresses[i].address){
+                        swal("新增地址失败", "地址重复", "error");
+                        return;
+                    }
+                }
+                var oneAddress = new Address(localStorage.getItem("customerId"), newAddress, 0, 0);
+                var res = saveDeliveryAddress(oneAddress);
+                if(res){
                     swal("新增地址成功","地址信息已更新","success");
-                }, 1200);
-            }else{
-                setTimeout(function(){
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 1200);
+                }else{
                     swal("新增地址失败","地址信息未更新","error");
-                }, 1200);
+                }
             }
         });
 }
@@ -54,26 +63,112 @@ function addRow(address) {
     addressCell.innerHTML = address;
     row.appendChild(addressCell);
 
-    var checkCell = document.createElement('td');
-    var check = document.createElement('a');
-    check.innerHTML = '编辑';
-    check.className = 'checkBtn';
-    check.href = '#';
-    check.onclick = function() {
-        addressEdit(this);
+    var opCell = document.createElement('td');
+    var edit = document.createElement('a');
+    edit.innerHTML = '编辑';
+    edit.className = 'opBtn';
+    edit.href = 'javascript:void(0);';
+    edit.onclick = function() {
+        editAddress(this);
     };
-    checkCell.appendChild(check);
-    row.appendChild(checkCell);
+    var del = document.createElement('a');
+    del.innerHTML = '删除';
+    del.className = 'opBtn';
+    del.href = 'javascript:void(0);';
+    del.onclick = function() {
+        delAddress(this);
+    };
+    opCell.appendChild(edit);
+    opCell.appendChild(del);
+    row.appendChild(opCell);
 
     table.appendChild(row);
 }
 
-function addressEdit(a) {
+function editAddress(a) {
     var tr = a.parentNode.parentNode;
-    var address = tr.cells[1].innerText;
-    localStorage.setItem("selectAddress", address);
-    window.location.href = 'customer-addressDetail';
-    window.event.returnValue = false;
+    var oldAddress = tr.cells[0].innerText;
+    swal({
+            title: "修改地址",
+            text: "请输入新地址",
+            type: "input",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            animation: "slide-from-top",
+            inputPlaceholder: "new address"
+        },
+        function (newAddress) {
+            if(newAddress === false)
+                return;
+            if(newAddress === "")
+                swal.showInputError("请输入地址");
+            else{
+                for(var i = 0; i < customerAddresses.length; i++){
+                    if(newAddress === customerAddresses[i].address){
+                        swal("新增地址失败", "地址重复", "error");
+                        return;
+                    }
+                }
+                $.ajax({
+                    type: 'POST',
+                    url:"/customerInfo/updateDeliveryAddress",
+                    data: {
+                        customerId : localStorage.getItem("customerId"),
+                        oldAddress : oldAddress,
+                        newAddress : newAddress
+                    },
+                    success:function(result){
+                        if(result){
+                            swal("修改地址成功","地址信息已更新","success");
+                            setTimeout(function(){
+                                window.location.reload();
+                            }, 1200);
+                        }else
+                            swal("新增地址失败","地址信息未更新","error");
+
+                    },
+                    error:function(){
+                        alert("error");
+                    }
+                });
+            }
+        });
+}
+
+function delAddress(a) {
+    swal({
+            title: "确定删除该地址吗?",
+            text: "点击确认进行删除操作",
+            type: "warning",
+            cancelButtonText:"取消",
+            confirmButtonText:"确认",
+            showCancelButton: true,
+            closeOnConfirm: false
+        },
+        function(){
+            var tr = a.parentNode.parentNode;
+            var address = tr.cells[0].innerText;
+            $.ajax({
+                type: 'POST',
+                url:"/customerInfo/deleteDeliveryAddress",
+                data: {
+                    customerId : localStorage.getItem("customerId"),
+                    address : address
+                },
+                success:function(result){
+                    if(result){
+                        swal("删除地址成功","地址信息已更新","success");
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1200);
+                    }else
+                        swal("删除地址失败","地址信息未更新","error");
+                },
+                error:function(){
+                    alert("error");
+                }
+            });
+        });
 }
 
 function showDeliveryAddress() {
@@ -84,6 +179,7 @@ function showDeliveryAddress() {
             customerId : localStorage.getItem("customerId")
         },
         success:function(result){
+            customerAddresses = result;
             for(var i = 0; i < result.length; i++)
                 addRow(result[i].address);
         },

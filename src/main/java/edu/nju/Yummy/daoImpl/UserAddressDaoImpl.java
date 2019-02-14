@@ -38,4 +38,43 @@ public class UserAddressDaoImpl implements UserAddressDao {
         }
         return res;
     }
+
+    @Override
+    public boolean updateAddress(String userId, String oldAddress, String newAddress) {
+        boolean res = false;
+        try (Session session = baseDao.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            String hql = "update Address a set a.address = ?1 where a.userId = ?2 and a.address = ?3";
+            Query query = session.createQuery(hql);
+            query.setParameter(1,newAddress);
+            query.setParameter(2,userId);
+            query.setParameter(3,oldAddress);
+            if(query.executeUpdate() > 0){
+                transaction.commit();
+                res = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @Override
+    public boolean deleteAddress(String userId, String address) {
+        boolean res = true;
+        try (Session session = baseDao.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            String hql = "delete Address a where a.userId = ?1 and a.address = ?2";
+            Query query = session.createQuery(hql);
+            query.setParameter(1,userId);
+            query.setParameter(2,address);
+            if(query.executeUpdate() > 0)
+                transaction.commit();
+            else
+                res = false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 }

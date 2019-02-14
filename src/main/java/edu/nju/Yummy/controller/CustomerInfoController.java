@@ -21,25 +21,40 @@ public class CustomerInfoController {
 
     @RequestMapping(value = "/findCustomerInfoByMail", method = RequestMethod.POST)
     @ResponseBody
-    public Customer findCustomerInfoByMail(@RequestParam String customerMail){
+    public Customer findCustomerInfoByMail(@RequestParam String customerMail) {
         return customerInfoService.findCustomerInfoByMail(customerMail);
     }
 
     @RequestMapping(value = "/updateCustomerInfo", method = RequestMethod.POST)
     @ResponseBody
-    public boolean updateCustomerInfo(@RequestBody Customer customer){
+    public boolean updateCustomerInfo(@RequestBody Customer customer) {
         return customerInfoService.updateCustomerInfo(customer);
     }
 
     @RequestMapping(value = "/saveDeliveryAddress", method = RequestMethod.POST)
     @ResponseBody
-    public boolean saveDeliveryAddress(@RequestBody Address address){
+    public boolean saveDeliveryAddress(@RequestBody Address address) {
         return userAddressService.saveAddress(address);
     }
 
     @RequestMapping(value = "/showDeliveryAddress", method = RequestMethod.POST)
     @ResponseBody
-    public ArrayList<Address> showDeliveryAddress(@RequestParam String customerId){
+    public ArrayList<Address> showDeliveryAddress(@RequestParam String customerId) {
         return userAddressService.showAddress(customerId);
+    }
+
+    @RequestMapping(value = "/updateDeliveryAddress", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean updateDeliveryAddress(@RequestParam String customerId,
+                                  @RequestParam String oldAddress,
+                                  @RequestParam String newAddress) {
+        return userAddressService.updateAddress(customerId, oldAddress, newAddress);
+    }
+
+    @RequestMapping(value = "/deleteDeliveryAddress", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean deleteDeliveryAddress(@RequestParam String customerId,
+                                         @RequestParam String address) {
+        return userAddressService.deleteAddress(customerId, address);
     }
 }

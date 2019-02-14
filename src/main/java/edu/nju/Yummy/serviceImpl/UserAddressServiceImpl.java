@@ -30,4 +30,14 @@ public class UserAddressServiceImpl implements UserAddressService {
     public ArrayList<Address> showAddress(String userId) {
         return userAddressDao.showAddress(userId);
     }
+
+    @Override
+    public boolean updateAddress(String userId, String oldAddress, String newAddress) {
+        return userAddressDao.updateAddress(userId, oldAddress, newAddress);
+    }
+
+    @Override
+    public boolean deleteAddress(String userId, String address) {
+        return userAddressDao.deleteAddress(userId, address);
+    }
 }
