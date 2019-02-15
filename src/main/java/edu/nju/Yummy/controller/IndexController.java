@@ -61,6 +61,16 @@ public class IndexController {
         return "customer-order";
     }
 
+    @RequestMapping("/customer-statistics")
+    public String customerStatistics(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "customer-statistics";
+    }
+
     @RequestMapping("/restaurant-home")
     public String restaurantHome(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
@@ -79,5 +89,15 @@ public class IndexController {
             return null;
         }
         return "restaurant-info";
+    }
+
+    @RequestMapping("/restaurant-statistics")
+    public String restaurantStatistics(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "restaurant-statistics";
     }
 }

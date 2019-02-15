@@ -49,4 +49,16 @@ public class RegisterLoginController {
             session.invalidate();
         return res;
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean logout(HttpServletRequest request){
+        boolean res = false;
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+            res = true;
+        }
+        return res;
+    }
 }

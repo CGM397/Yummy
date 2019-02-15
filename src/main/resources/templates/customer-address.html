@@ -6,6 +6,7 @@
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
     <script type="text/javascript" src="../static/js/model.js"></script>
     <script type="text/javascript" src="../static/js/customerAddress.js"></script>
+    <script type="text/javascript" src="../static/js/registerLogin.js"></script>
     <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
     <link href="../static/css/navigationBar.css" rel="stylesheet">
     <link href="../static/css/sweetalert.css" rel="stylesheet">
@@ -18,6 +19,10 @@
         <li><a href="customer-home">主页</a></li>
         <li><a href="customer-order">我的订单</a></li>
         <li class="active"><a href="customer-address">收货地址</a></li>
+        <li><a href="customer-statistics">统计信息</a></li>
+        <li style="float: right;">
+            <a href="javascript:void(0);" onclick="logout()">Logout</a>
+        </li>
         <li style="float: right">
             <label>
                 <input style="cursor: pointer" id="customerName" type="button" value="用户" onclick="turnToCustomerInfo()"/>

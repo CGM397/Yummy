@@ -155,3 +155,24 @@ function login() {
         }
     });
 }
+
+function logout() {
+    $.ajax({
+        type: "POST",
+        url: "/registerLogin/logout",
+        data: {},
+        success: function (result) {
+            if(result){
+                swal("登出成功", "欢迎再次使用本系统！", "success");
+                setTimeout(function(){
+                    window.location.href = "/login";
+                    window.event.returnValue=false;
+                }, 1500);
+            }else
+                swal("登出失败", "登出失败！", "error");
+        },
+        error: function () {
+            alert("login : error!");
+        }
+    });
+}
