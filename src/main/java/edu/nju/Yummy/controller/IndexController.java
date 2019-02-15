@@ -91,6 +91,16 @@ public class IndexController {
         return "restaurant-info";
     }
 
+    @RequestMapping("/restaurant-order")
+    public String restaurantOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "restaurant-order";
+    }
+
     @RequestMapping("/restaurant-statistics")
     public String restaurantStatistics(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);

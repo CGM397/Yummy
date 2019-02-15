@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>restaurant-info</title>
+    <title>restaurant-order</title>
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
     <script type="text/javascript" src="../static/js/model.js"></script>
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
@@ -15,14 +15,14 @@
     <ul class="menu">
         <li><p>Yummy!</p></li>
         <li><a href="restaurant-home">我的餐厅</a></li>
-        <li><a href="restaurant-order">销售记录</a></li>
+        <li class="active"><a href="restaurant-order">销售记录</a></li>
         <li><a href="restaurant-statistics">统计信息</a></li>
         <li style="float: right;">
             <a href="javascript:void(0);" onclick="logout()">Logout</a>
         </li>
         <li style="float: right">
             <label>
-                <input style="cursor: pointer" id="restaurantName" type="button" value="用户" onclick="refresh()"/>
+                <input style="cursor: pointer" id="restaurantName" type="button" value="用户" onclick="turnToRestaurantInfo()"/>
             </label>
         </li>
         <li style="float: right"><p style="margin: 0; padding: 18px 0">您好!</p></li>
@@ -33,8 +33,8 @@
     function infoInit() {
         document.getElementById("restaurantName").value = localStorage.getItem("restaurantName");
     }
-    function refresh() {
-        window.location.reload();
+    function turnToRestaurantInfo() {
+        window.location.href = "restaurant-info";
     }
 </script>
 </body>

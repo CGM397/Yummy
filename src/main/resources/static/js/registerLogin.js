@@ -98,10 +98,10 @@ function restaurantRegister() {
                 setTimeout(function(){
                     window.location.href = "/login";
                     window.event.returnValue=false;
-                }, 1500);
+                }, 10000);
             }
             else
-                alert("注册失败!");
+                swal("注册失败", "注册失败！", "error");
         },
         error: function () {
             alert("register : error!");

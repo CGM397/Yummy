@@ -44,7 +44,7 @@ public class RestaurantInfoDaoImpl implements RestaurantInfoDao {
     }
 
     @Override
-    public Restaurant findRestaurantById(String restaurantId) {
+    public Restaurant findRestaurantInfoById(String restaurantId) {
         Restaurant res = new Restaurant();
         try(Session session = baseDao.getSession()) {
             Transaction transaction = session.beginTransaction();

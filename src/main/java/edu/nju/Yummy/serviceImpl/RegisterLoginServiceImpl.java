@@ -41,7 +41,7 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
             else
                 res = "wrong_password";
         }else if(identity.equals("餐厅")){
-            Restaurant restaurant = restaurantInfoDao.findRestaurantById(account);
+            Restaurant restaurant = restaurantInfoDao.findRestaurantInfoById(account);
             if(restaurant.getRestaurantPassword() == null)
                 res = "wrong_password";
             else if(restaurant.getRestaurantPassword().equals(password)) {

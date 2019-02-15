@@ -17,4 +17,10 @@ public class RestaurantInfoController {
     public boolean updateRestaurantInfo(@RequestBody Restaurant restaurant){
         return restaurantInfoService.updateRestaurantInfo(restaurant);
     }
+
+    @RequestMapping(value = "/findRestaurantInfoById", method = RequestMethod.POST)
+    @ResponseBody
+    public Restaurant findRestaurantInfoById(@RequestParam String restaurantId){
+        return restaurantInfoService.findRestaurantInfoById(restaurantId);
+    }
 }

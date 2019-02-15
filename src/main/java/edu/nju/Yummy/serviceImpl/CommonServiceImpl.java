@@ -49,7 +49,7 @@ public class CommonServiceImpl implements CommonService {
             ArrayList<Restaurant> restaurants = restaurantInfoDao.showAllRestaurants();
             if(restaurants.size() > 0) {
                 for(Restaurant one : restaurants) {
-                    int currentId = Integer.parseInt(one.getRestaurantId().split("_")[1]);
+                    int currentId = Integer.parseInt(one.getRestaurantId());
                     if(maxId < currentId)
                         maxId = currentId;
                 }

@@ -12,6 +12,6 @@ public interface RestaurantInfoDao {
 
     boolean updateRestaurantInfo(Restaurant restaurant);
 
-    Restaurant findRestaurantById(String restaurantId);
+    Restaurant findRestaurantInfoById(String restaurantId);
 
 }

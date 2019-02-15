@@ -15,6 +15,17 @@ function Customer(customerId, customerMail, customerPassword, customerName, phon
     this.active = active;
 }
 
+var restaurantId = "";
+var restaurantPassword = "";
+var restaurantName = "";
+var restaurantType = "";
+function Restaurant(restaurantId, restaurantPassword, restaurantName, restaurantType) {
+    this.restaurantId = restaurantId;
+    this.restaurantPassword = restaurantPassword;
+    this.restaurantName = restaurantName;
+    this.restaurantType = restaurantType;
+}
+
 var userId = "";
 var address = "";
 var coordinateX = 0;

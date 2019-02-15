@@ -5,4 +5,6 @@ import edu.nju.Yummy.model.Restaurant;
 public interface RestaurantInfoService {
 
     boolean updateRestaurantInfo(Restaurant restaurant);
+
+    Restaurant findRestaurantInfoById(String restaurantId);
 }
