@@ -8,6 +8,7 @@
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
     <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
     <link href="../static/css/navigationBar.css" rel="stylesheet">
+    <link href="../static/css/userInfoList.css" rel="stylesheet">
     <link href="../static/css/sweetalert.css" rel="stylesheet">
 </head>
 <body style = "margin: 0">
@@ -28,6 +29,55 @@
         <li style="float: right"><p style="margin: 0; padding: 18px 0">您好!</p></li>
     </ul>
 </div>
+
+<section class="panel">
+    <h2>个人信息</h2>
+    <div class="infoList">
+        <form>
+            <ul>
+                <li>
+                    <label>餐厅登录码</label>
+                    <input id="restaurant-id" type="text" placeholder="restaurant-id" disabled />
+                </li>
+                <li>
+                    <label>餐厅名称</label>
+                    <input id="restaurant-name" type="text" placeholder="restaurant-name" disabled />
+                </li>
+                <li>
+                    <label>密码</label>
+                    <input id="restaurant-password" type="password" placeholder="restaurant-password" disabled />
+                </li>
+                <li>
+                    <label for="restaurant-type">餐厅类型</label>
+                    <select id="restaurant-type" disabled>
+                        <option>-- please select --</option>
+                        <option>西式快餐</option>
+                        <option>中式快餐</option>
+                        <option>甜品饮品</option>
+                        <option>火锅</option>
+                        <option>地方美食</option>
+                    </select>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <p>
+        <a id="modify" onclick="modify()" class="btn">
+            编辑餐厅信息
+        </a>
+        <a id="modifyPwd" onclick="modifyPassword()" class="btn">
+            修改密码
+        </a>
+        <a id="modifyInfo" onclick="modifyInfo()" class="btn">
+            保存个人信息
+        </a>
+        <a id="logout" onclick="delAccount()" class="specialBtn">
+            注销
+        </a>
+    </p>
+</section>
+
 <script>
     infoInit();
     function infoInit() {
