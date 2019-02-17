@@ -1,6 +1,8 @@
 package edu.nju.Yummy.serviceImpl;
 
+import edu.nju.Yummy.dao.ModificationDao;
 import edu.nju.Yummy.dao.RestaurantInfoDao;
+import edu.nju.Yummy.model.Modification;
 import edu.nju.Yummy.model.Restaurant;
 import edu.nju.Yummy.service.RestaurantInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ public class RestaurantInfoServiceImpl implements RestaurantInfoService {
     @Autowired
     private RestaurantInfoDao restaurantInfoDao;
 
+    @Autowired
+    private ModificationDao modificationDao;
+
     @Override
     public boolean updateRestaurantInfo(Restaurant restaurant) {
         return restaurantInfoDao.updateRestaurantInfo(restaurant);
@@ -20,5 +25,20 @@ public class RestaurantInfoServiceImpl implements RestaurantInfoService {
     @Override
     public Restaurant findRestaurantInfoById(String restaurantId) {
         return restaurantInfoDao.findRestaurantInfoById(restaurantId);
+    }
+
+    @Override
+    public boolean addModification(Modification modification) {
+        return modificationDao.addModification(modification);
+    }
+
+    @Override
+    public boolean deleteModification(String restaurantId) {
+        return modificationDao.deleteModification(restaurantId);
+    }
+
+    @Override
+    public Modification findModificationById(String restaurantId) {
+        return modificationDao.findModificationById(restaurantId);
     }
 }

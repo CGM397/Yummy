@@ -6,9 +6,13 @@ import java.util.ArrayList;
 
 public interface ModificationDao {
 
-    ArrayList<Modification> showModification();
+    boolean addModification(Modification modification);
 
     boolean deleteModification(String restaurantId);
 
-    boolean addModification(Modification modification);
+    boolean updateModification(Modification modification);
+
+    Modification findModificationById(String restaurantId);
+
+    ArrayList<Modification> showModification();
 }

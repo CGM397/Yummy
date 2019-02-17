@@ -83,6 +83,7 @@ function modifyPassword() {
 function modifyInfo() {
     var restaurantId = document.getElementById("restaurant-id").value;
     var restaurantName = document.getElementById("restaurant-name").value;
+    var restaurantAddress = document.getElementById("restaurant-address").value;
     var restaurantPassword = document.getElementById("restaurant-password").value;
     var restaurantType = document.getElementById("restaurant-type").value;
     var info = new Restaurant(restaurantId, restaurantPassword, restaurantName, restaurantType);

@@ -40,7 +40,7 @@ public class RestaurantInfoDaoImpl implements RestaurantInfoDao {
 
     @Override
     public boolean updateRestaurantInfo(Restaurant restaurant) {
-        return false;
+        return baseDao.update(restaurant);
     }
 
     @Override

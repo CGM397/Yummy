@@ -47,18 +47,4 @@ public class BaseDaoImpl implements BaseDao {
         }
         return res;
     }
-
-    @Override
-    public boolean merge(Object object) {
-        boolean res = false;
-        try(Session session = getSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.merge(object);
-            transaction.commit();
-            res = true;
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return res;
-    }
 }

@@ -15,6 +15,8 @@ public class Modification implements Serializable {
     @Id
     private String restaurantId;
 
+    private String modifiedName;
+
     private String modifiedType;
 
     private String modifiedAddress;
@@ -24,8 +26,10 @@ public class Modification implements Serializable {
     public Modification() {
     }
 
-    public Modification(String restaurantId, String modifiedType, String modifiedAddress, boolean approve) {
+    public Modification(String restaurantId, String modifiedName, String modifiedType,
+                        String modifiedAddress, boolean approve) {
         this.restaurantId = restaurantId;
+        this.modifiedName = modifiedName;
         this.modifiedType = modifiedType;
         this.modifiedAddress = modifiedAddress;
         this.approve = approve;
@@ -37,6 +41,14 @@ public class Modification implements Serializable {
 
     public void setRestaurantId(String restaurantId) {
         this.restaurantId = restaurantId;
+    }
+
+    public String getModifiedName() {
+        return modifiedName;
+    }
+
+    public void setModifiedName(String modifiedName) {
+        this.modifiedName = modifiedName;
     }
 
     public String getModifiedType() {

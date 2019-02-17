@@ -36,3 +36,11 @@ function Address(userId, address, coordinateX, coordinateY) {
     this.coordinateX = coordinateX;
     this.coordinateY = coordinateY;
 }
+
+function Modification(restaurantId, modifiedName, modifiedType, modifiedAddress, approve) {
+    this.restaurantId = restaurantId;
+    this.modifiedName = modifiedName;
+    this.modifiedType = modifiedType;
+    this.modifiedAddress = modifiedAddress;
+    this.approve = approve;
+}

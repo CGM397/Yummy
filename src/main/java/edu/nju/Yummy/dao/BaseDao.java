@@ -9,6 +9,4 @@ public interface BaseDao {
     boolean save(Object object);
 
     boolean update(Object object);
-
-    boolean merge(Object object);
 }

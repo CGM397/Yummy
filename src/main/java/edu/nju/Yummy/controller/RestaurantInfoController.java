@@ -1,6 +1,7 @@
 package edu.nju.Yummy.controller;
 
 import edu.nju.Yummy.model.Address;
+import edu.nju.Yummy.model.Modification;
 import edu.nju.Yummy.model.Restaurant;
 import edu.nju.Yummy.service.RestaurantInfoService;
 import edu.nju.Yummy.service.UserAddressService;
@@ -39,5 +40,23 @@ public class RestaurantInfoController {
         if(store != null && store.size() > 0)
             res = store.get(0);
         return res;
+    }
+
+    @RequestMapping(value = "/addModification", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean addModification(@RequestBody Modification modification){
+        return restaurantInfoService.addModification(modification);
+    }
+
+    @RequestMapping(value = "/deleteModification", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean deleteModification(@RequestParam String restaurantId){
+        return restaurantInfoService.deleteModification(restaurantId);
+    }
+
+    @RequestMapping(value = "/findModificationById", method = RequestMethod.POST)
+    @ResponseBody
+    public Modification findModificationById(@RequestParam String restaurantId){
+        return restaurantInfoService.findModificationById(restaurantId);
     }
 }
