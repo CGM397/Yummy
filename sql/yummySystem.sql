@@ -31,3 +31,12 @@ CREATE TABLE `address` (
   `coordinateY` INT,
   PRIMARY KEY (`userId`,`address`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
+
+DROP TABLE IF EXISTS `modification`;
+CREATE TABLE `modification` (
+  `restaurantId` VARCHAR(64) NOT NULL,
+  `modifiedType` VARCHAR(64),
+  `modifiedAddress` VARCHAR(64),
+  `approve` BOOLEAN,
+  PRIMARY KEY (`restaurantId`)
+) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;

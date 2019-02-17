@@ -30,7 +30,7 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
         String res = "";
         if(identity.equals("顾客")){
             Customer customer = customerInfoDao.findCustomerInfoByMail(account);
-            if(customer.getCustomerPassword() == null)
+            if(customer == null || customer.getCustomerPassword() == null)
                 res = "wrong_password";
             else if(customer.getCustomerPassword().equals(password)) {
                 if(customer.isActive())
@@ -42,7 +42,7 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
                 res = "wrong_password";
         }else if(identity.equals("餐厅")){
             Restaurant restaurant = restaurantInfoDao.findRestaurantInfoById(account);
-            if(restaurant.getRestaurantPassword() == null)
+            if(restaurant == null || restaurant.getRestaurantPassword() == null)
                 res = "wrong_password";
             else if(restaurant.getRestaurantPassword().equals(password)) {
                 res = "success";

@@ -6,6 +6,8 @@
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
     <script type="text/javascript" src="../static/js/model.js"></script>
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
+    <script type="text/javascript" src="../static/js/restaurantInfo.js"></script>
+    <script type="text/javascript" src="../static/js/restaurantAddress.js"></script>
     <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
     <link href="../static/css/navigationBar.css" rel="stylesheet">
     <link href="../static/css/userInfoList.css" rel="stylesheet">
@@ -44,6 +46,10 @@
                     <input id="restaurant-name" type="text" placeholder="restaurant-name" disabled />
                 </li>
                 <li>
+                    <label>餐厅地址</label>
+                    <input id="restaurant-address" type="text" placeholder="restaurant-address" disabled />
+                </li>
+                <li>
                     <label>密码</label>
                     <input id="restaurant-password" type="password" placeholder="restaurant-password" disabled />
                 </li>
@@ -70,10 +76,7 @@
             修改密码
         </a>
         <a id="modifyInfo" onclick="modifyInfo()" class="btn">
-            保存个人信息
-        </a>
-        <a id="logout" onclick="delAccount()" class="specialBtn">
-            注销
+            保存餐厅信息
         </a>
     </p>
 </section>
@@ -82,9 +85,29 @@
     infoInit();
     function infoInit() {
         document.getElementById("restaurantName").value = localStorage.getItem("restaurantName");
+        var currentRestaurant = findRestaurantInfoById(localStorage.getItem("restaurantId"));
+        var currentRestaurantAddress = showRestaurantAddress(localStorage.getItem("restaurantId"));
+        document.getElementById("restaurant-id").value = currentRestaurant.restaurantId;
+        document.getElementById("restaurant-name").value = currentRestaurant.restaurantName;
+        if(currentRestaurantAddress.address !== null)
+            document.getElementById("restaurant-address").value = currentRestaurantAddress.address;
+        document.getElementById("restaurant-password").value = currentRestaurant.restaurantPassword;
+        var typeList = document.getElementById("restaurant-type");
+        for(var i = 0; i < typeList.options.length; i++){
+            if(typeList.options[i].value === currentRestaurant.restaurantType){
+                typeList.options[i].selected = true;
+                break;
+            }
+        }
     }
     function refresh() {
         window.location.reload();
+    }
+    function modify() {
+        document.getElementById("restaurant-name").disabled = false;
+        document.getElementById("restaurant-address").disabled = false;
+        document.getElementById("restaurant-type").disabled = false;
+        swal("编辑权限已开启", "可在文本框中修改部分餐厅信息", "success");
     }
 </script>
 </body>

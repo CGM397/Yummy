@@ -15,5 +15,6 @@
     <mapping class="edu.nju.Yummy.model.Customer"/>
     <mapping class="edu.nju.Yummy.model.Restaurant"/>
     <mapping class="edu.nju.Yummy.model.Address"/>
+    <mapping class="edu.nju.Yummy.model.Modification"/>
   </session-factory>
 </hibernate-configuration>

@@ -93,6 +93,7 @@
         document.getElementById("customer-mail").value = currentCustomer.customerMail;
         document.getElementById("vip-level").value = currentCustomer.vipLevel;
         document.getElementById("phone-number").value = currentCustomer.phoneNumber;
+        localStorage.setItem("customerName",currentCustomer.customerName);
     }
     function refresh() {
         window.location.reload();

@@ -78,9 +78,12 @@ function modifyPassword() {
                                     var vipLevel = document.getElementById("vip-level").value;
                                     var active = true;
                                     var info = new Customer(customerId, customerMail, customerPassword, customerName, phoneNumber, vipLevel, active);
-                                    updateCustomerInfo(info);
-                                    infoListInit();
-                                    swal("修改成功", "密码已更新", "success");
+                                    if(updateCustomerInfo(info)){
+                                        infoListInit();
+                                        swal("修改成功", "密码已更新", "success");
+                                    }
+                                    else
+                                        swal("修改失败", "密码未更新", "error");
                                 }
                             });
                     });
@@ -111,9 +114,12 @@ function modifyInfo() {
                 swal("修改失败","用户名和联系电话不可为空","error");
                 return;
             }
-            updateCustomerInfo(info);
-            infoListInit();
-            swal("修改成功","个人信息已更新","success");
+            if(updateCustomerInfo(info)){
+                infoListInit();
+                swal("修改成功", "个人信息已更新", "success");
+            }
+            else
+                swal("修改失败", "个人信息未更新", "error");
         });
 }
 
@@ -137,26 +143,33 @@ function delAccount() {
             var vipLevel = document.getElementById("vip-level").value;
             var active = false;
             var info = new Customer(customerId, customerMail, customerPassword, customerName, phoneNumber, vipLevel, active);
-            updateCustomerInfo(info);
-            swal("注销成功","本账号已无法登陆此系统！","success");
-            setTimeout(function(){
-                window.location.href="login";
-                window.event.returnValue=false;
-            }, 1500);
+            if(updateCustomerInfo(info)){
+                infoListInit();
+                swal("注销成功","本账号已无法登陆此系统！","success");
+                setTimeout(function(){
+                    window.location.href="login";
+                    window.event.returnValue=false;
+                }, 1500);
+            }
+            else
+                swal("注销失败","注销失败！","error");
         });
 }
 
 function updateCustomerInfo(info) {
+    var res = false;
     $.ajax({
         type: 'POST',
         url:"/customerInfo/updateCustomerInfo",
         async: false,                         //将ajax改为同步模式
         contentType: "application/json",
         data: JSON.stringify(info),
-        success:function(){
+        success:function(result){
+            res = result;
         },
         error:function(){
             alert("error");
         }
     });
+    return res;
 }
