@@ -1,10 +1,3 @@
-var customerId = "";
-var customerMail = "";
-var customerPassword = "";
-var customerName = "";
-var phoneNumber = "";
-var vipLevel = 0;
-var active = false;
 function Customer(customerId, customerMail, customerPassword, customerName, phoneNumber, vipLevel, active) {
     this.customerId = customerId;
     this.customerMail = customerMail;
@@ -15,10 +8,6 @@ function Customer(customerId, customerMail, customerPassword, customerName, phon
     this.active = active;
 }
 
-var restaurantId = "";
-var restaurantPassword = "";
-var restaurantName = "";
-var restaurantType = "";
 function Restaurant(restaurantId, restaurantPassword, restaurantName, restaurantType) {
     this.restaurantId = restaurantId;
     this.restaurantPassword = restaurantPassword;
@@ -26,10 +15,6 @@ function Restaurant(restaurantId, restaurantPassword, restaurantName, restaurant
     this.restaurantType = restaurantType;
 }
 
-var userId = "";
-var address = "";
-var coordinateX = 0;
-var coordinateY = 0;
 function Address(userId, address, coordinateX, coordinateY) {
     this.userId = userId;
     this.address = address;
@@ -37,10 +22,13 @@ function Address(userId, address, coordinateX, coordinateY) {
     this.coordinateY = coordinateY;
 }
 
-function Modification(restaurantId, modifiedName, modifiedType, modifiedAddress, approve) {
+function Modification(modificationDate, restaurantId, modifiedName, modifiedType, modifiedAddress,
+                      checked, approve) {
+    this.modificationDate = modificationDate;
     this.restaurantId = restaurantId;
     this.modifiedName = modifiedName;
     this.modifiedType = modifiedType;
     this.modifiedAddress = modifiedAddress;
+    this.checked = checked;
     this.approve = approve;
 }

@@ -3,6 +3,8 @@ package edu.nju.Yummy.service;
 import edu.nju.Yummy.model.Modification;
 import edu.nju.Yummy.model.Restaurant;
 
+import java.util.ArrayList;
+
 public interface RestaurantInfoService {
 
     boolean updateRestaurantInfo(Restaurant restaurant);
@@ -11,7 +13,5 @@ public interface RestaurantInfoService {
 
     boolean addModification(Modification modification);
 
-    boolean deleteModification(String restaurantId);
-
-    Modification findModificationById(String restaurantId);
+    ArrayList<Modification> findRestaurantModification(String restaurantId);
 }

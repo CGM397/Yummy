@@ -8,6 +8,8 @@ import edu.nju.Yummy.service.RestaurantInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class RestaurantInfoServiceImpl implements RestaurantInfoService {
 
@@ -33,12 +35,8 @@ public class RestaurantInfoServiceImpl implements RestaurantInfoService {
     }
 
     @Override
-    public boolean deleteModification(String restaurantId) {
-        return modificationDao.deleteModification(restaurantId);
+    public ArrayList<Modification> findRestaurantModification(String restaurantId) {
+        return modificationDao.findRestaurantModification(restaurantId);
     }
 
-    @Override
-    public Modification findModificationById(String restaurantId) {
-        return modificationDao.findModificationById(restaurantId);
-    }
 }

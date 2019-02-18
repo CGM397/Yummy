@@ -2,9 +2,7 @@ package edu.nju.Yummy.model;
 
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -13,6 +11,11 @@ import java.io.Serializable;
 public class Modification implements Serializable {
 
     @Id
+    @GeneratedValue
+    private long modificationId;
+
+    private String modificationDate;
+
     private String restaurantId;
 
     private String modifiedName;
@@ -21,18 +24,39 @@ public class Modification implements Serializable {
 
     private String modifiedAddress;
 
+    private boolean checked;
+
     private boolean approve;
 
     public Modification() {
     }
 
-    public Modification(String restaurantId, String modifiedName, String modifiedType,
-                        String modifiedAddress, boolean approve) {
+    public Modification(String modificationDate, String restaurantId, String modifiedName,
+                        String modifiedType, String modifiedAddress,
+                        boolean checked, boolean approve) {
+        this.modificationDate = modificationDate;
         this.restaurantId = restaurantId;
         this.modifiedName = modifiedName;
         this.modifiedType = modifiedType;
         this.modifiedAddress = modifiedAddress;
+        this.checked = checked;
         this.approve = approve;
+    }
+
+    public long getModificationId() {
+        return modificationId;
+    }
+
+    public void setModificationId(long modificationId) {
+        this.modificationId = modificationId;
+    }
+
+    public String getModificationDate() {
+        return modificationDate;
+    }
+
+    public void setModificationDate(String modificationDate) {
+        this.modificationDate = modificationDate;
     }
 
     public String getRestaurantId() {
@@ -65,6 +89,14 @@ public class Modification implements Serializable {
 
     public void setModifiedAddress(String modifiedAddress) {
         this.modifiedAddress = modifiedAddress;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     public boolean isApprove() {

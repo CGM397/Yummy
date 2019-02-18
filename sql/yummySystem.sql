@@ -34,9 +34,13 @@ CREATE TABLE `address` (
 
 DROP TABLE IF EXISTS `modification`;
 CREATE TABLE `modification` (
+  `modificationId` INT,
+  `modificationDate` VARCHAR(64) NOT NULL,
   `restaurantId` VARCHAR(64) NOT NULL,
+  `modifiedName` VARCHAR(64) NOT NULL,
   `modifiedType` VARCHAR(64),
   `modifiedAddress` VARCHAR(64),
+  `checked` BOOLEAN,
   `approve` BOOLEAN,
-  PRIMARY KEY (`restaurantId`)
+  PRIMARY KEY (`modificationId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;

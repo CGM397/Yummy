@@ -69,10 +69,12 @@ function modifyPassword() {
                                     var restaurantName = document.getElementById("restaurant-name").value;
                                     var restaurantType = document.getElementById("restaurant-type").value;
                                     var info = new Restaurant(restaurantId,newPwd2,restaurantName,restaurantType);
-                                    if(updateRestaurantInfo(info))
-                                        swal("修改申请已提交", "待Yummy总经理审批", "success");
+                                    if(updateRestaurantInfo(info)){
+                                        infoInit();
+                                        swal("修改成功", "登陆密码已更新", "success");
+                                    }
                                     else
-                                        swal("修改申请未提交", "修改失败", "error");
+                                        swal("修改失败", "登陆密码未更新", "error");
                                 }
                             });
                     });
@@ -81,12 +83,17 @@ function modifyPassword() {
 }
 
 function modifyInfo() {
+    if(!modificationAllChecked()){
+        swal("修改失败","您还有在审核中的修改申请","error");
+        return;
+    }
+    var modificationDate = getDate();
     var restaurantId = document.getElementById("restaurant-id").value;
     var restaurantName = document.getElementById("restaurant-name").value;
     var restaurantAddress = document.getElementById("restaurant-address").value;
-    var restaurantPassword = document.getElementById("restaurant-password").value;
     var restaurantType = document.getElementById("restaurant-type").value;
-    var info = new Restaurant(restaurantId, restaurantPassword, restaurantName, restaurantType);
+    var modification = new Modification(modificationDate, restaurantId, restaurantName, restaurantType,
+                                        restaurantAddress, false, false);
     swal({
             title: "确定修改您的餐厅信息吗",
             text: "点击确认进行修改",
@@ -97,11 +104,12 @@ function modifyInfo() {
             closeOnConfirm: false
         },
         function(){
-            if(restaurantName === "" || restaurantType === "-- please select --"){
-                swal("修改失败","餐厅名称和餐厅类型不可为空","error");
+            if(restaurantName === "" || restaurantAddress === "" ||
+                restaurantType === "-- please select --"){
+                swal("修改失败","餐厅名称、地址和类型不可为空","error");
                 return;
             }
-            if(updateRestaurantInfo(info))
+            if(addModification(modification))
                 swal("修改申请已提交", "待Yummy总经理审批", "success");
             else
                 swal("修改申请未提交", "修改失败", "error");

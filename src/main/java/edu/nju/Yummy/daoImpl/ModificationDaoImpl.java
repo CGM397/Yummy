@@ -23,36 +23,19 @@ public class ModificationDaoImpl implements ModificationDao {
     }
 
     @Override
-    public boolean deleteModification(String restaurantId) {
-        boolean res = false;
-        try(Session session = baseDao.getSession()) {
-            Transaction transaction = session.beginTransaction();
-            Modification tmp = session.get(Modification.class, restaurantId);
-            if(tmp != null){
-                session.delete(tmp);
-                transaction.commit();
-                res = true;
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return res;
-    }
-
-    @Override
     public boolean updateModification(Modification modification) {
         return baseDao.update(modification);
     }
 
     @Override
-    public Modification findModificationById(String restaurantId) {
-        Modification res = new Modification();
-        try(Session session = baseDao.getSession()) {
-            Transaction transaction = session.beginTransaction();
-            res = session.get(Modification.class, restaurantId);
-            transaction.commit();
-        }catch (Exception e) {
-            e.printStackTrace();
+    public ArrayList<Modification> findRestaurantModification(String restaurantId) {
+        ArrayList<Modification> res = new ArrayList<>();
+        ArrayList<Modification> store = showModification();
+        if(store != null && store.size() > 0){
+            for(Modification modification : store){
+                if(modification.getRestaurantId().equals(restaurantId))
+                    res.add(modification);
+            }
         }
         return res;
     }

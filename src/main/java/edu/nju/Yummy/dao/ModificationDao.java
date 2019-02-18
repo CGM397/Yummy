@@ -8,11 +8,9 @@ public interface ModificationDao {
 
     boolean addModification(Modification modification);
 
-    boolean deleteModification(String restaurantId);
-
     boolean updateModification(Modification modification);
 
-    Modification findModificationById(String restaurantId);
+    ArrayList<Modification> findRestaurantModification(String restaurantId);
 
     ArrayList<Modification> showModification();
 }

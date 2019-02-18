@@ -5,6 +5,7 @@
     <title>restaurant-info</title>
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
     <script type="text/javascript" src="../static/js/model.js"></script>
+    <script type="text/javascript" src="../static/js/commonService.js"></script>
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
     <script type="text/javascript" src="../static/js/restaurantInfo.js"></script>
     <script type="text/javascript" src="../static/js/modificationManagement.js"></script>
@@ -85,11 +86,11 @@
 <script>
     infoInit();
     function infoInit() {
-        document.getElementById("restaurantName").value = localStorage.getItem("restaurantName");
         var currentRestaurant = findRestaurantInfoById(localStorage.getItem("restaurantId"));
         var currentRestaurantAddress = showRestaurantAddress(localStorage.getItem("restaurantId"));
         document.getElementById("restaurant-id").value = currentRestaurant.restaurantId;
         document.getElementById("restaurant-name").value = currentRestaurant.restaurantName;
+        document.getElementById("restaurantName").value = currentRestaurant.restaurantName;
         if(currentRestaurantAddress.address !== null)
             document.getElementById("restaurant-address").value = currentRestaurantAddress.address;
         document.getElementById("restaurant-password").value = currentRestaurant.restaurantPassword;

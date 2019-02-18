@@ -48,15 +48,9 @@ public class RestaurantInfoController {
         return restaurantInfoService.addModification(modification);
     }
 
-    @RequestMapping(value = "/deleteModification", method = RequestMethod.POST)
+    @RequestMapping(value = "/findRestaurantModification", method = RequestMethod.POST)
     @ResponseBody
-    public boolean deleteModification(@RequestParam String restaurantId){
-        return restaurantInfoService.deleteModification(restaurantId);
-    }
-
-    @RequestMapping(value = "/findModificationById", method = RequestMethod.POST)
-    @ResponseBody
-    public Modification findModificationById(@RequestParam String restaurantId){
-        return restaurantInfoService.findModificationById(restaurantId);
+    public ArrayList<Modification> findRestaurantModification(@RequestParam String restaurantId){
+        return restaurantInfoService.findRestaurantModification(restaurantId);
     }
 }
