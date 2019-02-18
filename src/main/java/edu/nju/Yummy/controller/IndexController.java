@@ -110,4 +110,14 @@ public class IndexController {
         }
         return "restaurant-statistics";
     }
+
+    @RequestMapping("/restaurant-modification")
+    public String restaurantModification(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "restaurant-modification";
+    }
 }

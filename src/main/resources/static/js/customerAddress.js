@@ -43,10 +43,13 @@ function addAddress() {
                 var oneAddress = new Address(localStorage.getItem("customerId"), newAddress, 0, 0);
                 var res = saveDeliveryAddress(oneAddress);
                 if(res){
-                    swal("新增地址成功","地址信息已更新","success");
-                    setTimeout(function(){
+                    swal({
+                        title: "新增地址成功",
+                        text: "地址信息已更新",
+                        type: "success"
+                    },function () {
                         window.location.reload();
-                    }, 1200);
+                    });
                 }else{
                     swal("新增地址失败","地址信息未更新","error");
                 }
@@ -119,10 +122,13 @@ function editAddress(a) {
                     },
                     success:function(result){
                         if(result){
-                            swal("修改地址成功","地址信息已更新","success");
-                            setTimeout(function(){
+                            swal({
+                                title: "修改地址成功",
+                                text: "地址信息已更新",
+                                type: "success"
+                            },function () {
                                 window.location.reload();
-                            }, 1200);
+                            });
                         }else
                             swal("新增地址失败","地址信息未更新","error");
 
@@ -157,10 +163,13 @@ function delAddress(a) {
                 },
                 success:function(result){
                     if(result){
-                        swal("删除地址成功","地址信息已更新","success");
-                        setTimeout(function(){
+                        swal({
+                            title: "删除地址成功",
+                            text: "地址信息已更新",
+                            type: "success"
+                        },function () {
                             window.location.reload();
-                        }, 1200);
+                        });
                     }else
                         swal("删除地址失败","地址信息未更新","error");
                 },

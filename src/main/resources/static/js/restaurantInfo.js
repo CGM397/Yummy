@@ -65,16 +65,23 @@ function modifyPassword() {
                                     swal.showInputError("确认密码错误");
                                 }
                                 else {
-                                    var restaurantId = document.getElementById("restaurant-id").value;
-                                    var restaurantName = document.getElementById("restaurant-name").value;
-                                    var restaurantType = document.getElementById("restaurant-type").value;
-                                    var info = new Restaurant(restaurantId,newPwd2,restaurantName,restaurantType);
+                                    var currentInfo =
+                                        findRestaurantInfoById(localStorage.getItem("restaurantId"));
+                                    var info = new Restaurant(currentInfo.restaurantId,
+                                                              newPwd2,
+                                                              currentInfo.restaurantName,
+                                                              currentInfo.restaurantType);
                                     if(updateRestaurantInfo(info)){
-                                        infoInit();
-                                        swal("修改成功", "登陆密码已更新", "success");
+                                        swal({
+                                            title: "修改成功",
+                                            text: "登录密码已更新",
+                                            type: "success"
+                                        },function () {
+                                            window.location.reload();
+                                        });
                                     }
                                     else
-                                        swal("修改失败", "登陆密码未更新", "error");
+                                        swal("修改失败", "登录密码未更新", "error");
                                 }
                             });
                     });

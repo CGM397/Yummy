@@ -70,20 +70,26 @@ function modifyPassword() {
                                     swal.showInputError("确认密码错误");
                                 }
                                 else {
-                                    var customerId = document.getElementById("customer-id").value;
-                                    var customerName = document.getElementById("customer-name").value;
-                                    var customerPassword = newPwd2;
-                                    var customerMail = document.getElementById("customer-mail").value;
-                                    var phoneNumber = document.getElementById("phone-number").value;
-                                    var vipLevel = document.getElementById("vip-level").value;
-                                    var active = true;
-                                    var info = new Customer(customerId, customerMail, customerPassword, customerName, phoneNumber, vipLevel, active);
+                                    var currentInfo =
+                                        findCustomerInfoByMail(localStorage.getItem("customerMail"));
+                                    var info = new Customer(currentInfo.customerId,
+                                                            currentInfo.customerMail,
+                                                            newPwd2,
+                                                            currentInfo.customerName,
+                                                            currentInfo.phoneNumber,
+                                                            currentInfo.vipLevel,
+                                                            currentInfo.active);
                                     if(updateCustomerInfo(info)){
-                                        infoListInit();
-                                        swal("修改成功", "密码已更新", "success");
+                                        swal({
+                                            title: "修改成功",
+                                            text: "登录密码已更新",
+                                            type: "success"
+                                        },function () {
+                                            window.location.reload();
+                                        });
                                     }
                                     else
-                                        swal("修改失败", "密码未更新", "error");
+                                        swal("修改失败", "登录密码未更新", "error");
                                 }
                             });
                     });
@@ -99,7 +105,8 @@ function modifyInfo() {
     var phoneNumber = document.getElementById("phone-number").value;
     var vipLevel = document.getElementById("vip-level").value;
     var active = true;
-    var info = new Customer(customerId, customerMail, customerPassword, customerName, phoneNumber, vipLevel, active);
+    var info = new Customer(customerId, customerMail, customerPassword, customerName,
+                            phoneNumber, vipLevel, active);
     swal({
             title: "确定修改您的个人信息吗",
             text: "点击确认进行修改",
@@ -135,21 +142,24 @@ function delAccount() {
             showLoaderOnConfirm: true
         },
         function(){
-            var customerId = document.getElementById("customer-id").value;
-            var customerName = document.getElementById("customer-name").value;
-            var customerPassword = document.getElementById("customer-password").value;
-            var customerMail = document.getElementById("customer-mail").value;
-            var phoneNumber = document.getElementById("phone-number").value;
-            var vipLevel = document.getElementById("vip-level").value;
-            var active = false;
-            var info = new Customer(customerId, customerMail, customerPassword, customerName, phoneNumber, vipLevel, active);
+            var currentInfo =
+                findCustomerInfoByMail(localStorage.getItem("customerMail"));
+            var info = new Customer(currentInfo.customerId,
+                                    currentInfo.customerMail,
+                                    currentInfo.customerPassword,
+                                    currentInfo.customerName,
+                                    currentInfo.phoneNumber,
+                                    currentInfo.vipLevel,
+                                    false);
             if(updateCustomerInfo(info)){
-                infoListInit();
-                swal("注销成功","本账号已无法登陆此系统！","success");
-                setTimeout(function(){
+                swal({
+                    title: "注销成功",
+                    text: "本账号已无法登陆此系统！",
+                    type: "success"
+                },function () {
                     window.location.href="login";
                     window.event.returnValue=false;
-                }, 1500);
+                });
             }
             else
                 swal("注销失败","注销失败！","error");

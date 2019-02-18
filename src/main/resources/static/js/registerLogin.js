@@ -57,11 +57,14 @@ function customerRegister() {
         },
         success: function (result) {
             if(result){
-                swal("注册成功", "欢迎使用本系统!", "success");
-                setTimeout(function(){
+                swal({
+                    title: "注册成功",
+                    text: "欢迎使用本系统！",
+                    type: "success"
+                },function () {
                     window.location.href = "/login";
                     window.event.returnValue=false;
-                }, 1500);
+                });
             }
             else
                 alert("注册失败!");
@@ -94,11 +97,14 @@ function restaurantRegister() {
         },
         success: function (result) {
             if(result.length === 7){
-                swal("注册成功", "您的登录码是: " + result, "success");
-                setTimeout(function(){
+                swal({
+                    title: "注册成功",
+                    text: "您的登录码: " + result,
+                    type: "success"
+                },function () {
                     window.location.href = "/login";
                     window.event.returnValue=false;
-                }, 10000);
+                });
             }
             else
                 swal("注册失败", "注册失败！", "error");
@@ -129,21 +135,22 @@ function login() {
         },
         success: function (result) {
             if(result === "success"){
-                swal("登录成功", "亲爱的用户，欢迎您！", "success");
-                if(identity === "顾客"){
-                    localStorage.setItem("customerMail",account);
-                    setTimeout(function(){
-                        window.location.href = "/customer-home";
-                        window.event.returnValue=false;
-                    }, 1500);
-                }
-                else if(identity === "餐厅"){
-                    localStorage.setItem("restaurantId", account);
-                    setTimeout(function(){
-                        window.location.href = "/restaurant-home";
-                        window.event.returnValue=false;
-                    }, 1500);
-                }
+                swal({
+                    title: "登录成功",
+                    text: "亲爱的用户，欢迎您！",
+                    type: "success"
+                },function () {
+                    if(identity === "顾客"){
+                        localStorage.setItem("customerMail", account);
+                            window.location.href = "/customer-home";
+                            window.event.returnValue=false;
+                    }
+                    else if(identity === "餐厅"){
+                        localStorage.setItem("restaurantId", account);
+                            window.location.href = "/restaurant-home";
+                            window.event.returnValue=false;
+                    }
+                });
             }
             else if(result === "wrong_password")
                 swal("登录失败", "账号或者密码错误！", "error");
@@ -163,11 +170,14 @@ function logout() {
         data: {},
         success: function (result) {
             if(result){
-                swal("登出成功", "欢迎再次使用本系统！", "success");
-                setTimeout(function(){
+                swal({
+                    title: "登出成功",
+                    text: "欢迎再次使用本系统！",
+                    type: "success"
+                },function () {
                     window.location.href = "/login";
                     window.event.returnValue=false;
-                }, 1500);
+                });
             }else
                 swal("登出失败", "登出失败！", "error");
         },

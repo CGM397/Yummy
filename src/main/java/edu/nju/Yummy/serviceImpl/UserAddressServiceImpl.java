@@ -33,7 +33,9 @@ public class UserAddressServiceImpl implements UserAddressService {
 
     @Override
     public boolean updateAddress(String userId, String oldAddress, String newAddress) {
-        return userAddressDao.updateAddress(userId, oldAddress, newAddress);
+        ArrayList<Integer> coordinates = commonService.generateCoordinate();
+        return userAddressDao.updateAddress(userId, oldAddress, newAddress,
+                coordinates.get(0), coordinates.get(1));
     }
 
     @Override

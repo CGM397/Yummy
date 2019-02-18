@@ -10,7 +10,7 @@ public interface UserAddressDao {
 
     ArrayList<Address> showAddress(String userId);
 
-    boolean updateAddress(String userId, String oldAddress, String newAddress);
+    boolean updateAddress(String userId, String oldAddress, String newAddress, int x, int y);
 
     boolean deleteAddress(String userId, String address);
 }
