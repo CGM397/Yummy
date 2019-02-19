@@ -99,8 +99,6 @@ function modifyInfo() {
     var restaurantName = document.getElementById("restaurant-name").value;
     var restaurantAddress = document.getElementById("restaurant-address").value;
     var restaurantType = document.getElementById("restaurant-type").value;
-    var modification = new Modification(modificationDate, restaurantId, restaurantName, restaurantType,
-                                        restaurantAddress, false, false);
     swal({
             title: "确定修改您的餐厅信息吗",
             text: "点击确认进行修改",
@@ -116,6 +114,16 @@ function modifyInfo() {
                 swal("修改失败","餐厅名称、地址和类型不可为空","error");
                 return;
             }
+            var currentRes = findRestaurantInfoById(restaurantId);
+            var currentAdd = showRestaurantAddress(restaurantId);
+            if(restaurantName === currentRes.restaurantName)
+                restaurantName = "无修改";
+            if(restaurantType === currentRes.restaurantType)
+                restaurantType = "无修改";
+            if(restaurantAddress === currentAdd.address)
+                restaurantAddress = "无修改";
+            var modification = new Modification(modificationDate, restaurantId, restaurantName,
+                                                restaurantType, restaurantAddress, false, false);
             if(addModification(modification))
                 swal("修改申请已提交", "待Yummy总经理审批", "success");
             else

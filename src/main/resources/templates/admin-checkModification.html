@@ -3,8 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>admin-checkModification</title>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+    <script type="text/javascript" src="../static/js/model.js"></script>
+    <script type="text/javascript" src="../static/js/registerLogin.js"></script>
+    <script type="text/javascript" src="../static/js/restaurantInfo.js"></script>
+    <script type="text/javascript" src="../static/js/restaurantAddress.js"></script>
+    <script type="text/javascript" src="../static/js/adminManagement.js"></script>
+    <script type="text/javascript" src="../static/js/modificationManagement.js"></script>
+    <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
+    <link href="../static/css/navigationBar.css" rel="stylesheet">
+    <link href="../static/css/restaurantModification.css" rel="stylesheet">
+    <link href="../static/css/sweetalert.css" rel="stylesheet">
 </head>
-<body>
+<body style = "margin: 0">
+<div>
+    <ul class="menu">
+        <li><p>Yummy!</p></li>
+        <li class="active"><a href="admin-checkModification">修改申请</a></li>
+        <li><a href="admin-statistics">统计信息</a></li>
+        <li style="float: right;">
+            <a href="javascript:void(0);" onclick="logout()">Logout</a>
+        </li>
+        <li style="float: right"><p style="margin: 0; padding: 18px 0">您好! 经理&emsp;</p></li>
+    </ul>
+</div>
 
+<div align="center">
+    <label>
+        <input type="text" class="title" value="修改餐厅信息申请" readonly />
+    </label>
+</div>
+<div>
+    <table id="modificationTable" class="modificationList">
+        <tr>
+            <th style="width: 20%">餐厅编号</th>
+            <th>修改内容</th>
+            <th style="width: 20%">操作</th>
+        </tr>
+    </table>
+</div>
+<script>
+    infoInit();
+    function infoInit() {
+        showUncheckedModification();
+    }
+</script>
 </body>
 </html>

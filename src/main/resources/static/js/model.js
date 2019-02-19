@@ -24,6 +24,7 @@ function Address(userId, address, coordinateX, coordinateY) {
 
 function Modification(modificationDate, restaurantId, modifiedName, modifiedType, modifiedAddress,
                       checked, approve) {
+    this.modificationId = "";
     this.modificationDate = modificationDate;
     this.restaurantId = restaurantId;
     this.modifiedName = modifiedName;

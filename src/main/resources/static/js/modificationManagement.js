@@ -16,12 +16,39 @@ function addModification(modification) {
     return res;
 }
 
-function updateModification() {
-
+function updateModification(modification) {
+    var res = false;
+    $.ajax({
+        type: 'POST',
+        url:"/adminManagement/updateModification",
+        async: false,                         //将ajax改为同步模式
+        contentType: "application/json",
+        data: JSON.stringify(modification),
+        success:function(result){
+            res = result;
+        },
+        error:function(){
+            alert("error");
+        }
+    });
+    return res;
 }
 
 function showModification() {
-
+    var res = [];
+    $.ajax({
+        type: 'POST',
+        url:"/adminManagement/showModification",
+        async: false,                         //将ajax改为同步模式
+        data: {},
+        success:function(result){
+            res = result;
+        },
+        error:function(){
+            alert("error");
+        }
+    });
+    return res;
 }
 
 function findRestaurantModification(restaurantId) {

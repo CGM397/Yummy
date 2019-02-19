@@ -49,6 +49,11 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
             }
             else
                 res = "wrong_password";
+        }else if(identity.equals("经理")){
+            if(account.equals("admin") && password.equals("000000"))
+                res = "success";
+            else
+                res = "wrong_password";
         }
         return res;
     }

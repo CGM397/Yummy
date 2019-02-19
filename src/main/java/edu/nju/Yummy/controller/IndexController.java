@@ -120,4 +120,24 @@ public class IndexController {
         }
         return "restaurant-modification";
     }
+
+    @RequestMapping("/admin-checkModification")
+    public String adminCheckModification(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "admin-checkModification";
+    }
+
+    @RequestMapping("/admin-statistics")
+    public String adminStatistics(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "admin-statistics";
+    }
 }

@@ -1,24 +1,13 @@
 function showRestaurantModification() {
     var store = findRestaurantModification(localStorage.getItem("restaurantId"));
-    var currentInfo = findRestaurantInfoById(localStorage.getItem("restaurantId"));
-    var currentRestaurantAddress = showRestaurantAddress(localStorage.getItem("restaurantId"));
     for(var i = 0; i < store.length; i++){
-        var date = store[i].modificationDate;
-        var name = "无修改";
-        var type = "无修改";
-        var address = "无修改";
         var condition = "已同意";
-        if(store[i].modifiedName !== currentInfo.restaurantName)
-            name = store[i].modifiedName;
-        if(store[i].modifiedType !== currentInfo.restaurantType)
-            type = store[i].modifiedType;
-        if(store[i].modifiedAddress !== currentRestaurantAddress)
-            address = store[i].modifiedAddress;
         if(!store[i].checked)
             condition = "审核中";
         else if(!store[i].approve)
             condition = "已拒绝";
-        addModificationRow(date, name, type, address, condition);
+        addModificationRow(store[i].modificationDate, store[i].modifiedName, store[i].modifiedType,
+                           store[i].modifiedAddress, condition);
     }
 }
 
@@ -52,6 +41,5 @@ function addModificationRow(date, name, type, address, condition) {
     conditionCell.style.textAlign='center';
     conditionCell.innerHTML = condition;
     row.appendChild(conditionCell);
-
     table.appendChild(row);
 }

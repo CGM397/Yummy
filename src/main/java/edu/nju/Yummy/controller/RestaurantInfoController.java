@@ -42,6 +42,20 @@ public class RestaurantInfoController {
         return res;
     }
 
+    @RequestMapping(value = "/saveRestaurantAddress", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean saveRestaurantAddress(@RequestBody Address address){
+        return userAddressService.saveAddress(address);
+    }
+
+    @RequestMapping(value = "/updateRestaurantAddress", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean updateRestaurantAddress(@RequestParam String restaurantId,
+                                           @RequestParam String oldAddress,
+                                           @RequestParam String newAddress){
+        return userAddressService.updateAddress(restaurantId, oldAddress, newAddress);
+    }
+
     @RequestMapping(value = "/addModification", method = RequestMethod.POST)
     @ResponseBody
     public boolean addModification(@RequestBody Modification modification){

@@ -142,13 +142,15 @@ function login() {
                 },function () {
                     if(identity === "顾客"){
                         localStorage.setItem("customerMail", account);
-                            window.location.href = "/customer-home";
-                            window.event.returnValue=false;
-                    }
-                    else if(identity === "餐厅"){
+                        window.location.href = "/customer-home";
+                        window.event.returnValue=false;
+                    }else if(identity === "餐厅"){
                         localStorage.setItem("restaurantId", account);
-                            window.location.href = "/restaurant-home";
-                            window.event.returnValue=false;
+                        window.location.href = "/restaurant-home";
+                        window.event.returnValue=false;
+                    }else if(identity === "经理"){
+                        window.location.href = "/admin-checkModification";
+                        window.event.returnValue=false;
                     }
                 });
             }
