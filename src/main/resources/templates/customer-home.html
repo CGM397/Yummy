@@ -7,8 +7,10 @@
     <script type="text/javascript" src="../static/js/model.js"></script>
     <script type="text/javascript" src="../static/js/customerInfo.js"></script>
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
+    <script type="text/javascript" src="../static/js/customerHome.js"></script>
     <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
     <link href="../static/css/navigationBar.css" rel="stylesheet">
+    <link href="../static/css/customerHome.css" rel="stylesheet">
     <link href="../static/css/sweetalert.css" rel="stylesheet">
 </head>
 <body style="margin: 0">
@@ -30,6 +32,10 @@
         <li style="float: right"><p style="margin: 0; padding: 18px 0">您好!</p></li>
     </ul>
 </div>
+<div>
+    <label for="customer-address" class="addressLabel">当前地址</label>
+    <select id="customer-address" class="customerAddress" onchange="updateRestaurantList()"></select>
+</div>
 <script>
     welcome();
     function welcome() {
@@ -38,6 +44,7 @@
         localStorage.setItem("customerName",currentCustomer.customerName);
         localStorage.setItem("customerId",currentCustomer.customerId);
         document.getElementById("customerName").value = currentCustomer.customerName;
+        setCustomerAddress();
     }
     function turnToCustomerInfo() {
         window.location.href = "customer-info";
