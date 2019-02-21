@@ -2,17 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>restaurant-modification</title>
+    <title>restaurant-release</title>
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
     <script type="text/javascript" src="../static/js/model.js"></script>
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
     <script type="text/javascript" src="../static/js/restaurantInfo.js"></script>
-    <script type="text/javascript" src="../static/js/modificationManagement.js"></script>
-    <script type="text/javascript" src="../static/js/restaurantModification.js"></script>
-    <script type="text/javascript" src="../static/js/restaurantAddress.js"></script>
     <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
     <link href="../static/css/navigationBar.css" rel="stylesheet">
-    <link href="../static/css/restaurantModification.css" rel="stylesheet">
+    <link href="../static/css/commodityInfo.css" rel="stylesheet">
     <link href="../static/css/sweetalert.css" rel="stylesheet">
 </head>
 <body style = "margin: 0">
@@ -20,10 +17,10 @@
     <ul class="menu">
         <li><p>Yummy!</p></li>
         <li><a href="restaurant-home">我的餐厅</a></li>
-        <li><a href="restaurant-release">推出新品</a></li>
+        <li class="active"><a href="restaurant-release">推出新品</a></li>
         <li><a href="restaurant-order">销售记录</a></li>
         <li><a href="restaurant-statistics">统计信息</a></li>
-        <li class="active"><a href="restaurant-modification">我的消息</a></li>
+        <li><a href="restaurant-modification">我的消息</a></li>
         <li style="float: right;">
             <a href="javascript:void(0);" onclick="logout()">Logout</a>
         </li>
@@ -35,26 +32,47 @@
         <li style="float: right"><p style="margin: 0; padding: 18px 0">您好!</p></li>
     </ul>
 </div>
-
-<div align="center">
-    <label>
-        <input type="text" class="title" value="修改餐厅信息申请" readonly />
-    </label>
-</div>
-<div>
-    <table id="modificationTable" class="modificationList">
-        <tr>
-            <th style="width: 20%">申请时间</th>
-            <th>修改内容</th>
-            <th style="width: 20%">状态</th>
-        </tr>
-    </table>
-</div>
+<section class="panel">
+    <h2>商品发布</h2>
+    <div class="commodityInfoList">
+        <form>
+            <ul>
+                <li>
+                    <label for="commodity-type">商品类型</label>
+                    <select id="commodity-type">
+                        <option>单品</option>
+                        <option>套餐</option>
+                    </select>
+                </li>
+                <li>
+                    <label>商品名称</label>
+                    <input id="commodity-name" type="text" placeholder="commodity-name"/>
+                </li>
+                <li>
+                    <label>商品价格</label>
+                    <input id="commodity-id" type="text" placeholder="commodity-id"/>
+                </li>
+                <li>
+                    <label>商品数量</label>
+                    <input id="commodity-amount" type="text" placeholder="commodity-amount"/>
+                </li>
+                <li>
+                    <label>持续时间(天)</label>
+                    <input id="commodity-duration" type="text" placeholder="restaurant-duration"/>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <p>
+        <a id="modifyInfo" onclick="modifyInfo()" class="btn">
+            发布商品信息
+        </a>
+    </p>
+</section>
 <script>
     infoInit();
     function infoInit() {
         document.getElementById("restaurantName").value = localStorage.getItem("restaurantName");
-        showRestaurantModification();
     }
     function turnToRestaurantInfo() {
         window.location.href = "restaurant-info";

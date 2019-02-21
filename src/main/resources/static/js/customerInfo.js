@@ -13,6 +13,7 @@ function findCustomerInfoByMail(customerMail) {
                 result.customerPassword,
                 result.customerName,
                 result.phoneNumber,
+                result.vipPoints,
                 result.vipLevel,
                 result.active);
         },
@@ -77,6 +78,7 @@ function modifyPassword() {
                                                             newPwd2,
                                                             currentInfo.customerName,
                                                             currentInfo.phoneNumber,
+                                                            currentInfo.vipPoints,
                                                             currentInfo.vipLevel,
                                                             currentInfo.active);
                                     if(updateCustomerInfo(info)){
@@ -103,10 +105,12 @@ function modifyInfo() {
     var customerPassword = document.getElementById("customer-password").value;
     var customerMail = document.getElementById("customer-mail").value;
     var phoneNumber = document.getElementById("phone-number").value;
-    var vipLevel = document.getElementById("vip-level").value;
+    var vipInfo = document.getElementById("vip-level&points").value;
+    var vipLevel = vipInfo.substring(vipInfo.indexOf(":") + 2, vipInfo.indexOf(";"));
+    var vipPoints = vipInfo.substring(vipInfo.lastIndexOf(":") + 2);
     var active = true;
     var info = new Customer(customerId, customerMail, customerPassword, customerName,
-                            phoneNumber, vipLevel, active);
+                            phoneNumber, vipPoints, vipLevel, active);
     swal({
             title: "确定修改您的个人信息吗",
             text: "点击确认进行修改",
@@ -149,6 +153,7 @@ function delAccount() {
                                     currentInfo.customerPassword,
                                     currentInfo.customerName,
                                     currentInfo.phoneNumber,
+                                    currentInfo.vipPoints,
                                     currentInfo.vipLevel,
                                     false);
             if(updateCustomerInfo(info)){

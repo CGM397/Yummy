@@ -38,8 +38,8 @@
         <form>
             <ul>
                 <li>
-                    <label>会员等级</label>
-                    <input id="vip-level" type="text" placeholder="vip-level" disabled />
+                    <label>会员等级/积分</label>
+                    <input id="vip-level&points" type="text" placeholder="vip-level&points" disabled />
                 </li>
                 <li>
                     <label>用户编号</label>
@@ -91,7 +91,8 @@
         document.getElementById("customer-name").value = currentCustomer.customerName;
         document.getElementById("customer-password").value = currentCustomer.customerPassword;
         document.getElementById("customer-mail").value = currentCustomer.customerMail;
-        document.getElementById("vip-level").value = currentCustomer.vipLevel;
+        document.getElementById("vip-level&points").value = "等级: " + currentCustomer.vipLevel +
+                                                            "; 积分: " + currentCustomer.vipPoints;
         document.getElementById("phone-number").value = currentCustomer.phoneNumber;
         localStorage.setItem("customerName",currentCustomer.customerName);
     }

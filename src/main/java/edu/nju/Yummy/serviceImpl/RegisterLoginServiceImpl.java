@@ -80,7 +80,7 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
                                     String customerName, String phoneNumber) {
         String customerId = "c_" + commonService.generateId(6,"customer");
         Customer customer = new Customer(customerId, customerMail, customerPassword, customerName,
-                phoneNumber,0,true);
+                phoneNumber,0,0,true);
         return customerInfoDao.saveCustomerInfo(customer);
     }
 

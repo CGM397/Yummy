@@ -1,9 +1,11 @@
-function Customer(customerId, customerMail, customerPassword, customerName, phoneNumber, vipLevel, active) {
+function Customer(customerId, customerMail, customerPassword, customerName, phoneNumber, vipPoints,
+                  vipLevel, active) {
     this.customerId = customerId;
     this.customerMail = customerMail;
     this.customerPassword = customerPassword;
     this.customerName= customerName;
     this.phoneNumber = phoneNumber;
+    this.vipPoints = vipPoints;
     this.vipLevel = vipLevel;
     this.active = active;
 }

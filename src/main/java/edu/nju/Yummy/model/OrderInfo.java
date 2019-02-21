@@ -3,7 +3,7 @@ package edu.nju.Yummy.model;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Order {
+public class OrderInfo {
 
     private String orderId;
 

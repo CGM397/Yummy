@@ -9,6 +9,7 @@ CREATE TABLE `customer` (
   `customerPassword` VARCHAR(64) NOT NULL,
   `customerName` VARCHAR(64),
   `phoneNumber` VARCHAR(64),
+  `vipPoints` INT,
   `vipLevel` INT,
   `active` BOOLEAN,
   PRIMARY KEY (`customerId`)
