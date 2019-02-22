@@ -45,3 +45,37 @@ CREATE TABLE `modification` (
   `approve` BOOLEAN,
   PRIMARY KEY (`modificationId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
+
+DROP TABLE IF EXISTS `commodityInfo`;
+CREATE TABLE `commodityInfo` (
+  `commodityInfoId` INT,
+  `restaurantId` VARCHAR(64) NOT NULL,
+  `commodityName` VARCHAR(64) NOT NULL,
+  `type` VARCHAR(64),
+  `commodityPrice` DOUBLE,
+  `amount` INT,
+  `releaseDate` VARCHAR(64),
+  `duration` INT,
+  PRIMARY KEY (`commodityInfoId`)
+) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
+
+DROP TABLE IF EXISTS `commodityItem`;
+CREATE TABLE `commodityItem` (
+  `commodityItemId` INT,
+  `restaurantId` VARCHAR(64) NOT NULL,
+  `itemName` VARCHAR(64) NOT NULL,
+  `itemPrice` DOUBLE,
+  PRIMARY KEY (`commodityItemId`)
+) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
+
+DROP TABLE IF EXISTS `discountInfo`;
+CREATE TABLE `discountInfo` (
+  `discountInfoId` INT,
+  `restaurantId` VARCHAR(64) NOT NULL,
+  `commodityName` VARCHAR(64) NOT NULL,
+  `discount` DOUBLE,
+  `discountAmount` INT,
+  `releaseDate` VARCHAR(64),
+  `duration` INT,
+  PRIMARY KEY (`discountInfoId`)
+) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;

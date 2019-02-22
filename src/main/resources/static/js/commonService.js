@@ -12,3 +12,11 @@ function getDate() {
     return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +
         hour + ":" + min + ":" + sec;
 }
+
+function isPositiveInteger(num) {
+    
+}
+
+function isNonNegativeDouble(num) {
+    
+}

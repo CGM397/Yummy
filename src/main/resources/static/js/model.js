@@ -26,7 +26,7 @@ function Address(userId, address, coordinateX, coordinateY) {
 
 function Modification(modificationDate, restaurantId, modifiedName, modifiedType, modifiedAddress,
                       checked, approve) {
-    this.modificationId = "";
+    this.modificationId = 0;
     this.modificationDate = modificationDate;
     this.restaurantId = restaurantId;
     this.modifiedName = modifiedName;
@@ -34,4 +34,34 @@ function Modification(modificationDate, restaurantId, modifiedName, modifiedType
     this.modifiedAddress = modifiedAddress;
     this.checked = checked;
     this.approve = approve;
+}
+
+function CommodityInfo(restaurantId, commodityName, type, commodityPrice, amount, items, releaseDate,
+                       duration) {
+    this.commodityInfoId = 0;
+    this.restaurantId = restaurantId;
+    this.commodityName = commodityName;
+    this.type = type;
+    this.commodityPrice = commodityPrice;
+    this.amount = amount;
+    this.items = items;
+    this.releaseDate = releaseDate;
+    this.duration = duration;
+}
+
+function CommodityItem(restaurantId, itemName, itemPrice) {
+    this.commodityItemId = 0;
+    this.restaurantId = restaurantId;
+    this.itemName = itemName;
+    this.itemPrice = itemPrice;
+}
+
+function DiscountInfo(restaurantId, commodityName, discount, discountAmount, releaseDate, duration) {
+    this.discountInfoId = 0;
+    this.restaurantId = restaurantId;
+    this.commodityName = commodityName;
+    this.discount = discount;
+    this.discountAmount = discountAmount;
+    this.releaseDate = releaseDate;
+    this.duration = duration;
 }

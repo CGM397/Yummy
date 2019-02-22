@@ -1,10 +1,12 @@
 .panel {
-    margin: auto;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 0;
     text-align: center;
     background-color: #ffffff;
     width: 600px;
     border-radius: 10px;
-    padding: 50px;
+    padding: 0;
 }
 .btn {
     cursor:pointer;
@@ -64,4 +66,54 @@
 .commodityInfoList ul li input:focus{
     border-color: green;
     padding-right:40px;
+}
+
+.commodityTable {
+    position: absolute;
+    margin-left: 700px;
+    margin-top: 15px;
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    width:600px;
+    border-collapse:collapse;
+}
+.commodityTable td {
+    text-align: center;
+    height:35px;
+    font-size:1.2em;
+    border:1px solid #979ea8;
+    padding:3px 7px 3px 7px;
+}
+.commodityTable th {
+    border:1px solid #979ea8;
+    font-size:1.3em;
+    text-align:center;
+    padding-left:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    background-color: #ffffff;
+    color: #45494a;
+}
+.commodityTable tr.alt td {
+    color:#000000;
+    background-color:#EAF2D3;
+}
+
+.opBtn {
+    display: inline-block;
+    cursor:pointer;
+    color: white;
+    margin-top:5px;
+    margin-left: 5px;
+    background: rgb(48, 35, 174);
+    font-size: 20px;
+    line-height: 22px;
+    height: 25px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background .15s;
+}
+
+.opBtn:hover {
+    background-color: rgb(81, 67, 224);
 }
