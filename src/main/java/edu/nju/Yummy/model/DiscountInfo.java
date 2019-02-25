@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table
@@ -25,21 +26,22 @@ public class DiscountInfo implements Serializable {
 
     private int discountAmount;
 
-    private String releaseDate;
+    private Date beginDate;
 
-    private int duration;
+    private Date endDate;
 
     public DiscountInfo() {
     }
 
-    public DiscountInfo(String restaurantId, String commodityName, double discount,
-                        int discountAmount, String releaseDate, int duration) {
+    public DiscountInfo(String restaurantId, String commodityName,
+                        double discount, int discountAmount,
+                        Date beginDate, Date endDate) {
         this.restaurantId = restaurantId;
         this.commodityName = commodityName;
         this.discount = discount;
         this.discountAmount = discountAmount;
-        this.releaseDate = releaseDate;
-        this.duration = duration;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
     }
 
     public long getDiscountInfoId() {
@@ -82,19 +84,19 @@ public class DiscountInfo implements Serializable {
         this.discountAmount = discountAmount;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public Date getBeginDate() {
+        return beginDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
     }
 
-    public int getDuration() {
-        return duration;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

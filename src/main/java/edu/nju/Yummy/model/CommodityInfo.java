@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -26,28 +28,27 @@ public class CommodityInfo implements Serializable {
 
     private int amount;
 
-    @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "info_Id")
-    private ArrayList<CommodityItem> items;
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    private List<CommodityItem> items;
 
-    private String releaseDate;
+    private Date beginDate;
 
-    private int duration;
+    private Date endDate;
 
     public CommodityInfo() {
     }
 
     public CommodityInfo(String restaurantId, String commodityName, String type,
                          double commodityPrice, int amount, ArrayList<CommodityItem> items,
-                         String releaseDate, int duration) {
+                         Date beginDate, Date endDate) {
         this.restaurantId = restaurantId;
         this.commodityName = commodityName;
         this.type = type;
         this.commodityPrice = commodityPrice;
         this.amount = amount;
         this.items = items;
-        this.releaseDate = releaseDate;
-        this.duration = duration;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
     }
 
     public long getCommodityInfoId() {
@@ -98,27 +99,27 @@ public class CommodityInfo implements Serializable {
         this.amount = amount;
     }
 
-    public ArrayList<CommodityItem> getItems() {
+    public List<CommodityItem> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<CommodityItem> items) {
+    public void setItems(List<CommodityItem> items) {
         this.items = items;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public Date getBeginDate() {
+        return beginDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
     }
 
-    public int getDuration() {
-        return duration;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

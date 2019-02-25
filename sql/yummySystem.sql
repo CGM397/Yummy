@@ -54,8 +54,8 @@ CREATE TABLE `commodityInfo` (
   `type` VARCHAR(64),
   `commodityPrice` DOUBLE,
   `amount` INT,
-  `releaseDate` VARCHAR(64),
-  `duration` INT,
+  `beginDate` DATETIME,
+  `endDate` DATETIME,
   PRIMARY KEY (`commodityInfoId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
 
@@ -75,7 +75,7 @@ CREATE TABLE `discountInfo` (
   `commodityName` VARCHAR(64) NOT NULL,
   `discount` DOUBLE,
   `discountAmount` INT,
-  `releaseDate` VARCHAR(64),
-  `duration` INT,
+  `beginDate` DATETIME,
+  `endDate` DATETIME,
   PRIMARY KEY (`discountInfoId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;

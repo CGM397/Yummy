@@ -14,9 +14,11 @@ function getDate() {
 }
 
 function isPositiveInteger(num) {
-    
+    var reg =/(^[1-9]\d*$)/;
+    return reg.test(num);
 }
 
 function isNonNegativeDouble(num) {
-    
+    var reg=/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+    return reg.test(num);
 }

@@ -73,8 +73,12 @@
                             <input id="commodity-amount" type="text" placeholder="commodity-amount"/>
                         </li>
                         <li>
-                            <label>持续时间(天)</label>
-                            <input id="commodity-duration" type="text" placeholder="restaurant-duration"/>
+                            <label>起始时间</label>
+                            <input id="commodity-beginDate" type="datetime-local" placeholder="now"/>
+                        </li>
+                        <li>
+                            <label>结束时间</label>
+                            <input id="commodity-endDate" type="datetime-local" placeholder="now"/>
                         </li>
                     </ul>
                 </form>
@@ -92,8 +96,8 @@
                 <th style="width: 27%">现有商品</th>
                 <th style="width: 15%">类型</th>
                 <th style="width: 15%">价格</th>
-                <th style="width: 25%">添加/删除</th>
-                <th style="width: 18%">加入数量</th>
+                <th id="table-op" style="width: 25%; display: none">添加/删除</th>
+                <th id="table-num" style="width: 18%; display: none">加入数量</th>
             </tr>
         </table>
     </div>
@@ -102,6 +106,20 @@
     infoInit();
     function infoInit() {
         document.getElementById("restaurantName").value = localStorage.getItem("restaurantName");
+        var time = new Date();
+        var month = ("0" + (time.getMonth() + 1)).slice(-2);
+        var day = ("0" + time.getDate()).slice(-2);
+        var hour = ("0" + time.getHours()).slice(-2);
+        var min = ("0" + time.getMinutes()).slice(-2);
+        var now = time.getFullYear() + "-" + month + "-" + day + "T" + hour + ":" + min;
+        var hour_max = "23";
+        var min_max = "59";
+        var end = time.getFullYear() + "-" + month + "-" + day + "T" +
+            hour_max + ":" + min_max;
+        document.getElementById("commodity-beginDate").value = now;
+        document.getElementById("commodity-endDate").value = end;
+        document.getElementById("commodity-endDate").min = now;
+        setCommodity();
     }
     function turnToRestaurantInfo() {
         window.location.href = "restaurant-info";
@@ -114,12 +132,14 @@
             document.getElementById("comSelect").style.display = "none";
             document.getElementById("comDiscount").style.display = "none";
             document.getElementById("comAmount").style.display = "block";
+            hideTableRow();
         }else if(selectedType === "套餐"){
             document.getElementById("comName").style.display = "block";
             document.getElementById("comPrice").style.display = "block";
             document.getElementById("comSelect").style.display = "none";
             document.getElementById("comDiscount").style.display = "none";
             document.getElementById("comAmount").style.display = "block";
+            displayTableRow();
             swal("已选择套餐类型","请在右侧表格中选择单品加入该套餐","success");
         } else if(selectedType === "优惠"){
             document.getElementById("comName").style.display = "none";
@@ -127,6 +147,25 @@
             document.getElementById("comSelect").style.display = "block";
             document.getElementById("comDiscount").style.display = "block";
             document.getElementById("comAmount").style.display = "block";
+            hideTableRow();
+        }
+    }
+    
+    function hideTableRow() {
+        var tab = document.getElementById("commodityTable");
+        var trs = tab.rows;
+        for(var i = 0; i < trs.length; i++){
+            trs[i].cells[3].style.display='none';
+            trs[i].cells[4].style.display='none';
+        }
+    }
+
+    function displayTableRow() {
+        var tab = document.getElementById("commodityTable");
+        var trs = tab.rows;
+        for(var i = 0; i < trs.length; i++){
+            trs[i].cells[3].style.display='table-cell';
+            trs[i].cells[4].style.display='table-cell';
         }
     }
 </script>

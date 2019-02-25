@@ -45,7 +45,7 @@
     display:inline-block;
     float: left;
 }
-.commodityInfoList ul li input[type=text]{
+.commodityInfoList ul li input[type=text],input[type=datetime-local]{
     margin-left:0;
     width:220px;
     height:20px;

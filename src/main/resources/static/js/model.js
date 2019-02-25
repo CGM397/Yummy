@@ -36,8 +36,8 @@ function Modification(modificationDate, restaurantId, modifiedName, modifiedType
     this.approve = approve;
 }
 
-function CommodityInfo(restaurantId, commodityName, type, commodityPrice, amount, items, releaseDate,
-                       duration) {
+function CommodityInfo(restaurantId, commodityName, type, commodityPrice, amount, items, beginDate,
+                       endDate) {
     this.commodityInfoId = 0;
     this.restaurantId = restaurantId;
     this.commodityName = commodityName;
@@ -45,8 +45,8 @@ function CommodityInfo(restaurantId, commodityName, type, commodityPrice, amount
     this.commodityPrice = commodityPrice;
     this.amount = amount;
     this.items = items;
-    this.releaseDate = releaseDate;
-    this.duration = duration;
+    this.beginDate = beginDate;
+    this.endDate = endDate;
 }
 
 function CommodityItem(restaurantId, itemName, itemPrice) {
@@ -56,12 +56,12 @@ function CommodityItem(restaurantId, itemName, itemPrice) {
     this.itemPrice = itemPrice;
 }
 
-function DiscountInfo(restaurantId, commodityName, discount, discountAmount, releaseDate, duration) {
+function DiscountInfo(restaurantId, commodityName, discount, discountAmount, beginDate, endDate) {
     this.discountInfoId = 0;
     this.restaurantId = restaurantId;
     this.commodityName = commodityName;
     this.discount = discount;
     this.discountAmount = discountAmount;
-    this.releaseDate = releaseDate;
-    this.duration = duration;
+    this.beginDate = beginDate;
+    this.endDate = endDate;
 }
