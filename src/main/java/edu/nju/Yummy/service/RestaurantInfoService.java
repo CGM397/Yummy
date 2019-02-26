@@ -1,5 +1,6 @@
 package edu.nju.Yummy.service;
 
+import edu.nju.Yummy.model.DiscountInfo;
 import edu.nju.Yummy.model.Modification;
 import edu.nju.Yummy.model.Restaurant;
 
@@ -14,4 +15,8 @@ public interface RestaurantInfoService {
     boolean addModification(Modification modification);
 
     ArrayList<Modification> findRestaurantModification(String restaurantId);
+
+    ArrayList<Restaurant> showAllRestaurants();
+
+    ArrayList<DiscountInfo> showDiscountInfo(String restaurantId);
 }

@@ -1,0 +1,114 @@
+.title {
+    cursor: default;
+    margin: 15px auto;
+    font-size: 30px;
+    border: none;
+    outline: none;
+    text-align: center;
+}
+
+.commodityTableLabel{
+    margin-left: 20px;
+    font-size: 25px;
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+.commodityTable {
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 10px;
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    width:850px;
+    border-collapse:collapse;
+}
+.commodityTable td {
+    text-align: center;
+    height:35px;
+    font-size:1.2em;
+    border:1px solid #979ea8;
+    padding:3px 7px 3px 7px;
+}
+.commodityTable th {
+    border:1px solid #979ea8;
+    font-size:1.3em;
+    text-align:center;
+    padding-left:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    background-color: #ffffff;
+    color: #45494a;
+}
+.commodityTable tr.alt td {
+    color:#000000;
+    background-color:#EAF2D3;
+}
+
+.shoppingCartTableLabel{
+    margin-left: 800px;
+    font-size: 25px;
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+.shoppingCartTable {
+    position: absolute;
+    margin-left: 800px;
+    margin-top: 10px;
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    width:420px;
+    border-collapse:collapse;
+}
+.shoppingCartTable td {
+    text-align: center;
+    height:35px;
+    font-size:1.2em;
+    border:1px solid #979ea8;
+    padding:3px 7px 3px 7px;
+}
+.shoppingCartTable th {
+    border:1px solid #979ea8;
+    font-size:1.3em;
+    text-align:center;
+    padding-left:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    background-color: #ffffff;
+    color: #45494a;
+}
+.shoppingCartTable tr.alt td {
+    color:#000000;
+    background-color:#EAF2D3;
+}
+
+.opBtn {
+    display: inline-block;
+    cursor:pointer;
+    color: white;
+    margin-top:5px;
+    margin-left: 5px;
+    background: rgb(48, 35, 174);
+    font-size: 20px;
+    line-height: 22px;
+    height: 25px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background .15s;
+}
+
+.opBtn:hover {
+    background-color: rgb(81, 67, 224);
+}
+
+.buyBtn {
+    cursor: pointer;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border: none;
+    outline: none;
+    background: #30c553;
+    width: 180px;
+    height: 50px;
+    font-size: 20px;
+    color: white;
+}

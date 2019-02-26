@@ -8,6 +8,7 @@
     <script type="text/javascript" src="../static/js/customerInfo.js"></script>
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
     <script type="text/javascript" src="../static/js/customerHome.js"></script>
+    <script type="text/javascript" src="../static/js/restaurantAddress.js"></script>
     <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
     <link href="../static/css/navigationBar.css" rel="stylesheet">
     <link href="../static/css/customerHome.css" rel="stylesheet">
@@ -38,10 +39,10 @@
     <select id="customer-address" class="customerAddress" onchange="updateRestaurantList()"></select>
 </div>
 <div>
-    <table style="margin-top: 30px" id="modificationTable" class="modificationList">
+    <table style="margin-top: 30px" id="restaurantTable" class="modificationList">
         <tr>
             <th style="display: none">餐厅编号</th>
-            <th>餐厅名称</th>
+            <th>附近餐厅</th>
             <th>餐厅类型</th>
             <th>餐厅地址</th>
             <th style="width: 20%">操作</th>
@@ -56,7 +57,7 @@
         localStorage.setItem("customerName",currentCustomer.customerName);
         localStorage.setItem("customerId",currentCustomer.customerId);
         document.getElementById("customerName").value = currentCustomer.customerName;
-        setCustomerAddress();
+        initPageInfo();
     }
     function turnToCustomerInfo() {
         window.location.href = "customer-info";

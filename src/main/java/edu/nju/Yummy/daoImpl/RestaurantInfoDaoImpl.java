@@ -2,6 +2,7 @@ package edu.nju.Yummy.daoImpl;
 
 import edu.nju.Yummy.dao.BaseDao;
 import edu.nju.Yummy.dao.RestaurantInfoDao;
+import edu.nju.Yummy.model.DiscountInfo;
 import edu.nju.Yummy.model.Restaurant;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class RestaurantInfoDaoImpl implements RestaurantInfoDao {
@@ -26,6 +28,23 @@ public class RestaurantInfoDaoImpl implements RestaurantInfoDao {
             Query query = session.createQuery(hql);
             if(query.list().size() > 0)
                 res = (ArrayList<Restaurant>) query.list();
+            transaction.commit();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @Override
+    public ArrayList<DiscountInfo> showDiscountInfo(String restaurantId) {
+        ArrayList<DiscountInfo> res = new ArrayList<>();
+        try(Session session = baseDao.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            String hql = "from DiscountInfo where restaurantId = ?1";
+            Query query = session.createQuery(hql);
+            query.setParameter(1,restaurantId);
+            if(query.list() != null && query.list().size() > 0)
+                res = (ArrayList<DiscountInfo>) query.list();
             transaction.commit();
         }catch (Exception e) {
             e.printStackTrace();

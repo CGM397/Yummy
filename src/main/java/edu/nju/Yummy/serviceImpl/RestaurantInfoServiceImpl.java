@@ -2,6 +2,7 @@ package edu.nju.Yummy.serviceImpl;
 
 import edu.nju.Yummy.dao.ModificationDao;
 import edu.nju.Yummy.dao.RestaurantInfoDao;
+import edu.nju.Yummy.model.DiscountInfo;
 import edu.nju.Yummy.model.Modification;
 import edu.nju.Yummy.model.Restaurant;
 import edu.nju.Yummy.service.RestaurantInfoService;
@@ -37,6 +38,16 @@ public class RestaurantInfoServiceImpl implements RestaurantInfoService {
     @Override
     public ArrayList<Modification> findRestaurantModification(String restaurantId) {
         return modificationDao.findRestaurantModification(restaurantId);
+    }
+
+    @Override
+    public ArrayList<Restaurant> showAllRestaurants() {
+        return restaurantInfoDao.showAllRestaurants();
+    }
+
+    @Override
+    public ArrayList<DiscountInfo> showDiscountInfo(String restaurantId) {
+        return restaurantInfoDao.showDiscountInfo(restaurantId);
     }
 
 }
