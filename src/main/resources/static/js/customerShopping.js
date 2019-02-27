@@ -83,7 +83,9 @@ function addCommodityRow(name, price, amount, describe, discount, discountAmount
 function addOneCommodity(a) {
     var tr=a.parentNode.parentNode;
     var commodityName = tr.cells[0].innerText;
+    var commodityPrice = parseFloat(tr.cells[1].innerText);
     var commodityAmount = parseInt(tr.cells[2].innerText);
+    var commodityDiscount = tr.cells[4].innerText;
     var discountAmount = tr.cells[5].innerText;
     var buyDiscountAmount = 0;
     if(commodityAmount < 1){
@@ -94,17 +96,24 @@ function addOneCommodity(a) {
     if(discountAmount !== "无" && parseInt(discountAmount) > 0){
         tr.cells[5].innerHTML = parseInt(discountAmount) - 1;
         buyDiscountAmount++;
+        commodityPrice = (commodityPrice *
+            parseFloat(commodityDiscount.substring(0, commodityDiscount.length - 1))) / 10.0 ;
     }
-    addShoppingCartRow(commodityName, buyDiscountAmount);
+    var price = parseFloat(commodityPrice.toFixed(2));
+    var total = document.getElementById("total").value;
+    document.getElementById("total").value = "￥" +
+                                (parseFloat(total.substring(1)) + price);
+    addShoppingCartRow(commodityName, price, buyDiscountAmount);
 }
 
-function addShoppingCartRow(name, buyDiscountAmount) {
+function addShoppingCartRow(name, price, buyDiscountAmount) {
     var table = document.getElementById("shoppingCartTable");
     var trs = table.rows;
     for(var i = 0; i < trs.length; i++){
         if(trs[i].cells[0].innerText === name){
             trs[i].cells[1].innerHTML = parseInt(trs[i].cells[1].innerText) + 1;
-            trs[i].cells[2].innerHTML = parseInt(trs[i].cells[2].innerText) + buyDiscountAmount;
+            trs[i].cells[2].innerHTML = parseFloat(trs[i].cells[2].innerText) + price;
+            trs[i].cells[3].innerHTML = parseInt(trs[i].cells[3].innerText) + buyDiscountAmount;
             return;
         }
     }
@@ -119,6 +128,11 @@ function addShoppingCartRow(name, buyDiscountAmount) {
     amountCell.style.textAlign='center';
     amountCell.innerHTML = "1";
     row.appendChild(amountCell);
+
+    var priceCell = document.createElement('td');
+    priceCell.style.textAlign='center';
+    priceCell.innerHTML = price;
+    row.appendChild(priceCell);
 
     var discountAmountCell = document.createElement('td');
     discountAmountCell.style.textAlign='center';
@@ -144,11 +158,12 @@ function deleteOneCommodity(a) {
     var tr=a.parentNode.parentNode;
     var commodityName = tr.cells[0].innerText;
     var commodityAmount = parseInt(tr.cells[1].innerText);
-    var discountAmount = parseInt(tr.cells[2].innerText);
+    var subtotal = parseFloat(tr.cells[2].innerText);
+    var discountAmount = parseInt(tr.cells[3].innerText);
     var isDiscount = (commodityAmount === discountAmount);
     if(commodityAmount > 1){
         if(isDiscount)
-            tr.cells[2].innerHTML = discountAmount - 1;
+            tr.cells[3].innerHTML = discountAmount - 1;
         tr.cells[1].innerHTML = commodityAmount - 1;
     }
     else{
@@ -158,12 +173,50 @@ function deleteOneCommodity(a) {
 
     var table = document.getElementById("commodityTable");
     var trs = table.rows;
-    for(var i = 0; i < trs.length; i++){
+    var price = 0.0;
+    var discount = 1.0;
+    for(var i = 0; i < trs.length; i++) {
         if(trs[i].cells[0].innerText === commodityName) {
             trs[i].cells[2].innerHTML = parseInt(trs[i].cells[2].innerText) + 1;
-            if(isDiscount)
+            price = parseFloat(trs[i].cells[1].innerText);
+            if(isDiscount){
                 trs[i].cells[5].innerHTML = parseInt(trs[i].cells[5].innerText) + 1;
+                var tmp = trs[i].cells[4].innerText;
+                discount = parseFloat(tmp.substring(0, tmp.length - 1)) / 10.0;
+            }
             break;
         }
     }
+    price = price * discount;
+    var total = document.getElementById("total").value;
+    document.getElementById("total").value = "￥" +
+                                        (parseFloat(total.substring(1)) - price);
+    if(commodityAmount > 1)
+        tr.cells[2].innerHTML = subtotal - parseFloat(price.toFixed(2));
+}
+
+function turnToSettle() {
+    var shoppingCartTable = document.getElementById("shoppingCartTable");
+    var trs = shoppingCartTable.rows;
+    if(trs.length === 1){
+        swal("结算失败","至少需要购买一样商品","error");
+        return;
+    }
+    var items = [];
+    var totalPrice = 0.0;
+    for(var i = 1; i < trs.length; i++) {
+        var itemName = trs[i].cells[0].innerText;
+        var amount = trs[i].cells[1].innerText;
+        var subTotal = trs[i].cells[2].innerText;
+        totalPrice += parseFloat(subTotal);
+        var oneItem = new OrderItem(itemName,amount,subTotal);
+        items.push(oneItem);
+    }
+    var customerId = localStorage.getItem("customerId");
+    var restaurantId = localStorage.getItem("selectRestaurant");
+    var deliveryAddress = localStorage.getItem("currentCustomerAddress");
+    var orderInfo = new OrderInfo(customerId, restaurantId, deliveryAddress, "", "", totalPrice,
+        "未付款", items);
+    localStorage.setItem("currentOrderInfo",JSON.stringify(orderInfo));
+    window.location.href="/customer-settle";
 }

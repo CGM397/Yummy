@@ -65,3 +65,23 @@ function DiscountInfo(restaurantId, commodityName, discount, discountAmount, beg
     this.beginDate = beginDate;
     this.endDate = endDate;
 }
+
+function OrderInfo(customerId, restaurantId, deliveryAddress, orderTime, deliveryTime, totalPrice,
+                   orderCondition, items) {
+    this.orderId = 0;
+    this.customerId = customerId;
+    this.restaurantId = restaurantId;
+    this.deliveryAddress = deliveryAddress;
+    this.orderTime = orderTime;
+    this.deliveryTime = deliveryTime;
+    this.totalPrice = totalPrice;
+    this.orderCondition = orderCondition;
+    this.items = items;
+}
+
+function OrderItem(itemName, amount, subTotal) {
+    this.orderItemId = 0;
+    this.itemName = itemName;
+    this.amount = amount;
+    this.subTotal = subTotal;
+}

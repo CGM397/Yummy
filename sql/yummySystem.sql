@@ -79,3 +79,25 @@ CREATE TABLE `discountInfo` (
   `endDate` DATETIME,
   PRIMARY KEY (`discountInfoId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
+
+DROP TABLE IF EXISTS `orderInfo`;
+CREATE TABLE `orderInfo` (
+  `orderId` INT,
+  `customerId` VARCHAR(64) NOT NULL,
+  `restaurantId` VARCHAR(64) NOT NULL,
+  `deliveryAddress` VARCHAR(64),
+  `orderTime` DATETIME,
+  `deliveryTime` DATETIME,
+  `totalPrice` DOUBLE,
+  `orderCondition` VARCHAR(64),
+  PRIMARY KEY (`orderId`)
+) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
+
+DROP TABLE IF EXISTS `orderItem`;
+CREATE TABLE `orderItem` (
+  `orderItemId` INT,
+  `itemName` VARCHAR(64) NOT NULL,
+  `amount` INT,
+  `subTotal` DOUBLE,
+  PRIMARY KEY (`orderItemId`)
+) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;

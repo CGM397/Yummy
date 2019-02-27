@@ -99,6 +99,31 @@
     background-color: rgb(81, 67, 224);
 }
 
+.totalLabel{
+    position: fixed;
+    bottom: 10px;
+    right: 320px;
+    width: 50px;
+    font-size: 25px;
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.total{
+    cursor: default;
+    border: none;
+    outline: none;
+    position: fixed;
+    bottom: 10px;
+    right: 200px;
+    width: 120px;
+    font-size: 25px;
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-align: center;
+    background: white;
+}
+
+
 .buyBtn {
     cursor: pointer;
     position: fixed;

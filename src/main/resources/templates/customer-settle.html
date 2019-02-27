@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>customer-settle</title>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+    <script type="text/javascript" src="../static/js/model.js"></script>
+    <script type="text/javascript" src="../static/js/registerLogin.js"></script>
+    <script type="text/javascript" src="../static/js/customerSettle.js"></script>
+    <script type="text/javascript" src="../static/js/restaurantAddress.js"></script>
+    <script type="text/javascript" src="../static/js/customerAddress.js"></script>
+    <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
+    <link href="../static/css/navigationBar.css" rel="stylesheet">
+    <link href="../static/css/customerSettle.css" rel="stylesheet">
+    <link href="../static/css/sweetalert.css" rel="stylesheet">
+</head>
+<body style="margin: 0">
+<div>
+    <ul class="menu">
+        <li><p>Yummy!</p></li>
+        <li><a href="customer-home">主页</a></li>
+        <li><a href="customer-order">我的订单</a></li>
+        <li><a href="customer-address">收货地址</a></li>
+        <li><a href="customer-statistics">统计信息</a></li>
+        <li style="float: right;">
+            <a href="javascript:void(0);" onclick="logout()">Logout</a>
+        </li>
+        <li style="float: right">
+            <label>
+                <input style="cursor: pointer" id="customerName" type="button" value="用户" onclick="turnToCustomerInfo()"/>
+            </label>
+        </li>
+        <li style="float: right"><p style="margin: 0; padding: 18px 0">您好!</p></li>
+    </ul>
+</div>
+<div>
+    <div style="display: inline-block">
+        <a href="customer-shopping" class="returnTag">返回</a>
+        <label for="shoppingCartTable" class="shoppingCartTableLabel">
+            购物车
+        </label>
+        <table id="shoppingCartTable" class="shoppingCartTable">
+            <tr>
+                <th style="width: 50%">商品名称</th>
+                <th style="width: 25%">数量</th>
+                <th style="width: 25%">小计</th>
+            </tr>
+        </table>
+    </div>
+    <div style="display: inline-block">
+        <section class="panel">
+            <h2>订单信息</h2>
+            <div class="orderList">
+                <form>
+                    <ul>
+                        <li>
+                            <label>收货地址</label>
+                            <input id="delivery-address" type="text" placeholder="delivery-address" readonly/>
+                        </li>
+                        <li>
+                            <label>应付金额(元)</label>
+                            <input id="total-price" type="text" placeholder="total-price" readonly/>
+                        </li>
+                        <li>
+                            <label>送达时间</label>
+                            <input id="delivery-time" type="datetime-local" placeholder="now"/>
+                        </li>
+                        <li style="display: none">
+                            <label>下单时间</label>
+                            <input id="order-time" type="datetime-local" placeholder="now"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <p>
+                <a id="confirm" onclick="confirmOrder()" class="btn">
+                    确认下单
+                </a>
+            </p>
+        </section>
+    </div>
+</div>
+<script>
+    infoInit();
+    function infoInit() {
+        document.getElementById("customerName").value = localStorage.getItem("customerName");
+        setPageInfo();
+    }
+    function turnToCustomerInfo() {
+        window.location.href = "customer-info";
+    }
+</script>
+</body>
+</html>

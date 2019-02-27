@@ -64,16 +64,19 @@
         <table id="shoppingCartTable" class="shoppingCartTable">
             <tr>
                 <th>商品名称</th>
-                <th style="width: 30%">购买数量</th>
+                <th style="width: 25%">购买数量</th>
+                <th style="width: 20%">小计</th>
                 <th style="display: none;">优惠数量</th>
-                <th style="width: 30%">操作</th>
+                <th style="width: 25%">操作</th>
             </tr>
         </table>
     </div>
 </div>
 
 <div>
-    <input class="buyBtn" type="button" value="去结算"/>
+    <label class="totalLabel" for="total">总计</label>
+    <input class="total" id="total" type="button" value="￥0" />
+    <input class="buyBtn" type="button" onclick="turnToSettle()" value="去结算"/>
 </div>
 
 <script>

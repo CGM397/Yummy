@@ -197,3 +197,22 @@ function showDeliveryAddress() {
         }
     });
 }
+
+function findCustomerAddressById(customerId) {
+    var res = [];
+    $.ajax({
+        type: 'POST',
+        url:"/customerInfo/showDeliveryAddress",
+        async: false,                         //将ajax改为同步模式
+        data: {
+            customerId : customerId
+        },
+        success:function(result){
+            res = result;
+        },
+        error:function(){
+            alert("error");
+        }
+    });
+    return res;
+}
