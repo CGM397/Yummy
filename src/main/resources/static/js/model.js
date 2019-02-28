@@ -85,3 +85,12 @@ function OrderItem(itemName, amount, subTotal) {
     this.amount = amount;
     this.subTotal = subTotal;
 }
+
+function Account(userId, accountId, paymentPassword, balance, inUse) {
+    this.accountInfoId = 0;
+    this.userId = userId;
+    this.accountId = accountId;
+    this.paymentPassword = paymentPassword;
+    this.balance = balance;
+    this.inUse = inUse;
+}

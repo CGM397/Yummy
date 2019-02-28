@@ -101,3 +101,14 @@ CREATE TABLE `orderItem` (
   `subTotal` DOUBLE,
   PRIMARY KEY (`orderItemId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
+
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE `account` (
+  `accountInfoId` INT,
+  `userId` VARCHAR(64) NOT NULL,
+  `accountId` VARCHAR(64) NOT NULL,
+  `paymentPassword` VARCHAR(64) NOT NULL,
+  `balance` DOUBLE,
+  `inUse` BOOLEAN,
+  PRIMARY KEY (`accountInfoId`)
+) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;

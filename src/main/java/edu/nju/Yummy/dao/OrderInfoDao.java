@@ -13,4 +13,6 @@ public interface OrderInfoDao {
     ArrayList<OrderInfo> showRestaurantOrders(String restaurantId);
 
     boolean saveOrderInfo(OrderInfo orderInfo);
+
+    boolean updateOrderCondition(long orderId, String orderCondition);
 }

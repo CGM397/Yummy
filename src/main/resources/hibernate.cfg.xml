@@ -21,5 +21,6 @@
     <mapping class="edu.nju.Yummy.model.DiscountInfo"/>
     <mapping class="edu.nju.Yummy.model.OrderInfo"/>
     <mapping class="edu.nju.Yummy.model.OrderItem"/>
+    <mapping class="edu.nju.Yummy.model.Account"/>
   </session-factory>
 </hibernate-configuration>

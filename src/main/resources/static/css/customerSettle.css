@@ -71,6 +71,19 @@
     background-color: #00BB00;
 }
 
+.restaurantName{
+    cursor: default;
+    border: none;
+    outline: none;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 50px;
+    font-size: 25px;
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    background: white;
+}
+
+
 .shoppingCartTableLabel{
     position: absolute;
     margin-left: 10px;

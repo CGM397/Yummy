@@ -1,6 +1,6 @@
 function setOrderList() {
     var store = showCustomerOrders(localStorage.getItem("customerId"));
-    for(var i = 0; i < store.length; i++){
+    for(var i = store.length - 1; i >= 0; i--){
         var orderId = store[i].orderId;
         var orderTime = store[i].orderTime;
         orderTime = orderTime.substring(0, orderTime.indexOf("T")) + " " +
