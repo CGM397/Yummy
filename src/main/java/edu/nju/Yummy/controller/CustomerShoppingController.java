@@ -36,6 +36,7 @@ public class CustomerShoppingController {
     @RequestMapping(value = "/confirmOrder", method = RequestMethod.POST)
     @ResponseBody
     public boolean confirmOrder(@RequestBody OrderInfo orderInfo){
+        System.out.println(orderInfo.getOrderTime());
         return orderInfoService.saveOrderInfo(orderInfo);
     }
 
