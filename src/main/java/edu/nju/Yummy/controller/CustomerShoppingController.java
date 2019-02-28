@@ -1,6 +1,5 @@
 package edu.nju.Yummy.controller;
 
-import edu.nju.Yummy.dao.OrderInfoDao;
 import edu.nju.Yummy.model.DiscountInfo;
 import edu.nju.Yummy.model.OrderInfo;
 import edu.nju.Yummy.model.Restaurant;
@@ -36,7 +35,6 @@ public class CustomerShoppingController {
     @RequestMapping(value = "/confirmOrder", method = RequestMethod.POST)
     @ResponseBody
     public boolean confirmOrder(@RequestBody OrderInfo orderInfo){
-        System.out.println(orderInfo.getOrderTime());
         return orderInfoService.saveOrderInfo(orderInfo);
     }
 

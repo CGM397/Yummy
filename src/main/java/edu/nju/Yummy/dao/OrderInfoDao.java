@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public interface OrderInfoDao {
 
+    OrderInfo findOneOrderById(long orderId);
+
     ArrayList<OrderInfo> showCustomerOrders(String customerId);
 
     ArrayList<OrderInfo> showRestaurantOrders(String restaurantId);

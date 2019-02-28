@@ -71,7 +71,6 @@ function confirmOrder() {
         time.getFullYear() + "-" + month + "-" + day + "T" + hour + ":" + min + ":" + sec;
     currentOrder.orderTime = document.getElementById("order-time").value;
     currentOrder.deliveryTime = document.getElementById("delivery-time").value;
-    alert(currentOrder.orderTime+"; "+currentOrder.deliveryTime);
     $.ajax({
         type: 'POST',
         url:"/customerShopping/confirmOrder",
