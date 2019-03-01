@@ -112,3 +112,5 @@ CREATE TABLE `account` (
   `inUse` BOOLEAN,
   PRIMARY KEY (`accountInfoId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
+
+INSERT INTO account(`accountInfoId`,`userId`,`accountId`,`paymentPassword`,`balance`,`inUse`) VALUES (10000000,'admin','001','123456','0',TRUE);

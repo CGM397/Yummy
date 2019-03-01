@@ -1,8 +1,13 @@
 function setPageInfo() {
     var currentOrder = JSON.parse(localStorage.getItem("currentOrderInfo"));
+    var currentCustomer = findCustomerInfoByMail(localStorage.getItem("customerMail"));
+    var totalPrice = currentOrder.totalPrice;
+    totalPrice = totalPrice * (1 - (currentCustomer.vipLevel / 100.0));
+    totalPrice = Math.round(totalPrice * 100) /100.0;
     var items = currentOrder.items;
     document.getElementById("delivery-address").value = currentOrder.deliveryAddress;
-    document.getElementById("total-price").value = currentOrder.totalPrice;
+    document.getElementById("total-price").value = totalPrice +
+                                        "(会员等级优惠，立减: " + currentCustomer.vipLevel +"%)";
     for(var i = 0; i < items.length; i++){
         var name = items[i].itemName;
         var amount = items[i].amount;
@@ -71,6 +76,9 @@ function confirmOrder() {
         time.getFullYear() + "-" + month + "-" + day + "T" + hour + ":" + min + ":" + sec;
     currentOrder.orderTime = document.getElementById("order-time").value;
     currentOrder.deliveryTime = document.getElementById("delivery-time").value;
+    var totalPrice = document.getElementById("total-price").value;
+    totalPrice = totalPrice.substring(0, totalPrice.indexOf("("));
+    currentOrder.totalPrice = totalPrice;
     $.ajax({
         type: 'POST',
         url:"/customerShopping/confirmOrder",

@@ -27,12 +27,22 @@ function releaseSingleProduct() {
             closeOnConfirm: false
         },
         function(){
+            var store = showCommodity(restaurantId);
+            for(var i = 0; i < store.length; i++){
+                if(store[i].commodityName === commodityName){
+                    swal("发布失败","商品名称与现有商品名称重复","error");
+                    return;
+                }
+            }
             if(commodityName === ""){
                 swal("发布失败","商品名称不可为空","error");
                 return;
             }else if(!isNonNegativeDouble(commodityPrice) ||
                      !isPositiveInteger(commodityAmount)){
                 swal("发布失败","商品价格、数量或者持续时间填写格式有误","error");
+                return;
+            }else if(parseInt(commodityAmount) > 10000){
+                swal("发布失败","一次性发布商品数量不得超过10000份","error");
                 return;
             }
             var commodityItem = new CommodityItem(restaurantId, commodityName, commodityPrice);
@@ -82,6 +92,9 @@ function releasePackage() {
             }else if(packageItems.length < 1){
                 swal("发布失败","套餐至少需要一件单品","error");
                 return;
+            }else if(parseInt(commodityAmount) > 10000){
+                swal("发布失败","一次性发布商品数量不得超过10000份","error");
+                return;
             }
             var commodityInfo = new CommodityInfo(restaurantId, commodityName, "套餐", commodityPrice,
                 commodityAmount, packageItems, commodityBeginDate,
@@ -125,6 +138,27 @@ function releaseDiscount() {
                 commodityDiscount >= 10){
                 swal("发布失败","商品折扣或者数量填写格式有误","error");
                 return;
+            }
+            var discountStore = showDiscountInfo(restaurantId);
+            for(var i = 0; i < discountStore.length; i++){
+                if(discountStore[i].commodityName === commodityName){
+                    swal("发布失败","此商品已经在打折中","error");
+                    return;
+                }
+            }
+            var store = showCommodity(restaurantId);
+            for(var j = 0; j < store.length; j++){
+                if(store[i].commodityName === commodityName){
+                    if(parseInt(store[i].amount) < parseInt(commodityAmount)){
+                        swal("发布失败","打折数量已超过该商品现有的数量","error");
+                        return;
+                    }
+                }
+            }
+            if(commodityDiscount.indexOf(".") > 0){
+                if(commodityDiscount.substring(commodityDiscount.indexOf(".") + 1).length > 1){
+                    commodityDiscount = parseFloat(commodityDiscount).toFixed(1);
+                }
             }
             var discountInfo = new DiscountInfo(restaurantId, commodityName, commodityDiscount,
                 commodityAmount, commodityBeginDate, commodityEndDate);

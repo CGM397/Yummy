@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -43,8 +44,13 @@ public class RestaurantInfoDaoImpl implements RestaurantInfoDao {
             String hql = "from DiscountInfo where restaurantId = ?1";
             Query query = session.createQuery(hql);
             query.setParameter(1,restaurantId);
-            if(query.list() != null && query.list().size() > 0)
-                res = (ArrayList<DiscountInfo>) query.list();
+            if(query.list() != null && query.list().size() > 0) {
+                ArrayList<DiscountInfo> store = (ArrayList<DiscountInfo>) query.list();
+                for(DiscountInfo one : store){
+                    if(isEffective(one.getBeginDate(), one.getEndDate()))
+                        res.add(one);
+                }
+            }
             transaction.commit();
         }catch (Exception e) {
             e.printStackTrace();
@@ -73,5 +79,10 @@ public class RestaurantInfoDaoImpl implements RestaurantInfoDao {
             e.printStackTrace();
         }
         return res;
+    }
+
+    private boolean isEffective(Date beginDate, Date endDate){
+        Date now = new Date();
+        return now.after(beginDate) && now.before(endDate);
     }
 }

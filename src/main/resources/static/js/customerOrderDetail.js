@@ -51,8 +51,20 @@ function addShoppingCartRow(name, amount, subTotal) {
 }
 
 function payOrder() {
+    var store = showUserAccount(localStorage.getItem("customerId"));
+    if(store.length === 0){
+        swal("支付失败","您还未绑定银行卡，请到个人信息页面进行绑定","error");
+        return;
+    }
+    var account = new Account();
+    for(var i = 0; i < store.length; i++){
+        if(store[i].inUse){
+            account = store[i];
+            break;
+        }
+    }
     swal({
-            title: "输入支付密码",
+            title: "支付密码",
             text: "请输入支付密码",
             type: "input",
             inputType: "password",
@@ -61,36 +73,78 @@ function payOrder() {
             animation: "slide-from-top",
             inputPlaceholder: "password"
         },
-        function (newPwd2) {
-            if (newPwd !== newPwd2) {
-                swal.showInputError("确认密码错误");
+        function (pwd) {
+            if (account.paymentPassword !== pwd) {
+                swal.showInputError("支付密码错误");
             }
             else {
-                var currentInfo =
-                    findCustomerInfoByMail(localStorage.getItem("customerMail"));
-                var info = new Customer(currentInfo.customerId,
-                    currentInfo.customerMail,
-                    newPwd2,
-                    currentInfo.customerName,
-                    currentInfo.phoneNumber,
-                    currentInfo.vipPoints,
-                    currentInfo.vipLevel,
-                    currentInfo.active);
-                if(updateCustomerInfo(info)){
-                    swal({
-                        title: "修改成功",
-                        text: "登录密码已更新",
-                        type: "success"
-                    },function () {
-                        window.location.reload();
-                    });
-                }
-                else
-                    swal("修改失败", "登录密码未更新", "error");
+                var orderId = localStorage.getItem("selectedOrderId");
+                $.ajax({
+                    type: 'POST',
+                    url:"/customerOrder/payOrder",
+                    data: {
+                        orderId : orderId
+                    },
+                    success:function(result){
+                        if(result){
+                            swal({
+                                title: "支付成功",
+                                text: "支付成功",
+                                type: "success"
+                            },function () {
+                                window.location.reload();
+                            });
+                        }else
+                            swal("支付失败", "商品数量不足或者银行账户余额不足", "error");
+                    },
+                    error:function(){
+                        alert("error");
+                    }
+                });
             }
         });
 }
 
 function cancelOrder() {
-
+    swal({
+            title: "确定取消此订单吗",
+            text: "点击确认取消订单",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false
+        },
+        function () {
+            var orderId = localStorage.getItem("selectedOrderId");
+            $.ajax({
+                type: 'POST',
+                url:"/customerOrder/cancelOrder",
+                data: {
+                    orderId : orderId
+                },
+                success:function(result) {
+                    if(result === -1){
+                        swal({
+                            title: "退订成功",
+                            text: "退订成功",
+                            type: "success"
+                        },function () {
+                            window.location.reload();
+                        });
+                    }else if(result === -2){
+                        swal("退订失败", "退订失败", "error");
+                    }else{
+                        swal({
+                            title: "退订成功",
+                            text: "退订成功，退还金额: " + result + " 元。",
+                            type: "success"
+                        },function () {
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(){
+                    alert("error");
+                }
+            });
+        });
 }

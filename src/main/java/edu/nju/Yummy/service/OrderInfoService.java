@@ -14,4 +14,7 @@ public interface OrderInfoService {
 
     boolean saveOrderInfo(OrderInfo orderInfo);
 
+    boolean payOrder(long orderId);
+
+    double cancelOrder(long orderId);
 }

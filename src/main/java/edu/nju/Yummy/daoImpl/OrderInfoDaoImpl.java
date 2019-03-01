@@ -45,8 +45,11 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
             e.printStackTrace();
         }
         for(OrderInfo one : store){
-            if(isOverdue(one.getOrderTime())){
+            if(one.getOrderCondition().equals("未付款") && isOverdue(one.getOrderTime())) {
                 one.setOrderCondition("已取消");
+                baseDao.update(one);
+            }else if(one.getOrderCondition().equals("送货中") && isArrive(one.getDeliveryTime())) {
+                one.setOrderCondition("已完成");
                 baseDao.update(one);
             }
             res.add(one);
@@ -103,5 +106,10 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
         Date now = new Date();
         Date twoMinutesBefore = new Date(now.getTime() - 120000);
         return twoMinutesBefore.after(orderTime);
+    }
+
+    private boolean isArrive(Date deliveryTime) {
+        Date now = new Date();
+        return now.after(deliveryTime);
     }
 }

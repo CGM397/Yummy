@@ -99,10 +99,10 @@ function addOneCommodity(a) {
         commodityPrice = (commodityPrice *
             parseFloat(commodityDiscount.substring(0, commodityDiscount.length - 1))) / 10.0 ;
     }
-    var price = parseFloat(commodityPrice.toFixed(2));
+    var price = Math.round(commodityPrice * 100) / 100.0;
     var total = document.getElementById("total").value;
-    document.getElementById("total").value = "￥" +
-                                (parseFloat(total.substring(1)) + price);
+    var tmp = Math.round((parseFloat(total.substring(1)) + price) * 100) / 100.0;
+    document.getElementById("total").value = "￥" + tmp;
     addShoppingCartRow(commodityName, price, buyDiscountAmount);
 }
 
@@ -112,7 +112,8 @@ function addShoppingCartRow(name, price, buyDiscountAmount) {
     for(var i = 0; i < trs.length; i++){
         if(trs[i].cells[0].innerText === name){
             trs[i].cells[1].innerHTML = parseInt(trs[i].cells[1].innerText) + 1;
-            trs[i].cells[2].innerHTML = parseFloat(trs[i].cells[2].innerText) + price;
+            trs[i].cells[2].innerHTML =
+                Math.round((parseFloat(trs[i].cells[2].innerText) + price) * 100) / 100.0;
             trs[i].cells[3].innerHTML = parseInt(trs[i].cells[3].innerText) + buyDiscountAmount;
             return;
         }
@@ -188,11 +189,12 @@ function deleteOneCommodity(a) {
         }
     }
     price = price * discount;
+    price = Math.round(price * 100) / 100.0;
     var total = document.getElementById("total").value;
-    document.getElementById("total").value = "￥" +
-                                        (parseFloat(total.substring(1)) - price);
+    var tmpTotal = Math.round((parseFloat(total.substring(1)) - price) * 100) / 100.0;
+    document.getElementById("total").value = "￥" + tmpTotal;
     if(commodityAmount > 1)
-        tr.cells[2].innerHTML = subtotal - parseFloat(price.toFixed(2));
+        tr.cells[2].innerHTML = Math.round((subtotal - price) * 100) / 100.0;
 }
 
 function turnToSettle() {

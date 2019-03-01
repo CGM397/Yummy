@@ -25,4 +25,16 @@ public class CustomerOrderController {
     public OrderInfo findOneOrderById(@RequestParam long orderId){
         return orderInfoService.findOneOrderById(orderId);
     }
+
+    @RequestMapping(value = "/payOrder", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean payOrder(@RequestParam long orderId){
+        return orderInfoService.payOrder(orderId);
+    }
+
+    @RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
+    @ResponseBody
+    public double cancelOrder(@RequestParam long orderId){
+        return orderInfoService.cancelOrder(orderId);
+    }
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -22,6 +23,11 @@ public class CommodityInfoDaoImpl implements CommodityInfoDao {
     @Override
     public boolean saveCommodityInfo(CommodityInfo commodityInfo) {
         return baseDao.save(commodityInfo);
+    }
+
+    @Override
+    public boolean updateCommodityInfo(CommodityInfo commodityInfo) {
+        return baseDao.update(commodityInfo);
     }
 
     @Override
@@ -39,12 +45,20 @@ public class CommodityInfoDaoImpl implements CommodityInfoDao {
             query.setParameter(1,restaurantId);
             if(query.list().size() > 0) {
                 List<CommodityInfo> store = query.list();
-                res = (ArrayList<CommodityInfo>) store;
+                for(CommodityInfo one : store){
+                    if(isOnSale(one.getBeginDate(), one.getEndDate()))
+                        res.add(one);
+                }
             }
             transaction.commit();
         }catch (Exception e) {
             e.printStackTrace();
         }
         return res;
+    }
+
+    private boolean isOnSale(Date beginDate, Date endDate){
+        Date now = new Date();
+        return now.after(beginDate) && now.before(endDate);
     }
 }
