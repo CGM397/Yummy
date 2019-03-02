@@ -1,7 +1,9 @@
 package edu.nju.Yummy.serviceImpl;
 
+import edu.nju.Yummy.dao.AccountInfoDao;
 import edu.nju.Yummy.dao.CustomerInfoDao;
 import edu.nju.Yummy.dao.RestaurantInfoDao;
+import edu.nju.Yummy.model.Account;
 import edu.nju.Yummy.model.Customer;
 import edu.nju.Yummy.model.Restaurant;
 import edu.nju.Yummy.service.CommonService;
@@ -24,6 +26,8 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
     private CustomerInfoDao customerInfoDao;
     @Autowired
     private RestaurantInfoDao restaurantInfoDao;
+    @Autowired
+    private AccountInfoDao accountInfoDao;
 
     @Override
     public String login(String identity, String account, String password) {
@@ -87,8 +91,12 @@ public class RegisterLoginServiceImpl implements RegisterLoginService {
     @Override
     public String restaurantRegister(String restaurantName, String restaurantPassword) {
         String restaurantId = commonService.generateId(7,"restaurant");
-        Restaurant restaurant = new Restaurant(restaurantId, restaurantPassword, restaurantName,"type");
-        if(restaurantInfoDao.saveRestaurantInfo(restaurant))
+        Restaurant restaurant = new Restaurant(restaurantId, restaurantPassword,
+                                                restaurantName,"type");
+        Account account = new Account(restaurantId, "001" , restaurantPassword,
+                                    0, true);
+        if(restaurantInfoDao.saveRestaurantInfo(restaurant) &&
+                accountInfoDao.saveUserAccount(account))
             return restaurantId;
         else
             return "fail";

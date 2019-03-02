@@ -28,6 +28,8 @@ public class CommodityInfo implements Serializable {
 
     private int amount;
 
+    private int leftAmount;
+
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<CommodityItem> items;
 
@@ -39,13 +41,14 @@ public class CommodityInfo implements Serializable {
     }
 
     public CommodityInfo(String restaurantId, String commodityName, String type,
-                         double commodityPrice, int amount, ArrayList<CommodityItem> items,
-                         Date beginDate, Date endDate) {
+                         double commodityPrice, int amount, int leftAmount,
+                         List<CommodityItem> items, Date beginDate, Date endDate) {
         this.restaurantId = restaurantId;
         this.commodityName = commodityName;
         this.type = type;
         this.commodityPrice = commodityPrice;
         this.amount = amount;
+        this.leftAmount = leftAmount;
         this.items = items;
         this.beginDate = beginDate;
         this.endDate = endDate;
@@ -97,6 +100,14 @@ public class CommodityInfo implements Serializable {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public int getLeftAmount() {
+        return leftAmount;
+    }
+
+    public void setLeftAmount(int leftAmount) {
+        this.leftAmount = leftAmount;
     }
 
     public List<CommodityItem> getItems() {

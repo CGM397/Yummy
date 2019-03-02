@@ -54,6 +54,7 @@ CREATE TABLE `commodityInfo` (
   `type` VARCHAR(64),
   `commodityPrice` DOUBLE,
   `amount` INT,
+  `leftAmount` INT,
   `beginDate` DATETIME,
   `endDate` DATETIME,
   PRIMARY KEY (`commodityInfoId`)
@@ -75,6 +76,7 @@ CREATE TABLE `discountInfo` (
   `commodityName` VARCHAR(64) NOT NULL,
   `discount` DOUBLE,
   `discountAmount` INT,
+  `leftAmount` INT,
   `beginDate` DATETIME,
   `endDate` DATETIME,
   PRIMARY KEY (`discountInfoId`)
@@ -108,7 +110,7 @@ CREATE TABLE `account` (
   `userId` VARCHAR(64) NOT NULL,
   `accountId` VARCHAR(64) NOT NULL,
   `paymentPassword` VARCHAR(64) NOT NULL,
-  `balance` DOUBLE,
+  `balance` DOUBLE(32,2),
   `inUse` BOOLEAN,
   PRIMARY KEY (`accountInfoId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;

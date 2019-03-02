@@ -25,6 +25,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Autowired
     private CommodityInfoDao commodityInfoDao;
 
+    @Autowired
+    private RestaurantInfoDao restaurantInfoDao;
+
     @Override
     public OrderInfo findOneOrderById(long orderId) {
         return orderInfoDao.findOneOrderById(orderId);
@@ -64,16 +67,30 @@ public class OrderInfoServiceImpl implements OrderInfoService {
                 break;
             }
         }
-        //check the commodity amount
+        //check the commodityInfo.leftAmount
         ArrayList<CommodityInfo> commodityInfos = commodityInfoDao.showCommodity(restaurantId);
+        ArrayList<DiscountInfo> discountInfos = restaurantInfoDao.showDiscountInfo(restaurantId);
         ArrayList<CommodityInfo> commodityInfoStore = new ArrayList<>();
+        ArrayList<DiscountInfo> discountInfoStore = new ArrayList<>();
         for(OrderItem one : items) {
             for(CommodityInfo commodityInfo : commodityInfos) {
                 if(one.getItemName().equals(commodityInfo.getCommodityName())) {
-                    if(one.getAmount() > commodityInfo.getAmount())
+                    if(one.getAmount() > commodityInfo.getLeftAmount())
                         return false;
-                    commodityInfo.setAmount(commodityInfo.getAmount() - one.getAmount());
+                    commodityInfo.setLeftAmount(commodityInfo.getLeftAmount() - one.getAmount());
                     commodityInfoStore.add(commodityInfo);
+                    for(DiscountInfo discountInfo : discountInfos) {
+                        if(one.getItemName().equals(discountInfo.getCommodityName())) {
+                            if(discountInfo.getLeftAmount() >= one.getAmount()){
+                                discountInfo.setLeftAmount(discountInfo.getLeftAmount()
+                                                            - one.getAmount());
+                            }else{
+                                discountInfo.setLeftAmount(0);
+                            }
+                            discountInfoStore.add(discountInfo);
+                            break;
+                        }
+                    }
                     break;
                 }
             }
@@ -101,9 +118,12 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         customer.setVipLevel(updateVipLevel(customer.getVipPoints()));
         customerInfoDao.updateCustomerInfo(customer);
 
-        //update commodityInfo.amount
-        for(CommodityInfo one : commodityInfoStore){
+        //update commodityInfo.leftAmount and discountInfo.leftAmount
+        for(CommodityInfo one : commodityInfoStore) {
             commodityInfoDao.updateCommodityInfo(one);
+        }
+        for(DiscountInfo one : discountInfoStore) {
+            commodityInfoDao.updateDiscountInfo(one);
         }
 
         //update order condition
@@ -154,13 +174,28 @@ public class OrderInfoServiceImpl implements OrderInfoService {
             adminAccount.setBalance(adminAccount.getBalance() - returnMoney);
             accountInfoDao.updateUserAccount(adminAccount);
 
-            //update commodityInfo.amount
+            //update commodityInfo.leftAmount and discountInfo.leftAmount
             ArrayList<CommodityInfo> commodityInfos = commodityInfoDao.showCommodity(restaurantId);
+            ArrayList<DiscountInfo> discountInfos = restaurantInfoDao.showDiscountInfo(restaurantId);
             for(OrderItem one : items) {
                 for(CommodityInfo commodityInfo : commodityInfos) {
                     if(one.getItemName().equals(commodityInfo.getCommodityName())) {
-                        commodityInfo.setAmount(commodityInfo.getAmount() + one.getAmount());
+                        int currentLeftAmount = commodityInfo.getLeftAmount();
+                        int amount = commodityInfo.getAmount();
+                        commodityInfo.setLeftAmount(commodityInfo.getLeftAmount() + one.getAmount());
                         commodityInfoDao.updateCommodityInfo(commodityInfo);
+                        for(DiscountInfo discountInfo : discountInfos) {
+                            if(one.getItemName().equals(discountInfo.getCommodityName())){
+                                int tmp1 = currentLeftAmount + one.getAmount();
+                                int tmp2 = amount - discountInfo.getDiscountAmount();
+                                if(tmp1 < tmp2){
+                                    discountInfo.setLeftAmount(0);
+                                }else
+                                    discountInfo.setLeftAmount(tmp1 - tmp2);
+                                commodityInfoDao.updateDiscountInfo(discountInfo);
+                                break;
+                            }
+                        }
                         break;
                     }
                 }

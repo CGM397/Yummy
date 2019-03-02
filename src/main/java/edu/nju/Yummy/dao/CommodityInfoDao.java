@@ -11,6 +11,8 @@ public interface CommodityInfoDao {
 
     boolean updateCommodityInfo(CommodityInfo commodityInfo);
 
+    boolean updateDiscountInfo(DiscountInfo discountInfo);
+
     boolean saveDiscountInfo(DiscountInfo discountInfo);
 
     ArrayList<CommodityInfo> showCommodity(String restaurantId);

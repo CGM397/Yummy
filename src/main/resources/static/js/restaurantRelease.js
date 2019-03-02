@@ -1,5 +1,14 @@
 var packageItems = [];
 
+function getNow() {
+    var time = new Date();
+    var month = ("0" + (time.getMonth() + 1)).slice(-2);
+    var day = ("0" + time.getDate()).slice(-2);
+    var hour = ("0" + time.getHours()).slice(-2);
+    var min = ("0" + time.getMinutes()).slice(-2);
+    return time.getFullYear() + "-" + month + "-" + day + "T" + hour + ":" + min;
+}
+
 function release() {
     var infoType = document.getElementById("info-type").value;
     if(infoType === "单品")
@@ -16,6 +25,9 @@ function releaseSingleProduct() {
     var commodityAmount = document.getElementById("commodity-amount").value;
     var commodityBeginDate = document.getElementById("commodity-beginDate").value;
     var commodityEndDate = document.getElementById("commodity-endDate").value;
+    var tmp1 = new Date(Date.parse(commodityBeginDate));
+    var tmp2 = new Date(Date.parse(commodityEndDate));
+    var tmp3 = new Date(Date.parse(getNow()));
     var restaurantId = localStorage.getItem("restaurantId");
     swal({
             title: "确定发布该信息吗",
@@ -26,9 +38,13 @@ function releaseSingleProduct() {
             showCancelButton: true,
             closeOnConfirm: false
         },
-        function(){
+        function() {
+            if(tmp1.getTime() > tmp2.getTime() || tmp1.getTime() < tmp3.getTime()){
+                swal("发布失败","结束时间必须大于等于开始时间，开始时间必须大于等于本地时间","error");
+                return;
+            }
             var store = showCommodity(restaurantId);
-            for(var i = 0; i < store.length; i++){
+            for(var i = 0; i < store.length; i++) {
                 if(store[i].commodityName === commodityName){
                     swal("发布失败","商品名称与现有商品名称重复","error");
                     return;
@@ -39,7 +55,7 @@ function releaseSingleProduct() {
                 return;
             }else if(!isNonNegativeDouble(commodityPrice) ||
                      !isPositiveInteger(commodityAmount)){
-                swal("发布失败","商品价格、数量或者持续时间填写格式有误","error");
+                swal("发布失败","商品价格或者数量填写格式有误","error");
                 return;
             }else if(parseInt(commodityAmount) > 10000){
                 swal("发布失败","一次性发布商品数量不得超过10000份","error");
@@ -49,8 +65,8 @@ function releaseSingleProduct() {
             var items = [];
             items.push(commodityItem);
             var commodityInfo = new CommodityInfo(restaurantId, commodityName, "单品", commodityPrice,
-                                            commodityAmount, items, commodityBeginDate,
-                                            commodityEndDate);
+                                            commodityAmount, commodityAmount, items,
+                                            commodityBeginDate, commodityEndDate);
             if(addCommodityInfo(commodityInfo)){
                 swal({
                     title: "发布成功",
@@ -72,6 +88,9 @@ function releasePackage() {
     var commodityBeginDate = document.getElementById("commodity-beginDate").value;
     var commodityEndDate = document.getElementById("commodity-endDate").value;
     var restaurantId = localStorage.getItem("restaurantId");
+    var tmp1 = new Date(Date.parse(commodityBeginDate));
+    var tmp2 = new Date(Date.parse(commodityEndDate));
+    var tmp3 = new Date(Date.parse(getNow()));
     swal({
             title: "确定发布该信息吗",
             text: "点击确认进行发布",
@@ -82,12 +101,16 @@ function releasePackage() {
             closeOnConfirm: false
         },
         function(){
+            if(tmp1.getTime() > tmp2.getTime() || tmp1.getTime() < tmp3.getTime()){
+                swal("发布失败","结束时间必须大于等于开始时间，开始时间必须大于等于本地时间","error");
+                return;
+            }
             if(commodityName === ""){
                 swal("发布失败","商品名称不可为空","error");
                 return;
             }else if(!isNonNegativeDouble(commodityPrice) ||
                 !isPositiveInteger(commodityAmount)){
-                swal("发布失败","商品价格、数量或者持续时间填写格式有误","error");
+                swal("发布失败","商品价格或者数量填写格式有误","error");
                 return;
             }else if(packageItems.length < 1){
                 swal("发布失败","套餐至少需要一件单品","error");
@@ -96,9 +119,15 @@ function releasePackage() {
                 swal("发布失败","一次性发布商品数量不得超过10000份","error");
                 return;
             }
+            var store = showCommodity(restaurantId);
+            for(var i = 0; i < store.length; i++) {
+                if(store[i].commodityName === commodityName){
+                    swal("发布失败","商品名称与现有商品名称重复","error");
+                    return;
+                }
+            }
             var commodityInfo = new CommodityInfo(restaurantId, commodityName, "套餐", commodityPrice,
-                commodityAmount, packageItems, commodityBeginDate,
-                commodityEndDate);
+                commodityAmount, commodityAmount, packageItems, commodityBeginDate, commodityEndDate);
             if(addCommodityInfo(commodityInfo)){
                 swal({
                     title: "发布成功",
@@ -120,6 +149,9 @@ function releaseDiscount() {
     var commodityBeginDate = document.getElementById("commodity-beginDate").value;
     var commodityEndDate = document.getElementById("commodity-endDate").value;
     var restaurantId = localStorage.getItem("restaurantId");
+    var tmp1 = new Date(Date.parse(commodityBeginDate));
+    var tmp2 = new Date(Date.parse(commodityEndDate));
+    var tmp3 = new Date(Date.parse(getNow()));
     swal({
             title: "确定发布该信息吗",
             text: "点击确认进行发布",
@@ -130,6 +162,10 @@ function releaseDiscount() {
             closeOnConfirm: false
         },
         function(){
+            if(tmp1.getTime() > tmp2.getTime() || tmp1.getTime() < tmp3.getTime()){
+                swal("发布失败","结束时间必须大于等于开始时间，开始时间必须大于等于本地时间","error");
+                return;
+            }
             if(commodityName === "--please select--"){
                 swal("发布失败","商品名称不可为空","error");
                 return;
@@ -139,17 +175,10 @@ function releaseDiscount() {
                 swal("发布失败","商品折扣或者数量填写格式有误","error");
                 return;
             }
-            var discountStore = showDiscountInfo(restaurantId);
-            for(var i = 0; i < discountStore.length; i++){
-                if(discountStore[i].commodityName === commodityName){
-                    swal("发布失败","此商品已经在打折中","error");
-                    return;
-                }
-            }
             var store = showCommodity(restaurantId);
-            for(var j = 0; j < store.length; j++){
-                if(store[i].commodityName === commodityName){
-                    if(parseInt(store[i].amount) < parseInt(commodityAmount)){
+            for(var j = 0; j < store.length; j++) {
+                if(store[j].commodityName === commodityName){
+                    if(parseInt(store[j].amount) < parseInt(commodityAmount)) {
                         swal("发布失败","打折数量已超过该商品现有的数量","error");
                         return;
                     }
@@ -161,7 +190,7 @@ function releaseDiscount() {
                 }
             }
             var discountInfo = new DiscountInfo(restaurantId, commodityName, commodityDiscount,
-                commodityAmount, commodityBeginDate, commodityEndDate);
+                commodityAmount, commodityAmount, commodityBeginDate, commodityEndDate);
             if(addDiscountInfo(discountInfo)){
                 swal({
                     title: "发布成功",
@@ -179,13 +208,24 @@ function releaseDiscount() {
 function setCommodity() {
     var store = showCommodity(localStorage.getItem("restaurantId"));
     var select = document.getElementById("commodity-select");
-    for(var i = 0; i < store.length; i++){
-        addCommodityRow(store[i].commodityName, store[i].type, store[i].commodityPrice, 0);
-        select.options.add(new Option(store[i].commodityName));
+    for(var i = 0; i < store.length; i++) {
+        addCommodityRow(store[i].commodityName, store[i].type, store[i].commodityPrice,
+                        store[i].amount, 0);
+        if(!hasDiscount(store[i].commodityName))
+            select.options.add(new Option(store[i].commodityName));
     }
 }
 
-function addCommodityRow(name, type, price, num) {
+function hasDiscount(commodityName) {
+    var store = showDiscountInfo(localStorage.getItem("restaurantId"));
+    for(var i = 0; i < store.length; i++){
+        if(store[i].commodityName === commodityName)
+            return true;
+    }
+    return false;
+}
+
+function addCommodityRow(name, type, price, amount, num) {
     var table = document.getElementById("commodityTable");
     var row = document.createElement("tr");
 
@@ -203,6 +243,11 @@ function addCommodityRow(name, type, price, num) {
     priceCell.style.textAlign='center';
     priceCell.innerHTML = price;
     row.appendChild(priceCell);
+
+    var amountCell = document.createElement('td');
+    amountCell.style.textAlign='center';
+    amountCell.innerHTML = amount;
+    row.appendChild(amountCell);
 
     var opCell = document.createElement('td');
     if(type === "单品"){
@@ -244,7 +289,7 @@ function addItem(a) {
     var itemPrice = tr.cells[2].innerText;
     var item = new CommodityItem(restaurantId, itemName, itemPrice);
     packageItems.push(item);
-    tr.cells[4].innerHTML = parseInt(tr.cells[4].innerText) + 1;
+    tr.cells[5].innerHTML = parseInt(tr.cells[5].innerText) + 1;
 }
 
 function deleteItem(a) {
@@ -257,6 +302,6 @@ function deleteItem(a) {
             break;
         }
     }
-    if(parseInt(tr.cells[4].innerText) > 0)
-        tr.cells[4].innerHTML = parseInt(tr.cells[4].innerText) - 1;
+    if(parseInt(tr.cells[5].innerText) > 0)
+        tr.cells[5].innerHTML = parseInt(tr.cells[5].innerText) - 1;
 }

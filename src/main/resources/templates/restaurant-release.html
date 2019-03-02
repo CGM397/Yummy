@@ -96,6 +96,7 @@
                 <th style="width: 27%">现有商品</th>
                 <th style="width: 15%">类型</th>
                 <th style="width: 15%">价格</th>
+                <th style="width: 15%">数量</th>
                 <th id="table-op" style="width: 25%; display: none">添加/删除</th>
                 <th id="table-num" style="width: 18%; display: none">加入数量</th>
             </tr>
@@ -155,17 +156,19 @@
         var tab = document.getElementById("commodityTable");
         var trs = tab.rows;
         for(var i = 0; i < trs.length; i++){
-            trs[i].cells[3].style.display='none';
+            trs[i].cells[3].style.display='table-cell';
             trs[i].cells[4].style.display='none';
+            trs[i].cells[5].style.display='none';
         }
     }
 
     function displayTableRow() {
         var tab = document.getElementById("commodityTable");
         var trs = tab.rows;
-        for(var i = 0; i < trs.length; i++){
-            trs[i].cells[3].style.display='table-cell';
+        for(var i = 0; i < trs.length; i++) {
+            trs[i].cells[3].style.display='none';
             trs[i].cells[4].style.display='table-cell';
+            trs[i].cells[5].style.display='table-cell';
         }
     }
 </script>

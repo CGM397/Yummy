@@ -25,6 +25,12 @@ public class CustomerInfoController {
         return customerInfoService.findCustomerInfoByMail(customerMail);
     }
 
+    @RequestMapping(value = "/findCustomerInfoById", method = RequestMethod.POST)
+    @ResponseBody
+    public Customer findCustomerInfoById(@RequestParam String customerId) {
+        return customerInfoService.findCustomerInfoById(customerId);
+    }
+
     @RequestMapping(value = "/updateCustomerInfo", method = RequestMethod.POST)
     @ResponseBody
     public boolean updateCustomerInfo(@RequestBody Customer customer) {

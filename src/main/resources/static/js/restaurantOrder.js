@@ -1,6 +1,6 @@
 function setOrderList() {
-    var store = showCustomerOrders(localStorage.getItem("customerId"));
-    for(var i = store.length - 1; i >= 0; i--){
+    var store = showRestaurantOrders(localStorage.getItem("restaurantId"));
+    for(var i = store.length - 1; i >= 0; i--) {
         var orderId = store[i].orderId;
         var orderTime = store[i].orderTime;
         orderTime = orderTime.substring(0, orderTime.indexOf("T")) + " " +
@@ -8,8 +8,7 @@ function setOrderList() {
         var content = "";
         var total = store[i].totalPrice;
         var condition = store[i].orderCondition;
-        var restaurantId = store[i].restaurantId;
-        var restaurantName = findRestaurantInfoById(restaurantId).restaurantName;
+        var restaurantName = localStorage.getItem("restaurantName");
         var itemName = store[i].items[0].itemName;
         var itemsAmount = store[i].items.length;
         content = restaurantName + ": " + itemName + "等" + itemsAmount + "种商品";
@@ -64,6 +63,6 @@ function addOrderList(orderId, time, content, total, condition) {
 function checkOrder(a) {
     var tr=a.parentNode.parentNode;
     var orderId = tr.cells[0].innerText;
-    localStorage.setItem("selectedOrderId", orderId);
-    window.location.href="customer-orderDetail";
+    localStorage.setItem("restaurantSelectedOrderId", orderId);
+    window.location.href="restaurant-orderDetail";
 }

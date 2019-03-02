@@ -1,7 +1,9 @@
 package edu.nju.Yummy.daoImpl;
 
+import edu.nju.Yummy.dao.AccountInfoDao;
 import edu.nju.Yummy.dao.BaseDao;
 import edu.nju.Yummy.dao.OrderInfoDao;
+import edu.nju.Yummy.model.Account;
 import edu.nju.Yummy.model.OrderInfo;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -17,6 +19,9 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 
     @Autowired
     private BaseDao baseDao;
+
+    @Autowired
+    private AccountInfoDao accountInfoDao;
 
     @Override
     public OrderInfo findOneOrderById(long orderId){
@@ -51,6 +56,12 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
             }else if(one.getOrderCondition().equals("送货中") && isArrive(one.getDeliveryTime())) {
                 one.setOrderCondition("已完成");
                 baseDao.update(one);
+                Account account = accountInfoDao.showUserAccount(one.getRestaurantId()).get(0);
+                Account adminAccount = accountInfoDao.showUserAccount("admin").get(0);
+                account.setBalance(account.getBalance() + one.getTotalPrice() * 0.9);
+                adminAccount.setBalance(adminAccount.getBalance() - one.getTotalPrice() * 0.9);
+                accountInfoDao.updateUserAccount(account);
+                accountInfoDao.updateUserAccount(adminAccount);
             }
             res.add(one);
         }

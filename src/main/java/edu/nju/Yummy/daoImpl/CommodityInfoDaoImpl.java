@@ -31,6 +31,11 @@ public class CommodityInfoDaoImpl implements CommodityInfoDao {
     }
 
     @Override
+    public boolean updateDiscountInfo(DiscountInfo discountInfo) {
+        return baseDao.update(discountInfo);
+    }
+
+    @Override
     public boolean saveDiscountInfo(DiscountInfo discountInfo) {
         return baseDao.save(discountInfo);
     }

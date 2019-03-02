@@ -1,8 +1,15 @@
 var confirmCode = "";
 //test the correction of the format of the mail address
 var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+var flag = false;
 
 function sendMail() {
+    confirmCode = "";
+    if(flag){
+        swal("获取验证码失败","获取频繁，请稍后再试","error");
+        return;
+    }
+    flag = true;
     var customerMail = document.getElementById("customerMail").value;
     if(customerMail === ""){
         alert("请输入您的邮箱!");
@@ -20,6 +27,7 @@ function sendMail() {
         success: function (result) {
             if(result.length === 6){
                 confirmCode = result;
+                flag = false;
             }
             else
                 alert("该邮箱已被注册，请输入另一个邮箱!");
@@ -80,10 +88,10 @@ function restaurantRegister() {
     var restaurantPassword = document.getElementById("restaurantPassword").value;
     var passwordConfirm = document.getElementById("restaurantPasswordConfirm").value;
 
-    if(restaurantName === "" || restaurantPassword === "" || passwordConfirm === ""){
+    if(restaurantName === "" || restaurantPassword === "" || passwordConfirm === "") {
         alert("请将注册信息填写完整!");
         return;
-    }else if(restaurantPassword !== passwordConfirm){
+    }else if(restaurantPassword !== passwordConfirm) {
         alert("两次密码输入不一致!");
         return;
     }
@@ -99,7 +107,8 @@ function restaurantRegister() {
             if(result.length === 7){
                 swal({
                     title: "注册成功",
-                    text: "您的登录码: " + result,
+                    text: "您的登录码: " + result + "; " +
+                        "系统已为您自动创建银行账户以便收款，密码即为登录密码",
                     type: "success"
                 },function () {
                     window.location.href = "/login";

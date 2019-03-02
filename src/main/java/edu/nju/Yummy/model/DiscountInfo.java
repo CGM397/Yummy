@@ -26,6 +26,8 @@ public class DiscountInfo implements Serializable {
 
     private int discountAmount;
 
+    private int leftAmount;
+
     private Date beginDate;
 
     private Date endDate;
@@ -33,13 +35,13 @@ public class DiscountInfo implements Serializable {
     public DiscountInfo() {
     }
 
-    public DiscountInfo(String restaurantId, String commodityName,
-                        double discount, int discountAmount,
-                        Date beginDate, Date endDate) {
+    public DiscountInfo(String restaurantId, String commodityName, double discount,
+                        int discountAmount, int leftAmount, Date beginDate, Date endDate) {
         this.restaurantId = restaurantId;
         this.commodityName = commodityName;
         this.discount = discount;
         this.discountAmount = discountAmount;
+        this.leftAmount = leftAmount;
         this.beginDate = beginDate;
         this.endDate = endDate;
     }
@@ -82,6 +84,14 @@ public class DiscountInfo implements Serializable {
 
     public void setDiscountAmount(int discountAmount) {
         this.discountAmount = discountAmount;
+    }
+
+    public int getLeftAmount() {
+        return leftAmount;
+    }
+
+    public void setLeftAmount(int leftAmount) {
+        this.leftAmount = leftAmount;
     }
 
     public Date getBeginDate() {

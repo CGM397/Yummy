@@ -4,7 +4,7 @@ function showRestaurantCommodity(restaurantId) {
     for(var i = 0; i < commodityStore.length; i++){
         var name = commodityStore[i].commodityName;
         var price = commodityStore[i].commodityPrice;
-        var amount = commodityStore[i].amount;
+        var amount = commodityStore[i].leftAmount;
         var describe = "";
         var mapStore = {};
         var discount = "无";
@@ -24,7 +24,7 @@ function showRestaurantCommodity(restaurantId) {
         for(var j = 0; j < discountInfoStore.length; j++){
             if(discountInfoStore[j].commodityName === name){
                 discount = discountInfoStore[j].discount + "折";
-                discountAmount = discountInfoStore[j].discountAmount;
+                discountAmount = discountInfoStore[j].leftAmount;
                 break;
             }
         }
@@ -96,8 +96,8 @@ function addOneCommodity(a) {
     if(discountAmount !== "无" && parseInt(discountAmount) > 0){
         tr.cells[5].innerHTML = parseInt(discountAmount) - 1;
         buyDiscountAmount++;
-        commodityPrice = (commodityPrice *
-            parseFloat(commodityDiscount.substring(0, commodityDiscount.length - 1))) / 10.0 ;
+        commodityPrice = commodityPrice *
+            (parseFloat(commodityDiscount.substring(0, commodityDiscount.length - 1)) / 10.0);
     }
     var price = Math.round(commodityPrice * 100) / 100.0;
     var total = document.getElementById("total").value;

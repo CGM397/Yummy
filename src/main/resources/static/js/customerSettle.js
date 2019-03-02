@@ -1,3 +1,5 @@
+var fastest = new Date();
+
 function setPageInfo() {
     var currentOrder = JSON.parse(localStorage.getItem("currentOrderInfo"));
     var currentCustomer = findCustomerInfoByMail(localStorage.getItem("customerMail"));
@@ -61,6 +63,7 @@ function setFastestDeliveryTime(restaurantId, customerId, customerAddress) {
     var hour = ("0" + time.getHours()).slice(-2);
     var min = ("0" + time.getMinutes()).slice(-2);
     var now = time.getFullYear() + "-" + month + "-" + day + "T" + hour + ":" + min;
+    fastest = now;
     document.getElementById("delivery-time").value = now;
     document.getElementById("delivery-time").min = now;
 }
@@ -76,6 +79,14 @@ function confirmOrder() {
         time.getFullYear() + "-" + month + "-" + day + "T" + hour + ":" + min + ":" + sec;
     currentOrder.orderTime = document.getElementById("order-time").value;
     currentOrder.deliveryTime = document.getElementById("delivery-time").value;
+    var tmp1 = new Date(Date.parse(currentOrder.deliveryTime));
+    var tmp2 = new Date(Date.parse(fastest));
+    var tmp3 = new Date(Date.parse(fastest));
+    tmp3.setMinutes(tmp3.getMinutes() + 60);
+    if(tmp1.getTime() < tmp2.getTime() || tmp1.getTime() > tmp3.getTime()) {
+        swal("下单失败","请将送达时间设置在给定最快时间之后的一个小时内","error");
+        return;
+    }
     var totalPrice = document.getElementById("total-price").value;
     totalPrice = totalPrice.substring(0, totalPrice.indexOf("("));
     currentOrder.totalPrice = totalPrice;

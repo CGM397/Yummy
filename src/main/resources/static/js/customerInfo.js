@@ -1,3 +1,22 @@
+function findCustomerInfoById(customerId) {
+    var currentCustomer = new Customer();
+    $.ajax({
+        type: "POST",
+        url: "/customerInfo/findCustomerInfoById",
+        async: false,                         //将ajax改为同步模式
+        data: {
+            customerId : customerId
+        },
+        success: function (result) {
+            currentCustomer = result;
+        },
+        error: function () {
+            alert("error!");
+        }
+    });
+    return currentCustomer;
+}
+
 function findCustomerInfoByMail(customerMail) {
     var currentCustomer = new Customer();
     $.ajax({
@@ -18,7 +37,7 @@ function findCustomerInfoByMail(customerMail) {
                 result.active);
         },
         error: function () {
-            alert("register : error!");
+            alert("error!");
         }
     });
     return currentCustomer;

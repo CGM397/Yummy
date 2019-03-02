@@ -1,6 +1,6 @@
 function showRestaurantModification() {
     var store = findRestaurantModification(localStorage.getItem("restaurantId"));
-    for(var i = 0; i < store.length; i++){
+    for(var i = store.length - 1; i >= 0; i--){
         var condition = "已同意";
         if(!store[i].checked)
             condition = "审核中";

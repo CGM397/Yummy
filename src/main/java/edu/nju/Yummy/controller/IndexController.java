@@ -171,6 +171,16 @@ public class IndexController {
         return "restaurant-release";
     }
 
+    @RequestMapping("/restaurant-orderDetail")
+    public String restaurantOrderDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "restaurant-orderDetail";
+    }
+
     @RequestMapping("/admin-checkModification")
     public String adminCheckModification(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
