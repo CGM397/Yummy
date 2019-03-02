@@ -29,4 +29,9 @@ public class RestaurantReleaseServiceImpl implements RestaurantReleaseService {
     public ArrayList<CommodityInfo> showCommodity(String restaurantId) {
         return commodityInfoDao.showCommodity(restaurantId);
     }
+
+    @Override
+    public ArrayList<CommodityInfo> showCommodityToCome(String restaurantId) {
+        return commodityInfoDao.showCommodityToCome(restaurantId);
+    }
 }

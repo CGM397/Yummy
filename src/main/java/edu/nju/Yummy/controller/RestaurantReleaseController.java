@@ -32,4 +32,10 @@ public class RestaurantReleaseController {
     public ArrayList<CommodityInfo> showCommodity(@RequestParam String restaurantId){
         return restaurantReleaseService.showCommodity(restaurantId);
     }
+
+    @RequestMapping(value = "/showCommodityToCome", method = RequestMethod.POST)
+    @ResponseBody
+    public ArrayList<CommodityInfo> showCommodityToCome(@RequestParam String restaurantId){
+        return restaurantReleaseService.showCommodityToCome(restaurantId);
+    }
 }

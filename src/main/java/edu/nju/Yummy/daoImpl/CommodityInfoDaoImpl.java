@@ -62,8 +62,35 @@ public class CommodityInfoDaoImpl implements CommodityInfoDao {
         return res;
     }
 
+    @Override
+    public ArrayList<CommodityInfo> showCommodityToCome(String restaurantId) {
+        ArrayList<CommodityInfo> res = new ArrayList<>();
+        try(Session session = baseDao.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            String hql = "from CommodityInfo where restaurantId = ?1";
+            Query query = session.createQuery(hql);
+            query.setParameter(1,restaurantId);
+            if(query.list().size() > 0) {
+                List<CommodityInfo> store = query.list();
+                for(CommodityInfo one : store){
+                    if(isToCome(one.getBeginDate()))
+                        res.add(one);
+                }
+            }
+            transaction.commit();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
     private boolean isOnSale(Date beginDate, Date endDate){
         Date now = new Date();
         return now.after(beginDate) && now.before(endDate);
+    }
+
+    private boolean isToCome(Date beginDate){
+        Date now = new Date();
+        return now.before(beginDate);
     }
 }

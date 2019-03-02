@@ -17,6 +17,25 @@ function showCommodity(restaurantId) {
     return res;
 }
 
+function showCommodityToCome(restaurantId) {
+    var res = [];
+    $.ajax({
+        type: 'POST',
+        url:"/restaurantRelease/showCommodityToCome",
+        async: false,                         //将ajax改为同步模式
+        data: {
+            restaurantId : restaurantId
+        },
+        success:function(result){
+            res = result;
+        },
+        error:function(){
+            alert("error");
+        }
+    });
+    return res;
+}
+
 function showDiscountInfo(restaurantId) {
     var res = [];
     $.ajax({

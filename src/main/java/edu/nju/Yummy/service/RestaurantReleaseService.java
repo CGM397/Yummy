@@ -12,4 +12,6 @@ public interface RestaurantReleaseService {
     boolean releaseDiscount(DiscountInfo discountInfo);
 
     ArrayList<CommodityInfo> showCommodity(String restaurantId);
+
+    ArrayList<CommodityInfo> showCommodityToCome(String restaurantId);
 }

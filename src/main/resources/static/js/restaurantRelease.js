@@ -50,6 +50,13 @@ function releaseSingleProduct() {
                     return;
                 }
             }
+            var store2 = showCommodityToCome(restaurantId);
+            for(var k = 0; k < store2.length; k++){
+                if(store2[k].commodityName === commodityName) {
+                    swal("发布失败","商品名称与将要发布的商品名称重复","error");
+                    return;
+                }
+            }
             if(commodityName === ""){
                 swal("发布失败","商品名称不可为空","error");
                 return;
@@ -123,6 +130,13 @@ function releasePackage() {
             for(var i = 0; i < store.length; i++) {
                 if(store[i].commodityName === commodityName){
                     swal("发布失败","商品名称与现有商品名称重复","error");
+                    return;
+                }
+            }
+            var store2 = showCommodityToCome(restaurantId);
+            for(var k = 0; k < store2.length; k++){
+                if(store2[k].commodityName === commodityName){
+                    swal("发布失败","商品名称与将要发布的商品名称重复","error");
                     return;
                 }
             }
