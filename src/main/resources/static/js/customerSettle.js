@@ -97,7 +97,13 @@ function confirmOrder() {
         data: JSON.stringify(currentOrder),
         success:function(result){
             if(result){
-                swal("下单成功","请于2分钟内到订单页面付款","success");
+                swal({
+                    title: "下单成功",
+                    text: "请于2分钟内到订单页面付款",
+                    type: "success"
+                },function () {
+                    window.location.href='customer-order';
+                });
             }else
                 swal("下单失败","下单失败","error");
         },

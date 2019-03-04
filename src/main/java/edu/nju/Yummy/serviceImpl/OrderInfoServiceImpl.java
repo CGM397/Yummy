@@ -218,7 +218,11 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         double res = 0;
         Date now = new Date();
         int min = (int)Math.round((now.getTime() - orderTime.getTime()) / 60000.0);
+        //1% per minutes
         res = totalPrice * (1 - min / 100.0);
+        //up to 50%
+        if(res < totalPrice / 2.0)
+            res = totalPrice / 2.0;
         res = Math.round(res * 100) / 100.0;
         return res;
     }

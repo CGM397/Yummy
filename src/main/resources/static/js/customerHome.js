@@ -51,6 +51,8 @@ function showAllRestaurants() {
 function isNear(restaurantAddress) {
     var x1 = restaurantAddress.coordinateX;
     var y1 = restaurantAddress.coordinateY;
+    if(restaurantAddress.address === null)
+        return false;
     var customerAddress = document.getElementById("customer-address").value;
     var x2 = 0,y2 = 0;
     for(var i = 0; i < customerAddresses.length; i++){
