@@ -111,6 +111,36 @@ public class IndexController {
         return "customer-account";
     }
 
+    @RequestMapping("/customer-statisticsDetail")
+    public String customerStatisticsDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "customer-statisticsDetail";
+    }
+
+    @RequestMapping("/customer-staResDetail")
+    public String customerStaResDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "customer-staResDetail";
+    }
+
+    @RequestMapping("/customer-staResItemDetail")
+    public String customerStaResItemDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "customer-staResItemDetail";
+    }
+
     @RequestMapping("/restaurant-home")
     public String restaurantHome(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);

@@ -14,7 +14,7 @@ function setRestaurantOrderReturnList() {
     for(var key in mapStore){
         if(mapStore.hasOwnProperty(key)){
             var restaurantName = findRestaurantInfoById(key).restaurantName;
-            addRestaurantOrderListRow(restaurantName, mapStore[key]);
+            addRestaurantOrderListRow(key, restaurantName, mapStore[key]);
         }
     }
 }
@@ -35,7 +35,7 @@ function setRestaurantOrderList() {
     for(var key in mapStore) {
         if(mapStore.hasOwnProperty(key)){
             var restaurantName = findRestaurantInfoById(key).restaurantName;
-            addRestaurantOrderListRow(restaurantName, mapStore[key]);
+            addRestaurantOrderListRow(key, restaurantName, mapStore[key]);
         }
     }
 }
@@ -87,6 +87,15 @@ function setOrderReturnListSortByTime() {
 function setOrderListSortByMoney() {
     clearOrderList();
     var store = showCustomerOrders(localStorage.getItem("customerId"));
+    for(var j = 0; j < store.length - 1; j++){
+        for(var k = j + 1; k < store.length; k++){
+            if(store[j].totalPrice > store[k].totalPrice){
+                var tmp = store[j];
+                store[j] = store[k];
+                store[k] = tmp;
+            }
+        }
+    }
     for(var i = store.length - 1; i >= 0; i--) {
         if(store[i].orderCondition === "已完成" || store[i].orderCondition === "送货中") {
             var orderId = store[i].orderId;
@@ -108,6 +117,33 @@ function setOrderListSortByMoney() {
 
 function setOrderReturnListSortByMoney() {
     clearOrderList();
+    var store = showCustomerOrders(localStorage.getItem("customerId"));
+    for(var j = 0; j < store.length - 1; j++){
+        for(var k = j + 1; k < store.length; k++){
+            if(store[j].totalPrice > store[k].totalPrice){
+                var tmp = store[j];
+                store[j] = store[k];
+                store[k] = tmp;
+            }
+        }
+    }
+    for(var i = store.length - 1; i >= 0; i--) {
+        if(store[i].orderCondition === "已取消") {
+            var orderId = store[i].orderId;
+            var orderTime = store[i].orderTime;
+            orderTime = orderTime.substring(0, orderTime.indexOf("T")) + " " +
+                orderTime.substring(orderTime.indexOf("T") + 1, orderTime.indexOf("."));
+            var content = "";
+            var total = store[i].totalPrice;
+            var condition = store[i].orderCondition;
+            var restaurantId = store[i].restaurantId;
+            var restaurantName = findRestaurantInfoById(restaurantId).restaurantName;
+            var itemName = store[i].items[0].itemName;
+            var itemsAmount = store[i].items.length;
+            content = restaurantName + ": " + itemName + "等" + itemsAmount + "种商品";
+            addOrderListRow(orderId, orderTime, content, total, condition);
+        }
+    }
 }
 
 function addOrderListRow(orderId, time, content, total, condition) {
@@ -154,9 +190,15 @@ function addOrderListRow(orderId, time, content, total, condition) {
     table.appendChild(row);
 }
 
-function addRestaurantOrderListRow(name, num) {
+function addRestaurantOrderListRow(id, name, num) {
     var table = document.getElementById("restaurantOrderList");
     var row = document.createElement("tr");
+
+    var idCell = document.createElement('td');
+    idCell.style.textAlign='center';
+    idCell.style.display='none';
+    idCell.innerHTML = id;
+    row.appendChild(idCell);
 
     var nameCell = document.createElement('td');
     nameCell.style.textAlign='center';
@@ -174,7 +216,7 @@ function addRestaurantOrderListRow(name, num) {
     check.className = 'opBtn';
     check.href = 'javascript:void(0);';
     check.onclick = function() {
-        checkOrder(this);
+        checkRestaurantOrder(this);
     };
     opCell.appendChild(check);
     row.appendChild(opCell);
@@ -194,4 +236,20 @@ function clearOrderList() {
     var trs = table.rows;
     for(var i = trs.length - 1; i > 0; i--)
         table.deleteRow(i);
+}
+
+function checkOrder(a) {
+    var tr = a.parentNode.parentNode;
+    var orderId = tr.cells[0].innerText;
+    localStorage.setItem("customerStatisticsOrderId", orderId);
+    window.location.href="customer-statisticsDetail";
+}
+
+function checkRestaurantOrder(a) {
+    var tr = a.parentNode.parentNode;
+    var restaurantId = tr.cells[0].innerText;
+    localStorage.setItem("customerStaResId", restaurantId);
+    var conditionOne = document.getElementById("filterCondition-one").value;
+    localStorage.setItem("staConditionOne",conditionOne);
+    window.location.href="customer-staResDetail";
 }

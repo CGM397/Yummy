@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>customer-staResDetail</title>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+    <script type="text/javascript" src="../static/js/model.js"></script>
+    <script type="text/javascript" src="../static/js/registerLogin.js"></script>
+    <script type="text/javascript" src="../static/js/orderManagement.js"></script>
+    <script type="text/javascript" src="../static/js/customerStaResDetail.js"></script>
+    <script type="text/javascript" src="../static/js/restaurantInfo.js"></script>
+    <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
+    <link href="../static/css/navigationBar.css" rel="stylesheet">
+    <link href="../static/css/customerOrder.css" rel="stylesheet">
+    <link href="../static/css/sweetalert.css" rel="stylesheet">
+</head>
+<body style = "margin: 0">
+<div>
+    <ul class="menu">
+        <li><p>Yummy!</p></li>
+        <li><a href="customer-home">主页</a></li>
+        <li><a href="customer-order">我的订单</a></li>
+        <li><a href="customer-address">收货地址</a></li>
+        <li><a href="customer-statistics">统计信息</a></li>
+        <li style="float: right;">
+            <a href="javascript:void(0);" onclick="logout()">Logout</a>
+        </li>
+        <li style="float: right">
+            <label>
+                <input style="cursor: pointer" id="customerName" type="button" value="用户" onclick="turnToCustomerInfo()"/>
+            </label>
+        </li>
+        <li style="float: right"><p style="margin: 0; padding: 18px 0">您好!</p></li>
+    </ul>
+</div>
+<div align="center">
+    <label>
+        <input id="staResId" type="text" class="title" value="餐厅名称" readonly />
+    </label>
+</div>
+<div>
+    <a href="customer-statistics" class="staResReturnTag">返回</a>
+</div>
+<div>
+    <table id="orderList" class="orderList">
+        <tr>
+            <th style="display: none">订单编号</th>
+            <th style="width: 18%;">下单时间</th>
+            <th>订单内容</th>
+            <th style="width: 12%;">支付金额(元)</th>
+            <th style="width: 10%;">状态</th>
+            <th style="width: 12%;">操作</th>
+        </tr>
+    </table>
+</div>
+<script>
+    infoInit();
+    function infoInit() {
+        document.getElementById("customerName").value = localStorage.getItem("customerName");
+        setPageInfo();
+    }
+
+    function turnToCustomerInfo() {
+        window.location.href = "customer-info";
+    }
+</script>
+</body>
+</html>

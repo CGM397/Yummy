@@ -55,3 +55,22 @@
 .opBtn:hover {
     background-color: rgb(81, 67, 224);
 }
+
+.staResReturnTag {
+    margin-top: 20px;
+    margin-left: 28px;
+    cursor:pointer;
+    color: white;
+    background: #00AA00;
+    font-size: 16px;
+    line-height: 38px;
+    height: 38px;
+    padding: 0 20px;
+    border-radius: 3px;
+    display: inline-block;
+    text-decoration: none;
+    transition: background .15s;
+}
+.staResReturnTag:hover{
+    background-color: #00BB00;
+}

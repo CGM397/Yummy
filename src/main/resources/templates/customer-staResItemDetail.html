@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>customer-orderDetail</title>
+    <title>customer-staResItemDetail</title>
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
     <script type="text/javascript" src="../static/js/model.js"></script>
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
     <script type="text/javascript" src="../static/js/orderManagement.js"></script>
-    <script type="text/javascript" src="../static/js/customerOrderDetail.js"></script>
+    <script type="text/javascript" src="../static/js/customerStatisticsDetail.js"></script>
     <script type="text/javascript" src="../static/js/restaurantInfo.js"></script>
-    <script type="text/javascript" src="../static/js/accountManagement.js"></script>
     <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
     <link href="../static/css/navigationBar.css" rel="stylesheet">
     <link href="../static/css/customerSettle.css" rel="stylesheet">
@@ -36,7 +35,7 @@
 </div>
 <div>
     <div style="display: inline-block">
-        <a href="customer-order" class="returnTag">返回</a>
+        <a href="customer-staResDetail" class="returnTag">返回</a>
         <input type="button" id="restaurantName" class="restaurantName" value="餐厅" />
         <table id="shoppingCartTable" class="shoppingCartTable">
             <tr>
@@ -67,14 +66,6 @@
                     </ul>
                 </form>
             </div>
-            <p>
-                <a id="pay-order" onclick="payOrder()" class="btn" style="display: none;">
-                    立即付款
-                </a>
-                <a id="cancel-order" onclick="cancelOrder()" class="btn" style="display: none">
-                    取消订单
-                </a>
-            </p>
         </section>
     </div>
 </div>
