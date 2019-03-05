@@ -6,8 +6,14 @@
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
     <script type="text/javascript" src="../static/js/model.js"></script>
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
+    <script type="text/javascript" src="../static/js/restaurantStatistics.js"></script>
+    <script type="text/javascript" src="../static/js/orderManagement.js"></script>
+    <script type="text/javascript" src="../static/js/customerInfo.js"></script>
+    <script type="text/javascript" src="../static/js/accountManagement.js"></script>
     <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
     <link href="../static/css/navigationBar.css" rel="stylesheet">
+    <link href="../static/css/customerHome.css" rel="stylesheet">
+    <link href="../static/css/customerOrder.css" rel="stylesheet">
     <link href="../static/css/sweetalert.css" rel="stylesheet">
 </head>
 <body style = "margin: 0">
@@ -30,11 +36,90 @@
         <li style="float: right"><p style="margin: 0; padding: 18px 0">您好!</p></li>
     </ul>
 </div>
+<div>
+    <div style="display: inline-block;">
+        <label for="filterCondition-one" class="addressLabel">筛选条件一</label>
+        <select id="filterCondition-one" class="customerAddress"  onchange="updateCondition()">
+            <option>购买记录</option>
+            <option>退订记录</option>
+        </select>
+    </div>
+    <div style="display: inline-block;">
+        <label for="filterCondition-two" class="addressLabel">筛选条件二</label>
+        <select id="filterCondition-two" class="customerAddress"  onchange="updateCondition()">
+            <option>时间</option>
+            <option>金额</option>
+            <option>会员</option>
+        </select>
+    </div>
+    <div style="display: inline-block">
+        <input id="totalIncome" class="totalPay" type="text" value="总收入：0 元" />
+    </div>
+</div>
+<div>
+    <table id="orderList" class="orderList">
+        <tr>
+            <th style="display: none">订单编号</th>
+            <th style="width: 18%;">下单时间</th>
+            <th>订单内容</th>
+            <th style="width: 12%;">支付金额(元)</th>
+            <th style="width: 10%;">状态</th>
+            <th style="width: 12%;">操作</th>
+        </tr>
+    </table>
+</div>
+<div>
+    <table style="display: none" id="customerOrderList" class="orderList">
+        <tr>
+            <th style="display: none">会员编号</th>
+            <th>会员名称</th>
+            <th>购买次数</th>
+            <th style="width: 12%;">操作</th>
+        </tr>
+    </table>
+</div>
 <script>
     infoInit();
     function infoInit() {
         document.getElementById("restaurantName").value = localStorage.getItem("restaurantName");
+        updateCondition();
+        setTotalIncome();
     }
+
+    function updateCondition() {
+        var conditionOne = document.getElementById("filterCondition-one").value;
+        var conditionTwo = document.getElementById("filterCondition-two").value;
+        if(conditionTwo === "会员") {
+            document.getElementById("orderList").style.display = "none";
+            document.getElementById("customerOrderList").style.display = "table";
+            if(conditionOne === "退订记录") {
+                document.getElementById("customerOrderList").rows[0].cells[2].innerHTML = "退订次数";
+                setCustomerOrderReturnList();
+            }else if(conditionOne === "购买记录") {
+                document.getElementById("customerOrderList").rows[0].cells[2].innerHTML = "购买次数";
+                setCustomerOrderList();
+            }
+        }
+        else if(conditionTwo === "时间"){
+            document.getElementById("orderList").style.display = "table";
+            document.getElementById("customerOrderList").style.display = "none";
+            if(conditionOne === "退订记录") {
+                setOrderReturnListSortByTime();
+            }else if(conditionOne === "购买记录") {
+                setOrderListSortByTime();
+            }
+        }
+        else if(conditionTwo === "金额"){
+            document.getElementById("orderList").style.display = "table";
+            document.getElementById("customerOrderList").style.display = "none";
+            if(conditionOne === "退订记录") {
+                setOrderReturnListSortByMoney();
+            }else if(conditionOne === "购买记录") {
+                setOrderListSortByMoney();
+            }
+        }
+    }
+
     function turnToRestaurantInfo() {
         window.location.href = "restaurant-info";
     }

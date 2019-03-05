@@ -50,6 +50,9 @@
             <option>餐厅</option>
         </select>
     </div>
+    <div style="display: inline-block">
+        <input id="totalPay" class="totalPay" type="text" value="总消费：0 元" />
+    </div>
 </div>
 <div>
     <table id="orderList" class="orderList">
@@ -80,6 +83,7 @@
     function infoInit() {
         document.getElementById("customerName").value = localStorage.getItem("customerName");
         updateCondition();
+        setTotalPay();
     }
 
     function updateCondition() {

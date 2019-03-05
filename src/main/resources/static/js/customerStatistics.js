@@ -1,3 +1,16 @@
+function setTotalPay() {
+    var totalPay = 0;
+    var customerId = localStorage.getItem("customerId");
+    var store = showCustomerOrders(customerId);
+    for(var i = 0; i < store.length; i++) {
+        if(store[i].orderCondition === "已完成" || store[i].orderCondition === "送货中") {
+            totalPay += store[i].totalPrice;
+        }
+    }
+    totalPay = Math.round(totalPay * 100) / 100.0;
+    document.getElementById("totalPay").value = "总消费：" + totalPay + " 元";
+}
+
 function setRestaurantOrderReturnList() {
     clearRestaurantOrderList();
     var customerId = localStorage.getItem("customerId");
