@@ -6,8 +6,11 @@
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
     <script type="text/javascript" src="../static/js/model.js"></script>
     <script type="text/javascript" src="../static/js/registerLogin.js"></script>
+    <script type="text/javascript" src="../static/js/adminStatistics.js"></script>
+    <script type="text/javascript" src="../static/js/accountManagement.js"></script>
     <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
     <link href="../static/css/navigationBar.css" rel="stylesheet">
+    <link href="../static/css/userInfoList.css" rel="stylesheet">
     <link href="../static/css/sweetalert.css" rel="stylesheet">
 </head>
 <body style = "margin: 0">
@@ -22,10 +25,31 @@
         <li style="float: right"><p style="margin: 0; padding: 18px 0">您好！经理&emsp;</p></li>
     </ul>
 </div>
+<section class="panel">
+    <h2>统计信息</h2>
+    <div class="infoList">
+        <form>
+            <ul>
+                <li>
+                    <label>餐厅统计(家)</label>
+                    <input id="restaurant-num" type="text" placeholder="restaurant-num" disabled />
+                </li>
+                <li>
+                    <label>会员统计(名)</label>
+                    <input id="customer-num" type="text" placeholder="customer-num" disabled />
+                </li>
+                <li>
+                    <label>系统收入(元)</label>
+                    <input id="sys-income" type="text" placeholder="sys-income" disabled />
+                </li>
+            </ul>
+        </form>
+    </div>
+</section>
 <script>
     infoInit();
     function infoInit() {
-
+        setPageInfo();
     }
 </script>
 </body>

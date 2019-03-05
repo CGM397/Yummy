@@ -25,4 +25,16 @@ public class AdminManagementController {
     public boolean updateModification(@RequestBody Modification modification){
         return adminManagementService.updateModification(modification);
     }
+
+    @RequestMapping(value = "/getCustomerNum", method = RequestMethod.POST)
+    @ResponseBody
+    public int getCustomerNum() {
+        return adminManagementService.getCustomerNum();
+    }
+
+    @RequestMapping(value = "/getRestaurantNum", method = RequestMethod.POST)
+    @ResponseBody
+    public int getRestaurantNum() {
+        return adminManagementService.getRestaurantNum();
+    }
 }

@@ -9,4 +9,8 @@ public interface AdminManagementService {
     ArrayList<Modification> showModification();
 
     boolean updateModification(Modification modification);
+
+    int getCustomerNum();
+
+    int getRestaurantNum();
 }
