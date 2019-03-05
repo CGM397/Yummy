@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>restaurant-staCusItemDetail</title>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+    <script type="text/javascript" src="../static/js/model.js"></script>
+    <script type="text/javascript" src="../static/js/registerLogin.js"></script>
+    <script type="text/javascript" src="../static/js/orderManagement.js"></script>
+    <script type="text/javascript" src="../static/js/restaurantStatisticsDetail.js"></script>
+    <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
+    <link href="../static/css/navigationBar.css" rel="stylesheet">
+    <link href="../static/css/customerSettle.css" rel="stylesheet">
+    <link href="../static/css/sweetalert.css" rel="stylesheet">
+</head>
+<body style = "margin: 0">
+<div>
+    <ul class="menu">
+        <li><p>Yummy!</p></li>
+        <li><a href="restaurant-home">我的餐厅</a></li>
+        <li><a href="restaurant-release">发布信息</a></li>
+        <li><a href="restaurant-order">销售记录</a></li>
+        <li><a href="restaurant-statistics">统计信息</a></li>
+        <li><a href="restaurant-modification">我的消息</a></li>
+        <li style="float: right;">
+            <a href="javascript:void(0);" onclick="logout()">Logout</a>
+        </li>
+        <li style="float: right">
+            <label>
+                <input style="cursor: pointer" id="restaurantName" type="button" value="用户" onclick="turnToRestaurantInfo()"/>
+            </label>
+        </li>
+        <li style="float: right"><p style="margin: 0; padding: 18px 0">您好!</p></li>
+    </ul>
+</div>
+<div>
+    <div style="display: inline-block">
+        <a href="restaurant-staCusDetail" class="returnTag">返回</a>
+        <input type="button" class="restaurantName" value="购物车" />
+        <table id="shoppingCartTable" class="shoppingCartTable">
+            <tr>
+                <th style="width: 50%">商品名称</th>
+                <th style="width: 25%">数量</th>
+                <th style="width: 25%">小计(元)</th>
+            </tr>
+        </table>
+    </div>
+    <div style="display: inline-block">
+        <section class="panel">
+            <h2>订单信息</h2>
+            <div class="orderList">
+                <form>
+                    <ul>
+                        <li>
+                            <label>收货地址</label>
+                            <input id="delivery-address" type="text" placeholder="delivery-address" readonly/>
+                        </li>
+                        <li>
+                            <label>实付金额(元)</label>
+                            <input id="total-price" type="text" placeholder="total-price" readonly/>
+                        </li>
+                        <li>
+                            <label>送达时间</label>
+                            <input id="delivery-time" type="datetime-local" placeholder="now" readonly/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
+<script>
+    infoInit();
+    function infoInit() {
+        document.getElementById("restaurantName").value = localStorage.getItem("restaurantName");
+        setPageInfo();
+    }
+
+    function turnToRestaurantInfo() {
+        window.location.href = "restaurant-info";
+    }
+</script>
+</body>
+</html>

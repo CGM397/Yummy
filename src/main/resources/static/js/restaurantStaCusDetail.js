@@ -1,12 +1,13 @@
 function setPageInfo() {
-    var restaurantId = localStorage.getItem("customerStaResId");
-    var conditionOne = localStorage.getItem("staConditionOne");
-    var restaurantName = findRestaurantInfoById(restaurantId).restaurantName;
-    document.getElementById("staResName").value = restaurantName;
-    var customerId = localStorage.getItem("customerId");
-    var store = showCustomerOrders(customerId);
+    var customerId = localStorage.getItem("restaurantStaCusId");
+    var conditionOne = localStorage.getItem("resStaConditionOne");
+    document.getElementById("staCusName").value =
+                                        findCustomerInfoById(customerId).customerName;
+    var restaurantId = localStorage.getItem("restaurantId");
+    var restaurantName = localStorage.getItem("restaurantName");
+    var store = showRestaurantOrders(restaurantId);
     for(var i = store.length - 1; i >= 0; i--){
-        if(store[i].restaurantId === restaurantId &&
+        if(store[i].customerId === customerId &&
             isSelectedCondition(store[i].orderCondition, conditionOne)) {
             var orderId = store[i].orderId;
             var orderTime = store[i].orderTime;
@@ -82,6 +83,6 @@ function addOrderListRow(orderId, time, content, total, condition) {
 function checkOrder(a) {
     var tr = a.parentNode.parentNode;
     var orderId = tr.cells[0].innerText;
-    localStorage.setItem("customerStatisticsOrderId", orderId);
-    window.location.href="customer-staResItemDetail";
+    localStorage.setItem("restaurantStatisticsOrderId", orderId);
+    window.location.href="restaurant-staCusItemDetail";
 }

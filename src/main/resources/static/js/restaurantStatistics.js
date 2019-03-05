@@ -219,7 +219,7 @@ function addCustomerOrderListRow(id, name, num) {
     check.className = 'opBtn';
     check.href = 'javascript:void(0);';
     check.onclick = function() {
-        checkRestaurantOrder(this);
+        checkCustomerOrder(this);
     };
     opCell.appendChild(check);
     row.appendChild(opCell);
@@ -248,11 +248,11 @@ function checkOrder(a) {
     window.location.href="restaurant-statisticsDetail";
 }
 
-function checkRestaurantOrder(a) {
+function checkCustomerOrder(a) {
     var tr = a.parentNode.parentNode;
-    var restaurantId = tr.cells[0].innerText;
-    localStorage.setItem("restaurantStaResId", restaurantId);
+    var customerId = tr.cells[0].innerText;
+    localStorage.setItem("restaurantStaCusId", customerId);
     var conditionOne = document.getElementById("filterCondition-one").value;
     localStorage.setItem("resStaConditionOne",conditionOne);
-    window.location.href="restaurant-staResDetail";
+    window.location.href="restaurant-staCusDetail";
 }

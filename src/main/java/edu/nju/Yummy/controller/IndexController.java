@@ -211,6 +211,36 @@ public class IndexController {
         return "restaurant-orderDetail";
     }
 
+    @RequestMapping("/restaurant-statisticsDetail")
+    public String restaurantStatisticsDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "restaurant-statisticsDetail";
+    }
+
+    @RequestMapping("/restaurant-staCusDetail")
+    public String restaurantStaCusDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "restaurant-staCusDetail";
+    }
+
+    @RequestMapping("/restaurant-staCusItemDetail")
+    public String restaurantStaCusItemDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+        return "restaurant-staCusItemDetail";
+    }
+
     @RequestMapping("/admin-checkModification")
     public String adminCheckModification(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
