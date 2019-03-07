@@ -9,7 +9,6 @@ function sendMail() {
         swal("获取验证码失败","获取频繁，请稍后再试","error");
         return;
     }
-    flag = true;
     var customerMail = document.getElementById("customerMail").value;
     if(customerMail === ""){
         alert("请输入您的邮箱!");
@@ -18,6 +17,7 @@ function sendMail() {
         alert("邮箱格式不正确，请重新输入!");
         return;
     }
+    flag = true;
     $.ajax({
         type: "POST",
         url: "/registerLogin/sendMail",
@@ -25,15 +25,15 @@ function sendMail() {
             customerMail : customerMail
         },
         success: function (result) {
-            if(result.length === 6){
+            if(result.length === 6)
                 confirmCode = result;
-                flag = false;
-            }
             else
                 alert("该邮箱已被注册，请输入另一个邮箱!");
+            flag = false;
         },
         error: function () {
             alert("sendMail : error!");
+            flag = false;
         }
     });
 }
