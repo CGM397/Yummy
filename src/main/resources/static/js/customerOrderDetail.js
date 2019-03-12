@@ -3,12 +3,15 @@ function setPageInfo() {
     var orderInfo = findOneOrderById(orderId);
     if(orderInfo.orderCondition === "未付款"){
         document.getElementById("pay-order").style.display = "inline-block";
+        document.getElementById("confirm-order").style.display = "none";
         document.getElementById("cancel-order").style.display = "inline-block";
     }else if(orderInfo.orderCondition === "送货中"){
         document.getElementById("pay-order").style.display = "none";
+        document.getElementById("confirm-order").style.display = "inline-block";
         document.getElementById("cancel-order").style.display = "inline-block";
     }else if(orderInfo.orderCondition === "已取消" || orderInfo.orderCondition === "已完成"){
         document.getElementById("pay-order").style.display = "none";
+        document.getElementById("confirm-order").style.display = "none";
         document.getElementById("cancel-order").style.display = "none";
     }
 
@@ -136,6 +139,50 @@ function cancelOrder() {
                         swal({
                             title: "退订成功",
                             text: "退订成功，退还金额: " + result + " 元。",
+                            type: "success"
+                        },function () {
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(){
+                    alert("error");
+                }
+            });
+        });
+}
+
+function confirmOrderInAdvance() {
+    swal({
+            title: "确认物品已送达吗",
+            text: "点击确认进行收货操作",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false
+        },
+        function () {
+            var orderId = localStorage.getItem("selectedOrderId");
+            var time = new Date();
+            var month = ("0" + (time.getMonth() + 1)).slice(-2);
+            var day = ("0" + time.getDate()).slice(-2);
+            var hour = ("0" + time.getHours()).slice(-2);
+            var min = ("0" + time.getMinutes()).slice(-2);
+            document.getElementById("delivery-time").value =
+                time.getFullYear() + "-" + month + "-" + day + "T" + hour + ":" + min;
+            var confirmTime =
+                time.getFullYear() + "/" + month + "/" + day + " " + hour + ":" + min + ":00";
+            $.ajax({
+                type: 'POST',
+                url:"/customerOrder/confirmOrderInAdvance",
+                data: {
+                    orderId : orderId,
+                    confirmTime : confirmTime
+                },
+                success:function(result) {
+                    if(result){
+                        swal({
+                            title: "确认收货成功",
+                            text: "祝用餐愉快！",
                             type: "success"
                         },function () {
                             window.location.reload();

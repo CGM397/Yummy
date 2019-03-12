@@ -54,14 +54,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
                 one.setOrderCondition("已取消");
                 baseDao.update(one);
             }else if(one.getOrderCondition().equals("送货中") && isArrive(one.getDeliveryTime())) {
-                one.setOrderCondition("已完成");
-                baseDao.update(one);
-                Account account = accountInfoDao.showUserAccount(one.getRestaurantId()).get(0);
-                Account adminAccount = accountInfoDao.showUserAccount("admin").get(0);
-                account.setBalance(account.getBalance() + one.getTotalPrice() * 0.9);
-                adminAccount.setBalance(adminAccount.getBalance() - one.getTotalPrice() * 0.9);
-                accountInfoDao.updateUserAccount(account);
-                accountInfoDao.updateUserAccount(adminAccount);
+                payMoneyToRestaurant(one);
             }
             res.add(one);
         }
@@ -113,6 +106,14 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
         return res;
     }
 
+    @Override
+    public boolean confirmOrderInAdvance(long orderId, Date confirmTime) {
+        OrderInfo one = findOneOrderById(orderId);
+        one.setDeliveryTime(confirmTime);
+        payMoneyToRestaurant(one);
+        return true;
+    }
+
     private boolean isOverdue(Date orderTime){
         Date now = new Date();
         Date twoMinutesBefore = new Date(now.getTime() - 120000);
@@ -122,5 +123,16 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
     private boolean isArrive(Date deliveryTime) {
         Date now = new Date();
         return now.after(deliveryTime);
+    }
+
+    private void payMoneyToRestaurant(OrderInfo one){
+        one.setOrderCondition("已完成");
+        baseDao.update(one);
+        Account account = accountInfoDao.showUserAccount(one.getRestaurantId()).get(0);
+        Account adminAccount = accountInfoDao.showUserAccount("admin").get(0);
+        account.setBalance(account.getBalance() + one.getTotalPrice() * 0.9);
+        adminAccount.setBalance(adminAccount.getBalance() - one.getTotalPrice() * 0.9);
+        accountInfoDao.updateUserAccount(account);
+        accountInfoDao.updateUserAccount(adminAccount);
     }
 }

@@ -3,6 +3,7 @@ package edu.nju.Yummy.dao;
 import edu.nju.Yummy.model.OrderInfo;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public interface OrderInfoDao {
 
@@ -15,4 +16,6 @@ public interface OrderInfoDao {
     boolean saveOrderInfo(OrderInfo orderInfo);
 
     boolean updateOrderCondition(long orderId, String orderCondition);
+
+    boolean confirmOrderInAdvance(long orderId, Date confirmTime);
 }

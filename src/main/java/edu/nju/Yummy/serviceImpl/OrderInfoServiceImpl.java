@@ -207,6 +207,11 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         return res;
     }
 
+    @Override
+    public boolean confirmOrderInAdvance(long orderId, Date confirmTime) {
+        return orderInfoDao.confirmOrderInAdvance(orderId, confirmTime);
+    }
+
     private int updateVipLevel(int vipPoints) {
         int res = vipPoints / 50;
         if(res > 10)

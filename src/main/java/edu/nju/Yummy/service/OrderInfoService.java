@@ -3,6 +3,7 @@ package edu.nju.Yummy.service;
 import edu.nju.Yummy.model.OrderInfo;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public interface OrderInfoService {
 
@@ -17,4 +18,6 @@ public interface OrderInfoService {
     boolean payOrder(long orderId);
 
     double cancelOrder(long orderId);
+
+    boolean confirmOrderInAdvance(long orderId, Date confirmTime);
 }

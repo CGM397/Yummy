@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/customerOrder")
@@ -36,5 +37,11 @@ public class CustomerOrderController {
     @ResponseBody
     public double cancelOrder(@RequestParam long orderId){
         return orderInfoService.cancelOrder(orderId);
+    }
+
+    @RequestMapping(value = "confirmOrderInAdvance", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean confirmOrderInAdvance(@RequestParam long orderId, @RequestParam Date confirmTime){
+        return orderInfoService.confirmOrderInAdvance(orderId, confirmTime);
     }
 }
